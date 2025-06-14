@@ -10,6 +10,6 @@
     <Project Path="src/TourBooking.Web/TourBooking.Web.csproj" />
   </Folder>
   <Folder Name="/tests/">
-    <Project Path="tests/TourBooking.Tests/TourBooking.Tests.csproj" />
+    <Project Path="tests/TourBooking.WebTests/TourBooking.WebTests.csproj" Id="f23dfc16-fe3c-4338-bab0-3800dae87f9a" />
   </Folder>
 </Solution>
