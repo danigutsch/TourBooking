@@ -9,11 +9,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Aspire.StackExchange.Redis.OutputCaching" Version="9.3.1" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Update="SonarAnalyzer.CSharp" Version="10.11.0.117924" />
+    <PackageReference Include="Aspire.StackExchange.Redis.OutputCaching" />
   </ItemGroup>
 
 </Project>

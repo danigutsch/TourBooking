@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
 		<OutputType>Exe</OutputType>
@@ -29,22 +29,18 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Aspire.Hosting.Testing" Version="9.3.1" />
-		<PackageReference Include="coverlet.collector" Version="6.0.4">
+		<PackageReference Include="Aspire.Hosting.Testing" />
+		<PackageReference Include="coverlet.collector">
 		  <PrivateAssets>all</PrivateAssets>
 		  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
-		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.14.1" />
-		<PackageReference Include="xunit.v3" Version="2.0.3" />
-		<PackageReference Include="xunit.runner.visualstudio" Version="3.1.1" />
+		<PackageReference Include="Microsoft.NET.Test.Sdk" />
+		<PackageReference Include="xunit.v3" />
+		<PackageReference Include="xunit.runner.visualstudio" />
 	</ItemGroup>
 
 	<ItemGroup>
 	  <ProjectReference Include="..\..\src\TourBooking.AppHost\TourBooking.AppHost.csproj" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <PackageReference Update="SonarAnalyzer.CSharp" Version="10.11.0.117924" />
 	</ItemGroup>
 
 </Project>
