@@ -6,6 +6,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <ProjectReference Include="..\Aspire\TourBooking.Aspire.Constants\TourBooking.Aspire.Constants.csproj" />
 	  <ProjectReference Include="..\TourBooking.Tours.Application\TourBooking.Tours.Application.csproj" />
 	</ItemGroup>
 
