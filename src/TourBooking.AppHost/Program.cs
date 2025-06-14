@@ -1,13 +1,16 @@
 var builder = DistributedApplication.CreateBuilder(args);
 
-var cache = builder.AddRedis("cache");
+var redis = builder.AddRedis("redis")
+    .WithRedisInsight()
+    .WithRedisCommander();
 
 var apiService = builder.AddProject<Projects.TourBooking_ApiService>("apiservice");
+    .WaitFor(redis)
 
 builder.AddProject<Projects.TourBooking_Web>("webfrontend")
     .WithExternalHttpEndpoints()
-    .WithReference(cache)
-    .WaitFor(cache)
+    .WithReference(redis)
+    .WaitFor(redis)
     .WithReference(apiService)
     .WaitFor(apiService);
 
