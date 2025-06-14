@@ -11,6 +11,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\TourBooking.ApiService\TourBooking.ApiService.csproj" />
+    <ProjectReference Include="..\TourBooking.MigrationService\TourBooking.MigrationService.csproj" />
     <ProjectReference Include="..\TourBooking.Web\TourBooking.Web.csproj" />
   </ItemGroup>
 

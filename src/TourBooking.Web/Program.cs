@@ -6,7 +6,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add service defaults & Aspire client integrations.
 builder.AddServiceDefaults();
-builder.AddRedisOutputCache("cache");
+builder.AddRedisOutputCache("redis");
 
 // Add services to the container.
 builder.Services.AddRazorComponents()
@@ -16,7 +16,7 @@ builder.Services.AddHttpClient<WeatherApiClient>(client =>
     {
         // This URL uses "https+http://" to indicate HTTPS is preferred over HTTP.
         // Learn more about service discovery scheme resolution at https://aka.ms/dotnet/sdschemes.
-        client.BaseAddress = new("https+http://apiservice");
+        client.BaseAddress = new Uri("https+http://apiservice");
     });
 
 var app = builder.Build();

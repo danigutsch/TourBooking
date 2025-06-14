@@ -1,0 +1,12 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<ItemGroup>
+		<PackageReference Include="Aspire.Npgsql.EntityFrameworkCore.PostgreSQL" />
+		<PackageReference Include="JetBrains.Annotations" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\TourBooking.Tours.Application\TourBooking.Tours.Application.csproj" />
+	</ItemGroup>
+
+</Project>

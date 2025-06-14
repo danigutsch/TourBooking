@@ -8,11 +8,14 @@
   <Folder Name="/src/">
     <Project Path="src/TourBooking.ApiService/TourBooking.ApiService.csproj" />
     <Project Path="src/TourBooking.AppHost/TourBooking.AppHost.csproj" />
+    <Project Path="src/TourBooking.MigrationService/TourBooking.MigrationService.csproj" />
     <Project Path="src/TourBooking.ServiceDefaults/TourBooking.ServiceDefaults.csproj" />
     <Project Path="src/TourBooking.Web/TourBooking.Web.csproj" />
   </Folder>
   <Folder Name="/src/Tours/">
-    <Project Path="src\TourBooking.Tours.Domain\TourBooking.Tours.Domain.csproj" Type="Classic C#" />
+    <Project Path="src/TourBooking.Tours.Application/TourBooking.Tours.Application.csproj" Id="e05c91ac-d59d-4e0b-9726-2a4e92581b8d" />
+    <Project Path="src/TourBooking.Tours.Persistence/TourBooking.Tours.Persistence.csproj" Id="370e250b-d6ff-4150-beac-6f8e68b1d760" />
+    <Project Path="src\TourBooking.Tours.Domain\TourBooking.Tours.Domain.csproj" />
   </Folder>
   <Folder Name="/tests/">
     <Project Path="tests/TourBooking.WebTests/TourBooking.WebTests.csproj" />

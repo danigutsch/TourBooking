@@ -1,7 +1,12 @@
 using TourBooking.ApiService;
 using TourBooking.ServiceDefaults;
+using TourBooking.Tours.Application;
+using TourBooking.Tours.Domain;
+using TourBooking.Tours.Persistence;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.AddToursPersistenceServices();
 
 // Add service defaults & Aspire client integrations.
 builder.AddServiceDefaults();
@@ -22,23 +27,17 @@ if (app.Environment.IsDevelopment())
     app.MapOpenApi();
 }
 
-string[] summaries = ["Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"];
-
-app.MapGet("/weatherforecast", () =>
+app.MapPost("/tours", async (CreateTourRequest request, TimeProvider clock, IToursRepository repository, IUnitOfWork uow, CancellationToken ct) =>
 {
-    var forecast = Enumerable.Range(1, 5).Select(index =>
-        new WeatherForecast
-        (
-            DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-#pragma warning disable CA5394
-            Random.Shared.Next(-20, 55),
-            summaries[Random.Shared.Next(summaries.Length)]
-#pragma warning restore CA5394
-        ))
-        .ToArray();
-    return forecast;
+    var tour = new Tour(request.Name, request.Description, request.Price, request.StartDate, request.EndDate);
+
+    repository.Add(tour);
+
+    await uow.SaveChanges(ct);
+
+    return TypedResults.Ok();
 })
-.WithName("GetWeatherForecast");
+.WithName("CreateTour");
 
 app.MapDefaultEndpoints();
 

@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\TourBooking.ServiceDefaults\TourBooking.ServiceDefaults.csproj" />
+    <ProjectReference Include="..\TourBooking.Tours.Persistence\TourBooking.Tours.Persistence.csproj" />
   </ItemGroup>
 
   <ItemGroup>

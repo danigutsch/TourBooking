@@ -22,4 +22,6 @@ builder.AddProject<Projects.TourBooking_Web>("webfrontend")
     .WithReference(apiService)
     .WaitFor(apiService);
 
+builder.AddProject<Projects.TourBooking_MigrationService>("tourbooking-migrationservice");
+
 await builder.Build().RunAsync();

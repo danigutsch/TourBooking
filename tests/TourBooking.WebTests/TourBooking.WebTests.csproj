@@ -43,6 +43,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <ProjectReference Include="..\..\src\TourBooking.ApiService\TourBooking.ApiService.csproj" />
 	  <ProjectReference Include="..\..\src\TourBooking.AppHost\TourBooking.AppHost.csproj" />
 	</ItemGroup>
 

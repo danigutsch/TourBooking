@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk.Worker">
+
+	<PropertyGroup>
+		<NoWarn>$(NoWarn);CA2007</NoWarn>
+	</PropertyGroup>
+
+	<PropertyGroup>
+		<UserSecretsId>dotnet-TourBooking.MigrationService-12e77878-09cf-4430-95ee-ab9575eff583</UserSecretsId>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+		<PackageReference Include="Microsoft.Extensions.Hosting" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\TourBooking.ServiceDefaults\TourBooking.ServiceDefaults.csproj" />
+		<ProjectReference Include="..\TourBooking.Tours.Persistence\TourBooking.Tours.Persistence.csproj" />
+	</ItemGroup>
+</Project>

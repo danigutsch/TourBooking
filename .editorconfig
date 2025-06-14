@@ -5,6 +5,11 @@ root = true
 # Ignore CS1591 (missing XML doc comments) for generated files
 [*.g.cs]
 dotnet_diagnostic.CS1591.severity = none
-dotnet_diagnostic.CA1812.severity = none
+
+[202*.cs]
+dotnet_diagnostic.CA1062.severity = none
+
+[*.cs]
 dotnet_diagnostic.CA1515.severity = none
+dotnet_diagnostic.CA1812.severity = none
 dotnet_diagnostic.S1075.severity = none
