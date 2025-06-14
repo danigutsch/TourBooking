@@ -4,26 +4,17 @@
 
 A **cloud-native bike tours booking and management** system built with **.NET 9** and **.NET Aspire**, showcasing modern C# features, **Domain-Driven Design (DDD)**, and **clean architecture** principles. This repository demonstrates how to build a **production-ready distributed** application that focuses on scalability, maintainability, and exceptional customer experience in cloud-native environments.
 
+> **🚧 Project Status**: This is a new project currently in the planning and initial development phase. The roadmap below shows current progress and planned implementations.
+
 ---
 
 ## Table of Contents
 1. [Overview](#overview)  
 2. [Core Features](#core-features)  
 3. [Architecture](#architecture)  
-    - [Clean Architecture](#clean-architecture)  
-    - [Domain-Driven Design](#domain-driven-design)  
-4. [Technical Stack](#technical-stack)  
-    - [Implemented](#implemented)  
-    - [Planned](#planned)  
+4. [Implementation Roadmap](#implementation-roadmap)  
 5. [Getting Started](#getting-started)  
-    - [Prerequisites](#prerequisites)  
-    - [Running the Application](#running-the-application)  
-    - [Test Credentials](#test-credentials)  
 6. [Development](#development)  
-    - [Project Structure](#project-structure)  
-    - [Key Design Principles](#key-design-principles)  
-    - [Infrastructure Configurations](#infrastructure-configurations)  
-    - [Package Distribution](#package-distribution)  
 7. [Contributing](#contributing)  
 8. [License](#license)
 
@@ -31,9 +22,14 @@ A **cloud-native bike tours booking and management** system built with **.NET 9*
 
 ## Overview
 
-> **🚧 Project Status**: This is a new project currently in the planning and initial development phase. All features listed below are planned for implementation.
+The **Bike Tours Booking Platform API** provides a comprehensive framework for managing bike tours, customer bookings, inventory, and e-commerce operations. Leveraging **.NET 9** and the **.NET Aspire** ecosystem, this project employs enterprise architectural patterns to ensure high availability, scalability, and testability for a seamless customer booking experience in cloud-native environments.
 
-The **Bike Tours Booking Platform API** will provide a comprehensive framework for managing bike tours, customer bookings, inventory, and e-commerce operations. Leveraging **.NET 9** and the **.NET Aspire** ecosystem, this project will employ enterprise architectural patterns to ensure high availability, scalability, and testability for a seamless customer booking experience in cloud-native environments.
+### Key Benefits
+- **Modern .NET Stack**: Built on .NET 9 with latest C# features
+- **Cloud-Native Design**: Optimized for containerized deployment and microservices
+- **Enterprise Patterns**: Implements DDD, CQRS, and event-driven architecture
+- **Production Ready**: Comprehensive testing, monitoring, and observability
+- **Developer Experience**: Hot reload, dev containers, and comprehensive tooling
 
 ---
 
@@ -44,15 +40,15 @@ The **Bike Tours Booking Platform API** will provide a comprehensive framework f
 - **E-commerce Integration**: Secure payment processing and order management  
 - **Inventory Management**: Bike availability, maintenance tracking, and resource allocation  
 - **Customer Management**: User profiles, booking history, and preference tracking  
-- **Distributed Caching**: Improves performance for tour searches and availability checks with Redis  
-- **Event-Driven Updates**: Ensures consistent state and real-time availability across microservices  
-- **Comprehensive Testing**: Includes unit tests, integration tests, and health checks  
+- **Real-time Updates**: Live availability and booking confirmations
+- **Comprehensive APIs**: RESTful APIs with GraphQL and gRPC support
+- **Multi-tenant Architecture**: Support for multiple tour operators
 
 ---
 
 ## Architecture
 
-### Clean Architecture
+### Clean Architecture Layers
 - **Domain**: Core business models and logic for tours, bookings, and customers  
 - **Application**: Use cases and interfaces for booking workflows and tour management  
 - **Infrastructure**: Technical implementations (persistence, payment gateways, caching, external services)  
@@ -68,42 +64,223 @@ The **Bike Tours Booking Platform API** will provide a comprehensive framework f
 
 ---
 
-## Technical Stack
+## Implementation Roadmap
 
-### Implementation Status
+### 🏗️ **Architecture & Design**
+- [ ] Clean Architecture implementation
+- [ ] Domain-Driven Design patterns
+- [ ] CQRS pattern
+- [ ] Event-driven architecture
+- [ ] Event Sourcing
+- [ ] Outbox pattern
+- [ ] Read/write segregation
+- [ ] Multi-tenancy support
+- [ ] Binary data handling
+- [ ] Efficient media file processing
+- [ ] Document storage patterns
 
-This is a **brand new project** - all features below are planned for implementation.
+### 🏗️ **Infrastructure**
 
-### Phase 1: Core Foundation
+#### Cloud & Hosting
+- [ ] .NET Aspire cloud-native setup
+- [ ] Basic authentication
+- [ ] Full-text search capabilities
 
-**Documentation & Architecture**
-- [ ] Domain model diagrams  
-- [ ] Bounded context map  
-- [ ] Architecture decision records (ADRs)  
-- [ ] Domain description and glossary  
+#### Persistence
+**SQL Databases**
+- [ ] PostgreSQL persistence
+- [ ] SQLite support
+- [ ] Database maintenance
+- [ ] Data migration tools
 
-**Advanced Patterns & Performance**
-- [ ] Read/write segregation  
-- [ ] Multi-tenancy (for tour operators)  
-- [ ] Garnet caching integration  
-- [ ] AOT compilation  
-- [ ] Response compression  
-- [ ] Query optimization  
+**NoSQL & Document Storage**
+- [ ] Document DB support
+- [ ] Document storage patterns
 
-**Storage & Media**
-- [ ] S3 storage for tour media  
-- [ ] Binary data handling for tour images/videos  
-- [ ] Document storage for booking confirmations  
-- [ ] Data streaming (Kafka)  
-- [ ] Data archival/retention  
+#### Caching Systems
+**Memory Caching**
+- [ ] Memory cache management
+- [ ] Output caching
+- [ ] Response caching
 
-**Additional Business Features**
+**Distributed Caching**
+- [ ] Redis distributed caching
+- [ ] Garnet caching integration
+
+**Hybrid & Advanced**
+- [ ] Hybrid caching system
+- [ ] Cache invalidation strategies
+
+#### APIs & Endpoints
+**REST APIs**
+- [ ] Controller-based APIs
+- [ ] Minimal APIs
+- [ ] OpenAPI/Swagger documentation
+- [ ] API versioning
+
+**Alternative Protocols**
+- [ ] gRPC services
+- [ ] GraphQL endpoint
+
+### ⚡ **Performance & Optimization**
+
+#### Compilation & Runtime
+- [ ] AOT compilation
+- [ ] JIT optimization
+- [ ] Native AOT support
+
+#### Response & Output
+- [ ] Response compression
+- [ ] Output compression
+- [ ] Static file optimization
+
+#### Database & Queries
+- [ ] Query optimization
+- [ ] Lazy loading implementation
+- [ ] Connection pooling
+- [ ] Database indexing strategies
+
+#### Processing & Scaling
+- [ ] Batch processing system
+- [ ] Background job processing
+- [ ] Parallel processing
+- [ ] Resource management
+
+### 🧪 **Testing & Quality Assurance**
+- [ ] Unit testing suite
+- [ ] Integration tests with containers
+- [ ] Health checks
+- [ ] OpenTelemetry observability
+- [ ] Problem Details error handling
+- [ ] Gherkin behavior tests
+- [ ] Feature flags & toggles
+- [ ] Snapshot testing
+- [ ] Multi-configuration testing
+- [ ] AI integration for testing
+- [ ] Performance benchmarks
+- [ ] Distributed tracing
+
+### 🔗 **Communication & Integration**
+
+#### Real-time Communication
+- [ ] Real-time updates (SignalR)
+- [ ] WebSocket connections
+- [ ] Server-sent events
+
+#### Message Systems
+- [ ] Message broker integration
+- [ ] Data streaming (Kafka)
+- [ ] Event bus implementation
+- [ ] Message queuing
+
+#### External Integrations
+- [ ] Third-party payment processors
+- [ ] External API integrations
+- [ ] Webhook support
+- [ ] OAuth provider integrations
+
+#### Notifications & Alerts
+- [ ] Email notifications
+- [ ] SMS notifications
+- [ ] Push notifications
+- [ ] In-app notifications
+
+#### Frontend Integration
+- [ ] Front-end frameworks integration
+- [ ] SPA routing support
+- [ ] CORS configuration
+
+### 💾 **Storage & Data Management**
+
+#### File Storage
+- [ ] S3 storage integration
+- [ ] Local file storage
+- [ ] CDN integration
+- [ ] File upload handling
+
+#### Media Processing
+- [ ] Image optimization
+- [ ] Video processing
+- [ ] Binary data handling
+- [ ] Efficient media file processing
+
+#### Data Operations
+- [ ] Data archival/retention
+- [ ] Data compression
+- [ ] Data validation
+- [ ] Data transformation
+
+#### Multi-tenancy & Partitioning
+- [ ] Storage tenant system
+- [ ] Data partitioning
+- [ ] Tenant isolation
+- [ ] Cross-tenant queries
+
+#### Backup & Recovery
+- [ ] Backup automation
+- [ ] Point-in-time recovery
+- [ ] Disaster recovery
+- [ ] Data synchronization
+
+### 🔐 **Security & Authentication**
+- [ ] Bearer token authentication
+- [ ] OpenID Connect/OAuth2
+- [ ] Keycloak integration
+- [ ] Duende Identity Server
+- [ ] Rate limiting
+- [ ] Request idempotency
+- [ ] Secrets management
+- [ ] API key management
+- [ ] Audit logging
+- [ ] Data encryption
+- [ ] GDPR compliance
+- [ ] Role-based file access
+- [ ] Security headers
+- [ ] CORS configuration
+
+### 🛠️ **DevOps & Deployment**
+- [ ] Cloud deployment templates
+- [ ] Blue-green deployments
+- [ ] Infrastructure as Code
+- [ ] Monitoring dashboards
+- [ ] Backup strategies
+- [ ] Database maintenance
+- [ ] Production migration practices
+- [ ] Auto semantic versioning in CI
+- [ ] NuGet package distribution
+- [ ] Project templates
+- [ ] Development containers (.devcontainer)
+- [ ] Docker Compose setup
+- [ ] Kubernetes manifests
+- [ ] Helm charts
+- [ ] CI/CD pipelines
+
+### 📚 **Documentation & Knowledge**
+- [ ] Domain model diagrams
+- [ ] Bounded context map
+- [ ] Aggregate relationship diagrams
+- [ ] Event flow documentation
+- [ ] Architecture decision records (ADRs)
+- [ ] Domain description and glossary
+- [ ] API documentation
+- [ ] Deployment guides
+- [ ] Development setup guides
+
+### 🎯 **Business Features**
 - [ ] Seasonal tour scheduling  
+- [ ] Dynamic pricing algorithms
 - [ ] Tax calculation  
 - [ ] Subscription billing for memberships  
 - [ ] Cancellation policies  
 - [ ] AI integration for recommendations  
-- [ ] Feature flags & toggles  
+- [ ] Customer loyalty programs
+- [ ] Review and rating system
+- [ ] Multi-language support
+- [ ] Currency conversion
+- [ ] Weather integration
+- [ ] Route optimization
+- [ ] Equipment management
+- [ ] Tour guide scheduling
 
 ---
 
@@ -111,15 +288,10 @@ This is a **brand new project** - all features below are planned for implementat
 
 ### Prerequisites
 - [.NET 9 SDK](https://dotnet.microsoft.com/)  
-- [Docker Desktop](https://www.docker.com/products/docker-desktop)  
-- Entity Framework Core tools:
-  ```bash
-  dotnet tool install --global dotnet-ef
-  ```
+- [Docker Desktop](https://www.docker.com/products/docker-desktop/) (optional, for containerized development)
+- [Visual Studio 2022](https://visualstudio.microsoft.com/) or [VS Code](https://code.visualstudio.com/) with C# extension
 
-### Running the Application
-
-> **Note**: This is a new project in development. The following steps will be available once the initial implementation is complete.
+### Quick Start
 
 1. **Clone the repository**:
    ```bash
@@ -127,45 +299,29 @@ This is a **brand new project** - all features below are planned for implementat
    cd BikeToursBooking
    ```
 
-2. **Start the infrastructure services**:
+2. **Restore development tools**:
    ```bash
-   docker-compose up -d
+   dotnet tool restore
    ```
 
-3. **Update the database**:
-   ```bash
-   dotnet ef database update --project src/Infrastructure --startup-project src/API
-   ```
-
-4. **Run the application**:
+3. **Run the application**:
    ```bash
    dotnet run --project src/AppHost
    ```
 
-5. **Access the application** *(planned endpoints)*:
-   - **API Documentation**: `https://localhost:7001/swagger`
-   - **Customer Portal**: `https://localhost:7002`
-   - **Admin Dashboard**: `https://localhost:7003`
-   - **.NET Aspire Dashboard**: `https://localhost:15000`
+4. **Access the application**:
+   - API: `https://localhost:7001`
+   - Swagger UI: `https://localhost:7001/swagger`
+   - Aspire Dashboard: `https://localhost:15888`
 
-### Test Credentials *(Planned)*
-**Customer Account**:
-- Email: `customer@biketours.com`
-- Password: `Customer123!`
 
-**Tour Operator Account**:
-- Email: `operator@biketours.com`
-- Password: `Operator123!`
-
-**Admin Account**:
-- Email: `admin@biketours.com`
-- Password: `Admin123!`
 
 ---
 
 ## Development
 
-### Project Structure *(Planned)*
+### Project Structure
+
 ```
 src/
 ├── API/                     # Web API endpoints and controllers
@@ -178,35 +334,37 @@ src/
 tests/
 ├── UnitTests/               # Domain and application layer tests
 ├── IntegrationTests/        # API and infrastructure tests
-└── FunctionalTests/         # End-to-end booking scenarios
+├── FunctionalTests/         # End-to-end booking scenarios
+└── PerformanceTests/        # Load and stress tests
+
+docs/
+├── architecture/            # Architecture diagrams and decisions
+├── api/                     # API documentation
+└── deployment/              # Deployment guides
+
+tools/
+├── scripts/                 # Build and deployment scripts
+└── docker/                  # Docker configurations
 ```
 
 ### Key Design Principles
+
 - **Domain-First Approach**: Business logic drives technical decisions
 - **Eventual Consistency**: Distributed data consistency through domain events
 - **Fail-Fast Validation**: Early input validation with comprehensive error handling
 - **Immutable Value Objects**: Ensuring data integrity and thread safety
 - **Rich Domain Models**: Business rules encapsulated within domain entities
 - **Separation of Concerns**: Clear boundaries between layers and responsibilities
-
-### Infrastructure Configurations
-- **PostgreSQL**: Primary data store with Entity Framework Core
-- **Redis**: Distributed caching for tour availability and session management
-- **OpenTelemetry**: Comprehensive observability and performance monitoring
-- **Health Checks**: Application and dependency health monitoring
-- **Problem Details**: Standardized API error responses
-
-### Package Distribution
-The project is structured to support NuGet package distribution for:
-- **Domain Models**: Reusable business entities and value objects
-- **Application Contracts**: Shared interfaces and DTOs
-- **Infrastructure Components**: Common caching, logging, and data access patterns
+- **Cloud-Native Patterns**: Built for scalability and resilience
+- **Developer Experience**: Fast feedback loops and productive tooling
 
 ---
 
 ## Contributing
 
 We welcome contributions! Please follow these guidelines:
+
+### Getting Started
 
 1. **Fork the repository** and create a feature branch
 2. **Follow the coding standards** established in the project
@@ -215,10 +373,27 @@ We welcome contributions! Please follow these guidelines:
 5. **Submit a pull request** with a clear description of changes
 
 ### Development Workflow
+
 - Use **conventional commits** for clear commit messages
 - Ensure all **tests pass** before submitting PRs
 - Follow **domain-driven design** principles for new features
 - Maintain **backward compatibility** for public APIs
+- Run code analysis and formatting tools
+
+### Code Standards
+
+- Follow C# coding conventions
+- Use meaningful names for variables, methods, and classes
+- Write XML documentation for public APIs
+- Implement comprehensive error handling
+- Follow SOLID principles
+
+### Pull Request Process
+
+1. Update the README.md with details of changes if applicable
+2. Update the version numbers following semantic versioning
+3. Ensure the PR description clearly describes the problem and solution
+4. Include any relevant issue numbers
 
 ---
 
