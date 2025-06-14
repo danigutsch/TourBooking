@@ -1,7 +1,19 @@
+using JetBrains.Annotations;
+
 namespace TourBooking.Web;
 
-public class WeatherApiClient(HttpClient httpClient)
+/// <summary>
+/// Client for retrieving weather forecasts from the weather API.
+/// </summary>
+[UsedImplicitly]
+internal sealed class WeatherApiClient(HttpClient httpClient)
 {
+    /// <summary>
+    /// Retrieves weather forecasts asynchronously from the API.
+    /// </summary>
+    /// <param name="maxItems">The maximum number of forecasts to return.</param>
+    /// <param name="cancellationToken">A cancellation token to cancel the operation.</param>
+    /// <returns>An array of <see cref="WeatherForecast"/> objects.</returns>
     public async Task<WeatherForecast[]> GetWeatherAsync(int maxItems = 10, CancellationToken cancellationToken = default)
     {
         List<WeatherForecast>? forecasts = null;
@@ -21,9 +33,4 @@ public class WeatherApiClient(HttpClient httpClient)
 
         return forecasts?.ToArray() ?? [];
     }
-}
-
-public record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
-{
-    public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
 }

@@ -42,6 +42,10 @@ else
 @code {
     private WeatherForecast[]? forecasts;
 
+    /// <summary>
+    /// Asynchronously initializes the component and fetches the weather data.
+    /// </summary>
+    /// <returns>A task representing the asynchronous operation.</returns>
     protected override async Task OnInitializedAsync()
     {
         forecasts = await WeatherApi.GetWeatherAsync();

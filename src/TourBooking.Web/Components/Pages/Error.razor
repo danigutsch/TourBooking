@@ -25,12 +25,18 @@
 </p>
 
 @code{
+    /// <summary>
+    /// The current HTTP context, provided via cascading parameter.
+    /// </summary>
     [CascadingParameter]
     public HttpContext? HttpContext { get; set; }
 
     private string? requestId;
     private bool ShowRequestId => !string.IsNullOrEmpty(requestId);
 
+    /// <summary>
+    /// Initializes the component and sets the request ID.
+    /// </summary>
     protected override void OnInitialized()
     {
         requestId = Activity.Current?.Id ?? HttpContext?.TraceIdentifier;

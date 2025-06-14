@@ -1,20 +1,29 @@
+using JetBrains.Annotations;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.ServiceDiscovery;
 using OpenTelemetry;
 using OpenTelemetry.Metrics;
 using OpenTelemetry.Trace;
 
-namespace Microsoft.Extensions.Hosting;
+namespace TourBooking.ServiceDefaults;
 
-// Adds common .NET Aspire services: service discovery, resilience, health checks, and OpenTelemetry.
-// This project should be referenced by each service project in your solution.
-// To learn more about using this project, see https://aka.ms/dotnet/aspire/service-defaults
-public static class Extensions
+/// <summary>
+/// Provides extension methods to add common .NET Aspire services such as service discovery, resilience, health checks, and OpenTelemetry.
+/// This static class should be referenced by each service project in your solution.
+/// </summary>
+[PublicAPI]
+public static class ServiceDefaultExtensions
 {
+    /// <summary>
+    /// Adds default service configuration including OpenTelemetry, health checks, service discovery, and HTTP client defaults.
+    /// </summary>
+    /// <typeparam name="TBuilder">The type of the host application builder.</typeparam>
+    /// <param name="builder">The host application builder instance.</param>
+    /// <returns>The configured host application builder.</returns>
     public static TBuilder AddServiceDefaults<TBuilder>(this TBuilder builder) where TBuilder : IHostApplicationBuilder
     {
         builder.ConfigureOpenTelemetry();
@@ -32,15 +41,15 @@ public static class Extensions
             http.AddServiceDiscovery();
         });
 
-        // Uncomment the following to restrict the allowed schemes for service discovery.
-        // builder.Services.Configure<ServiceDiscoveryOptions>(options =>
-        // {
-        //     options.AllowedSchemes = ["https"];
-        // });
-
         return builder;
     }
 
+    /// <summary>
+    /// Configures OpenTelemetry logging, metrics, and tracing for the application.
+    /// </summary>
+    /// <typeparam name="TBuilder">The type of the host application builder.</typeparam>
+    /// <param name="builder">The host application builder instance.</param>
+    /// <returns>The configured host application builder.</returns>
     public static TBuilder ConfigureOpenTelemetry<TBuilder>(this TBuilder builder) where TBuilder : IHostApplicationBuilder
     {
         builder.Logging.AddOpenTelemetry(logging =>
@@ -70,6 +79,12 @@ public static class Extensions
         return builder;
     }
 
+    /// <summary>
+    /// Adds OpenTelemetry exporters if the OTLP endpoint is configured.
+    /// </summary>
+    /// <typeparam name="TBuilder">The type of the host application builder.</typeparam>
+    /// <param name="builder">The host application builder instance.</param>
+    /// <returns>The configured host application builder.</returns>
     private static TBuilder AddOpenTelemetryExporters<TBuilder>(this TBuilder builder) where TBuilder : IHostApplicationBuilder
     {
         var useOtlpExporter = !string.IsNullOrWhiteSpace(builder.Configuration["OTEL_EXPORTER_OTLP_ENDPOINT"]);
@@ -79,16 +94,15 @@ public static class Extensions
             builder.Services.AddOpenTelemetry().UseOtlpExporter();
         }
 
-        // Uncomment the following lines to enable the Azure Monitor exporter (requires the Azure.Monitor.OpenTelemetry.AspNetCore package)
-        //if (!string.IsNullOrEmpty(builder.Configuration["APPLICATIONINSIGHTS_CONNECTION_STRING"]))
-        //{
-        //    builder.Services.AddOpenTelemetry()
-        //       .UseAzureMonitor();
-        //}
-
         return builder;
     }
 
+    /// <summary>
+    /// Adds default health checks to the application, including a liveness check.
+    /// </summary>
+    /// <typeparam name="TBuilder">The type of the host application builder.</typeparam>
+    /// <param name="builder">The host application builder instance.</param>
+    /// <returns>The configured host application builder.</returns>
     public static TBuilder AddDefaultHealthChecks<TBuilder>(this TBuilder builder) where TBuilder : IHostApplicationBuilder
     {
         builder.Services.AddHealthChecks()
@@ -98,8 +112,15 @@ public static class Extensions
         return builder;
     }
 
+    /// <summary>
+    /// Maps default health check endpoints for the application in development environments.
+    /// </summary>
+    /// <param name="app">The web application instance.</param>
+    /// <returns>The web application with mapped endpoints.</returns>
     public static WebApplication MapDefaultEndpoints(this WebApplication app)
     {
+        ArgumentNullException.ThrowIfNull(app);
+
         // Adding health checks endpoints to applications in non-development environments has security implications.
         // See https://aka.ms/dotnet/aspire/healthchecks for details before enabling these endpoints in non-development environments.
         if (app.Environment.IsDevelopment())

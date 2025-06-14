@@ -4,6 +4,7 @@
 		<TargetFramework>net9.0</TargetFramework>
 		<TreatWarningsAsErrors>true</TreatWarningsAsErrors>
 		<CodeAnalysisTreatWarningsAsErrors>true</CodeAnalysisTreatWarningsAsErrors>
+		<NoWarn>CA1812</NoWarn>
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
 		<NoDefaultExcludes>true</NoDefaultExcludes>
 		<ImplicitUsings>enable</ImplicitUsings>
@@ -16,6 +17,7 @@
 
 	<ItemGroup>
 		<PackageReference Include="SonarAnalyzer.CSharp"
+						  Version="9.18.0.83559"
 						  PrivateAssets="all"
 						  Condition="$(MSBuildProjectExtension) == '.csproj'" />
 	</ItemGroup>
