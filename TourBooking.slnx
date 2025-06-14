@@ -11,7 +11,10 @@
     <Project Path="src/TourBooking.ServiceDefaults/TourBooking.ServiceDefaults.csproj" />
     <Project Path="src/TourBooking.Web/TourBooking.Web.csproj" />
   </Folder>
+  <Folder Name="/src/Tours/">
+    <Project Path="src\TourBooking.Tours.Domain\TourBooking.Tours.Domain.csproj" Type="Classic C#" />
+  </Folder>
   <Folder Name="/tests/">
-    <Project Path="tests/TourBooking.WebTests/TourBooking.WebTests.csproj" Id="f23dfc16-fe3c-4338-bab0-3800dae87f9a" />
+    <Project Path="tests/TourBooking.WebTests/TourBooking.WebTests.csproj" />
   </Folder>
 </Solution>
