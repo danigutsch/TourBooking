@@ -14,13 +14,10 @@ public sealed class Tour
     /// <param name="price">The price per person for the tour.</param>
     /// <param name="startDate">The date when the tour begins.</param>
     /// <param name="endDate">The date when the tour concludes.</param>
-    /// <param name="clock">Time provider for generating consistent timestamps.</param>
     /// <exception cref="ArgumentNullException">Thrown when the clock parameter is null.</exception>
-    public Tour(string name, string description, decimal price, DateOnly startDate, DateOnly endDate, TimeProvider clock)
+    public Tour(string name, string description, decimal price, DateOnly startDate, DateOnly endDate)
     {
-        ArgumentNullException.ThrowIfNull(clock);
-
-        Id = Guid.CreateVersion7(clock.GetUtcNow());
+        Id = Guid.CreateVersion7(TimeProvider.System.GetUtcNow());
         Name = name;
         Description = description;
         Price = price;
