@@ -9,10 +9,15 @@ var postgres = builder.AddPostgres("postgres")
 
 var database = postgres.AddDatabase("tourbooking");
 
+var migrationService = builder.AddProject<Projects.TourBooking_MigrationService>("migrationservice")
+    .WithReference(database)
+    .WaitFor(database);
+
 var apiService = builder.AddProject<Projects.TourBooking_ApiService>("apiservice")
     .WaitFor(redis)
     .WithReference(database)
-    .WaitFor(database);
+    .WaitFor(database)
+    .WaitForCompletion(migrationService);
 
 builder.AddProject<Projects.TourBooking_Web>("webfrontend")
     .WithExternalHttpEndpoints()
@@ -21,7 +26,5 @@ builder.AddProject<Projects.TourBooking_Web>("webfrontend")
     .WaitFor(database)
     .WithReference(apiService)
     .WaitFor(apiService);
-
-builder.AddProject<Projects.TourBooking_MigrationService>("tourbooking-migrationservice");
 
 await builder.Build().RunAsync();
