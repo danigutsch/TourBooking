@@ -15,6 +15,9 @@
     <Project Path="src/Aspire/TourBooking.AppHost/TourBooking.AppHost.csproj" />
     <Project Path="src/Aspire/TourBooking.Aspire.Constants/TourBooking.Aspire.Constants.csproj" Id="9bfb6303-6075-4185-bd16-4e1b0921f5e8" />
   </Folder>
+  <Folder Name="/src/Core/">
+    <Project Path="TourBooking.Core.Infrastructure/TourBooking.Core.Infrastructure.csproj" Id="c666bf03-96b2-4f0a-961e-a43f49e2aec3" />
+  </Folder>
   <Folder Name="/src/Tours/">
     <Project Path="src/TourBooking.Tours.Application/TourBooking.Tours.Application.csproj" Id="e05c91ac-d59d-4e0b-9726-2a4e92581b8d" />
     <Project Path="src/TourBooking.Tours.Persistence/TourBooking.Tours.Persistence.csproj" Id="370e250b-d6ff-4150-beac-6f8e68b1d760" />

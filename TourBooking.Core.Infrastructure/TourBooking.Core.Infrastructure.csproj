@@ -1,0 +1,11 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<ItemGroup>
+		<PackageReference Include="Aspire.StackExchange.Redis.OutputCaching" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\src\Aspire\TourBooking.Aspire.Constants\TourBooking.Aspire.Constants.csproj" />
+	</ItemGroup>
+
+</Project>

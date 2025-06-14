@@ -5,11 +5,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\TourBooking.Core.Infrastructure\TourBooking.Core.Infrastructure.csproj" />
     <ProjectReference Include="..\TourBooking.ServiceDefaults\TourBooking.ServiceDefaults.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="Aspire.StackExchange.Redis.OutputCaching" />
   </ItemGroup>
 
 </Project>

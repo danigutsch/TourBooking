@@ -1,12 +1,14 @@
+using TourBooking.Core.Infrastructure;
 using TourBooking.ServiceDefaults;
 using TourBooking.Web;
 using TourBooking.Web.Components;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.AddCoreInfrastructureServices();
+
 // Add service defaults & Aspire client integrations.
 builder.AddServiceDefaults();
-builder.AddRedisOutputCache("redis");
 
 // Add services to the container.
 builder.Services.AddRazorComponents()
