@@ -1,0 +1,11 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/TourBooking.ApiService/TourBooking.ApiService.csproj" />
+    <Project Path="src/TourBooking.AppHost/TourBooking.AppHost.csproj" />
+    <Project Path="src/TourBooking.ServiceDefaults/TourBooking.ServiceDefaults.csproj" />
+    <Project Path="src/TourBooking.Web/TourBooking.Web.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/TourBooking.Tests/TourBooking.Tests.csproj" />
+  </Folder>
+</Solution>
