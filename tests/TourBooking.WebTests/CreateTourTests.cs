@@ -1,5 +1,6 @@
 using System.Net.Http.Json;
 using TourBooking.ApiService;
+using TourBooking.Aspire.Constants;
 
 namespace TourBooking.WebTests;
 
@@ -14,8 +15,8 @@ public sealed class CreateTourTests
         await using var app = await appHost.BuildAsync(TestContext.Current.CancellationToken);
         var resourceNotificationService = app.Services.GetRequiredService<ResourceNotificationService>();
         await app.StartAsync(TestContext.Current.CancellationToken);
-        using var httpClient = app.CreateHttpClient("apiservice");
-        await resourceNotificationService.WaitForResourceAsync("apiservice", KnownResourceStates.Running, TestContext.Current.CancellationToken).WaitAsync(TimeSpan.FromSeconds(30), TestContext.Current.CancellationToken);
+        using var httpClient = app.CreateHttpClient(ResourceNames.ApiService);
+        await resourceNotificationService.WaitForResourceAsync(ResourceNames.ApiService, KnownResourceStates.Running, TestContext.Current.CancellationToken).WaitAsync(TimeSpan.FromSeconds(30), TestContext.Current.CancellationToken);
 
         var today = DateOnly.FromDateTime(DateTime.UtcNow);
 
