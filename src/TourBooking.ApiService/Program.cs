@@ -1,4 +1,4 @@
-using TourBooking.ApiService;
+using TourBooking.ApiService.Contracts;
 using TourBooking.ServiceDefaults;
 using TourBooking.Tours.Application;
 using TourBooking.Tours.Domain;
@@ -27,7 +27,7 @@ if (app.Environment.IsDevelopment())
     app.MapOpenApi();
 }
 
-app.MapPost("/tours", async (CreateTourRequest request, TimeProvider clock, IToursRepository repository, IUnitOfWork uow, CancellationToken ct) =>
+app.MapPost("/tours", async (CreateTourRequest request, IToursRepository repository, IUnitOfWork uow, CancellationToken ct) =>
 {
     var tour = new Tour(request.Name, request.Description, request.Price, request.StartDate, request.EndDate);
 

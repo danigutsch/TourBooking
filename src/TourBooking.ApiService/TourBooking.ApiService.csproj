@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\TourBooking.ApiService.Contracts\TourBooking.ApiService.Contracts.csproj" />
     <ProjectReference Include="..\TourBooking.ServiceDefaults\TourBooking.ServiceDefaults.csproj" />
     <ProjectReference Include="..\TourBooking.Tours.Persistence\TourBooking.Tours.Persistence.csproj" />
   </ItemGroup>

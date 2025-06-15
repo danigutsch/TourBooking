@@ -1,5 +1,5 @@
 using System.Net.Http.Json;
-using TourBooking.ApiService;
+using TourBooking.ApiService.Contracts;
 using TourBooking.Aspire.Constants;
 
 namespace TourBooking.WebTests;

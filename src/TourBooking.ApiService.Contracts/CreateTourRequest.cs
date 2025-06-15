@@ -1,6 +1,6 @@
 ﻿using JetBrains.Annotations;
 
-namespace TourBooking.ApiService;
+namespace TourBooking.ApiService.Contracts;
 
 /// <summary>
 /// Represents a request to create a new tour.

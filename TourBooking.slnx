@@ -6,6 +6,7 @@
     <File Path="README.md" />
   </Folder>
   <Folder Name="/src/">
+    <Project Path="src/TourBooking.ApiService.Contracts/TourBooking.ApiService.Contracts.csproj" Id="6b8a72e6-9f20-45a5-ab46-24f5996633ae" />
     <Project Path="src/TourBooking.ApiService/TourBooking.ApiService.csproj" />
     <Project Path="src/TourBooking.MigrationService/TourBooking.MigrationService.csproj" />
     <Project Path="src/TourBooking.ServiceDefaults/TourBooking.ServiceDefaults.csproj" />
