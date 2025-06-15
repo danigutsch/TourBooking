@@ -1,4 +1,5 @@
 ﻿using JetBrains.Annotations;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Hosting;
 using TourBooking.Aspire.Constants;
@@ -24,7 +25,7 @@ public static class ToursPersistenceDependencyInjection
     {
         builder.AddNpgsqlDbContext<ToursDbContext>(ResourceNames.ToursDatabase);
 
-        builder.Services.TryAddScoped<IUnitOfWork, ToursDbContext>();
+        builder.Services.TryAddScoped<IUnitOfWork>(provider => provider.GetRequiredService<ToursDbContext>());
         builder.Services.TryAddScoped<IToursRepository, ToursRepository>();
     }
 

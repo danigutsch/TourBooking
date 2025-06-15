@@ -74,8 +74,7 @@ public static class ServiceDefaultExtensions
                     .AddGrpcClientInstrumentation()
                     .AddHttpClientInstrumentation()
                     .AddRedisInstrumentation()
-                    .AddEntityFrameworkCoreInstrumentation()
-                    .AddNpgsql();
+                    .AddEntityFrameworkCoreInstrumentation();
             });
 
         builder.AddOpenTelemetryExporters();

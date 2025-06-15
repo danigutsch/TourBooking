@@ -15,7 +15,7 @@ builder.AddServiceDefaults();
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
-builder.Services.AddHttpClient<WeatherApiClient>(client => client.BaseAddress = new Uri($"https+http://{ResourceNames.ApiService}"));
+builder.Services.AddHttpClient<ToursApiClient>(client => client.BaseAddress = new Uri($"https+http://{ResourceNames.ApiService}"));
 
 var app = builder.Build();
 

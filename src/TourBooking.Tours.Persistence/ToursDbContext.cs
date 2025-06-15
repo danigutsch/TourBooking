@@ -19,5 +19,5 @@ internal sealed class ToursDbContext(DbContextOptions<ToursDbContext> options) :
         });
     }
 
-    public Task SaveChanges(CancellationToken ct) => SaveChangesAsync(ct);
+    public async Task SaveChanges(CancellationToken ct) => await SaveChangesAsync(ct).ConfigureAwait(false);
 }

@@ -1,0 +1,14 @@
+﻿@TourBooking.ApiService_HostAddress = https://localhost:7578
+
+POST {{TourBooking.ApiService_HostAddress}}/tours
+Content-Type: application/json
+
+{
+  "name": "Sample Tour",
+  "description": "This is a sample tour description.",
+  "price": 99.99,
+  "startDate": "2023-01-01",
+  "endDate": "2023-01-05"
+}
+
+###
