@@ -32,4 +32,16 @@ public static class ResourceNames
     /// Represents the identifier for the Migration Service.
     /// </summary>
     public const string MigrationService = "migrationservice";
+    /// <summary>
+    /// Represents the identifier for the OpenTelemetry Collector service.
+    /// </summary>
+    public const string OpenTelemetryCollector = "otelcollector";
+    /// <summary>
+    /// Represents the identifier for the Prometheus monitoring service.
+    /// </summary>
+    public const string Prometheus = "prometheus";
+    /// <summary>
+    /// Represents the identifier for the Grafana dashboard service.
+    /// </summary>
+    public const string Grafana = "grafana";
 }
