@@ -1,7 +1,18 @@
 ﻿namespace TourBooking.AppHost.OpenTelemetryCollector;
 
-internal sealed class OpenTelemetryCollectorResource(string name) : ContainerResource(name)
+/// <summary>
+/// Represents an OpenTelemetry Collector resource for distributed application hosting.
+/// </summary>
+/// <param name="name">The name of the OpenTelemetry Collector resource.</param>
+public sealed class OpenTelemetryCollectorResource(string name) : ContainerResource(name)
 {
-    internal const string OtlpGrpcEndpointName = "grpc";
-    internal const string OtlpHttpEndpointName = "http";
+    /// <summary>
+    /// The gRPC endpoint name for OTLP.
+    /// </summary>
+    public const string OtlpGrpcEndpointName = "grpc";
+
+    /// <summary>
+    /// The HTTP endpoint name for OTLP.
+    /// </summary>
+    public const string OtlpHttpEndpointName = "http";
 }

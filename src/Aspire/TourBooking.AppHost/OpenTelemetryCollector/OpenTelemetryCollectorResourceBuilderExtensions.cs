@@ -2,16 +2,26 @@
 
 namespace TourBooking.AppHost.OpenTelemetryCollector;
 
-internal static class OpenTelemetryCollectorResourceBuilderExtensions
+/// <summary>
+/// Provides extension methods for adding OpenTelemetry Collector resources to the application model.
+/// </summary>
+public static class OpenTelemetryCollectorResourceBuilderExtensions
 {
     private const string DashboardOtlpUrlVariableName = "DASHBOARD_OTLP_ENDPOINT_URL";
     private const string DashboardOtlpApiKeyVariableName = "AppHost:OtlpApiKey";
     private const string DashboardOtlpUrlDefaultValue = "http://localhost:18889";
-    private const string OTelCollectorImageName = "ghcr.io/open-telemetry/opentelemetry-collector-releases/opentelemetry-collector-contrib";
-    private const string OTelCollectorImageTag = "0.128.0";
 
+    /// <summary>
+    /// Adds an OpenTelemetry Collector resource to the application model.
+    /// </summary>
+    /// <param name="builder">The distributed application builder.</param>
+    /// <param name="name">The name of the resource.</param>
+    /// <param name="configFileLocation">The path to the collector configuration file.</param>
+    /// <returns>The resource builder for the OpenTelemetry Collector resource.</returns>
     public static IResourceBuilder<OpenTelemetryCollectorResource> AddOpenTelemetryCollector(this IDistributedApplicationBuilder builder, string name, string configFileLocation)
     {
+        ArgumentNullException.ThrowIfNull(builder);
+
         builder.AddOpenTelemetryCollectorInfrastructure();
 
         var url = builder.Configuration[DashboardOtlpUrlVariableName] ?? DashboardOtlpUrlDefaultValue;
@@ -21,7 +31,8 @@ internal static class OpenTelemetryCollectorResourceBuilderExtensions
 
         var resource = new OpenTelemetryCollectorResource(name);
         var resourceBuilder = builder.AddResource(resource)
-            .WithImage(OTelCollectorImageName, OTelCollectorImageTag)
+            .WithImage(OpenTelemetryCollectorContainerImageTags.Image, OpenTelemetryCollectorContainerImageTags.Tag)
+            .WithImageRegistry(OpenTelemetryCollectorContainerImageTags.Registry)
             .WithEndpoint(targetPort: 4317, name: OpenTelemetryCollectorResource.OtlpGrpcEndpointName, scheme: isHttpsEnabled ? "https" : "http")
             .WithEndpoint(targetPort: 4318, name: OpenTelemetryCollectorResource.OtlpHttpEndpointName, scheme: isHttpsEnabled ? "https" : "http")
             .WithBindMount(configFileLocation, "/etc/otelcol-contrib/config.yaml")
