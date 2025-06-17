@@ -3,7 +3,7 @@ using TourBooking.Aspire.Constants;
 
 var builder = DistributedApplication.CreateBuilder(args);
 
-var prometheus = builder.AddContainer(ResourceNames.Prometheus, "prom/prometheus", "v3.2.1")
+var prometheus = builder.AddContainer(ResourceNames.Prometheus, "prom/prometheus", "v3.4.1")
     .WithBindMount("../../../prometheus", "/etc/prometheus", isReadOnly: true)
     .WithArgs("--web.enable-otlp-receiver", "--config.file=/etc/prometheus/prometheus.yml")
     .WithHttpEndpoint(targetPort: 9090, name: "http");
@@ -14,15 +14,17 @@ builder.AddContainer(ResourceNames.Grafana, "grafana/grafana")
     .WithEnvironment("PROMETHEUS_ENDPOINT", prometheus.GetEndpoint("http"))
     .WithHttpEndpoint(targetPort: 3000, name: "http");
 
-builder.AddOpenTelemetryCollector(ResourceNames.OpenTelemetryCollector, "../../../otelcollector/config.yaml")
+var otelCollector = builder.AddOpenTelemetryCollector(ResourceNames.OpenTelemetryCollector, "../../../otelcollector/config.yaml")
     .WithEnvironment("PROMETHEUS_ENDPOINT", $"{prometheus.GetEndpoint("http")}/api/v1/otlp");
 
 var redis = builder.AddRedis(ResourceNames.Redis)
     .WithRedisInsight()
-    .WithRedisCommander();
+    .WithRedisCommander()
+    .WaitFor(otelCollector);
 
 var postgres = builder.AddPostgres(ResourceNames.PostgreSql)
-    .WithPgWeb();
+    .WithPgWeb()
+    .WaitFor(otelCollector);
 
 var database = postgres.AddDatabase(ResourceNames.ToursDatabase);
 
