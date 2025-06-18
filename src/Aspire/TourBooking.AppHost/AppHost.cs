@@ -1,3 +1,4 @@
+using TourBooking.AppHost.Grafana;
 using TourBooking.AppHost.OpenTelemetryCollector;
 using TourBooking.Aspire.Constants;
 
@@ -8,11 +9,8 @@ var prometheus = builder.AddContainer(ResourceNames.Prometheus, "prom/prometheus
     .WithArgs("--web.enable-otlp-receiver", "--config.file=/etc/prometheus/prometheus.yml")
     .WithHttpEndpoint(targetPort: 9090, name: "http");
 
-var grafana = builder.AddContainer(ResourceNames.Grafana, "grafana/grafana")
-    .WithBindMount("../../../grafana/config", "/etc/grafana", isReadOnly: true)
-    .WithBindMount("../../../grafana/dashboards", "/var/lib/grafana/dashboards", isReadOnly: true)
-    .WithEnvironment("PROMETHEUS_ENDPOINT", prometheus.GetEndpoint("http"))
-    .WithHttpEndpoint(targetPort: 3000, name: "http");
+var grafana = builder.AddGrafana(ResourceNames.Grafana, "../../../grafana/config", "../../../grafana/dashboards")
+    .WithEnvironment("PROMETHEUS_ENDPOINT", prometheus.GetEndpoint("http"));
 
 var otelCollector = builder.AddOpenTelemetryCollector(ResourceNames.OpenTelemetryCollector, "../../../otelcollector/config.yaml")
     .WithEnvironment("PROMETHEUS_ENDPOINT", $"{prometheus.GetEndpoint("http")}/api/v1/otlp")
