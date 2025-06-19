@@ -6,7 +6,9 @@ using TourBooking.Aspire.Constants;
 
 var builder = DistributedApplication.CreateBuilder(args);
 
-var prometheus = builder.AddPrometheus(ResourceNames.Prometheus, "../../../prometheus");
+var prometheus = builder.AddPrometheus(ResourceNames.Prometheus, "../../../prometheus")
+    .WithContainerName(ResourceNames.Prometheus)
+    .WithLifetime(ContainerLifetime.Persistent);
 
 var grafana = builder.AddGrafana(
         name: ResourceNames.Grafana,
@@ -35,13 +37,20 @@ var redis = builder.AddRedis(ResourceNames.Redis)
     .WithContainerName(ResourceNames.Redis)
     .WithLifetime(ContainerLifetime.Persistent)
     .WithRedisInsight(
-        redisInsight => redisInsight.WithContainerName(ResourceNames.RedisInsight))
+        redisInsight => redisInsight
+            .WithContainerName(ResourceNames.RedisInsight)
+            .WithLifetime(ContainerLifetime.Persistent))
     .WithRedisCommander(
-        redisCommander => redisCommander.WithContainerName(ResourceNames.RedisCommander))
+        redisCommander => redisCommander
+            .WithContainerName(ResourceNames.RedisCommander)
+            .WithLifetime(ContainerLifetime.Persistent))
     .WaitFor(otelCollector);
 
 var postgres = builder.AddPostgres(ResourceNames.PostgreSql)
-    .WithPgWeb(pgWeb => pgWeb.WithContainerName(ResourceNames.PgWeb))
+    .WithPgWeb(
+        pgWeb => pgWeb
+            .WithContainerName(ResourceNames.PgWeb)
+            .WithLifetime(ContainerLifetime.Persistent))
     .WithContainerName(ResourceNames.PostgreSql)
     .WithLifetime(ContainerLifetime.Persistent)
     .WaitFor(otelCollector);
