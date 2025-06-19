@@ -15,4 +15,14 @@ public sealed class OpenTelemetryCollectorResource(string name) : ContainerResou
     /// The HTTP endpoint name for OTLP.
     /// </summary>
     public const string OtlpHttpEndpointName = "http";
+
+    /// <summary>
+    /// The health check endpoint name.
+    /// </summary>
+    public const string HealthCheckEndpointName = "health";
+
+    /// <summary>
+    /// The zPages endpoint name.
+    /// </summary>
+    public const string ZPagesEndpointName = "zpages";
 }

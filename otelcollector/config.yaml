@@ -17,19 +17,21 @@ exporters:
     headers:
       x-otlp-api-key: ${env:ASPIRE_API_KEY}
     tls:
-        insecure: ${env:ASPIRE_INSECURE}
-        insecure_skip_verify: true # Required in local development because cert is localhost and the endpoint is host.docker.internal
+      insecure: ${env:ASPIRE_INSECURE}
+      insecure_skip_verify: true # Required in local development because cert is localhost and the endpoint is host.docker.internal
   otlphttp/prometheus:
     endpoint: ${env:PROMETHEUS_ENDPOINT}
     tls:
-        insecure: true
+      insecure: true
 
 extensions:
   health_check:
     endpoint: 0.0.0.0:13133
+  zpages:
+    endpoint: 0.0.0.0:55679
 
 service:
-  extensions: [health_check]
+  extensions: [health_check, zpages]
   pipelines:
     traces:
       receivers: [otlp]

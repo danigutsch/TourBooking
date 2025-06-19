@@ -33,9 +33,22 @@ public static class OpenTelemetryCollectorResourceBuilderExtensions
         var resourceBuilder = builder.AddResource(resource)
             .WithImage(OpenTelemetryCollectorContainerImageTags.Image, OpenTelemetryCollectorContainerImageTags.Tag)
             .WithImageRegistry(OpenTelemetryCollectorContainerImageTags.Registry)
-            .WithEndpoint(targetPort: 4317, name: OpenTelemetryCollectorResource.OtlpGrpcEndpointName, scheme: isHttpsEnabled ? "https" : "http")
-            .WithEndpoint(targetPort: 4318, name: OpenTelemetryCollectorResource.OtlpHttpEndpointName, scheme: isHttpsEnabled ? "https" : "http")
-            .WithEndpoint(targetPort: 13133, name: "health", scheme: "http")
+            .WithEndpoint(
+                targetPort: 4317,
+                name: OpenTelemetryCollectorResource.OtlpGrpcEndpointName,
+                scheme: isHttpsEnabled ? "https" : "http")
+            .WithEndpoint(
+                targetPort: 4318,
+                name: OpenTelemetryCollectorResource.OtlpHttpEndpointName,
+                scheme: isHttpsEnabled ? "https" : "http")
+            .WithEndpoint(
+                targetPort: 13133,
+                name: OpenTelemetryCollectorResource.HealthCheckEndpointName,
+                scheme: "http")
+            .WithEndpoint(
+                targetPort: 55679,
+                name: OpenTelemetryCollectorResource.ZPagesEndpointName,
+                scheme: "http")
             .WithBindMount(configFileLocation, "/etc/otelcol-contrib/config.yaml")
             .WithEnvironment("ASPIRE_ENDPOINT", $"{dashboardOtlpEndpoint}")
             .WithEnvironment("ASPIRE_API_KEY", builder.Configuration[DashboardOtlpApiKeyVariableName])
@@ -50,7 +63,7 @@ public static class OpenTelemetryCollectorResourceBuilderExtensions
                 resourceBuilder.WithArgs(
                     @"--config=yaml:receivers::otlp::protocols::grpc::tls::cert_file: ""dev-certs/dev-cert.pem""",
                     @"--config=yaml:receivers::otlp::protocols::grpc::tls::key_file: ""dev-certs/dev-cert.key""",
-                    @"--config=/etc/otelcol-contrib/config.yaml");
+                    "--config=/etc/otelcol-contrib/config.yaml");
             });
         }
 
