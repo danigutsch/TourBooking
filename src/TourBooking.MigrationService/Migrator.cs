@@ -1,8 +1,5 @@
-using System.Data;
-using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
 using TourBooking.Tours.Application;
-using TourBooking.Tours.Persistence;
 
 namespace TourBooking.MigrationService;
 
