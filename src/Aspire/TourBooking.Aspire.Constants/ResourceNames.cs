@@ -13,9 +13,21 @@ public static class ResourceNames
     /// </summary>
     public const string Redis = "redis";
     /// <summary>
+    /// Represents the identifier for the RedisInsight tool.
+    /// </summary>
+    public const string RedisInsight = "redisinsight";
+    /// <summary>
+    /// Represents the identifier for the Redis Commander tool.
+    /// </summary>
+    public const string RedisCommander = "rediscommander";
+    /// <summary>
     /// Represents the identifier for the PostgreSQL database.
     /// </summary>
     public const string PostgreSql = "postgresql";
+    /// <summary>
+    /// Represents the identifier for the Redis database.
+    /// </summary>
+    public const string PgWeb = "pgweb";
     /// <summary>
     /// Represents the identifier for the Tours database.
     /// </summary>

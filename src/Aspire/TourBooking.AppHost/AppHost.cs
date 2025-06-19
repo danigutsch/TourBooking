@@ -12,25 +12,38 @@ var grafana = builder.AddGrafana(
         name: ResourceNames.Grafana,
         configPath: "../../../grafana/config",
         dashboardsPath: "../../../grafana/dashboards")
-    .WithEnvironment("PROMETHEUS_ENDPOINT", prometheus.GetEndpoint("http"));
+    .WithEnvironment("PROMETHEUS_ENDPOINT", prometheus.GetEndpoint("http"))
+    .WithContainerName(ResourceNames.Grafana)
+    .WithLifetime(ContainerLifetime.Persistent);
 
-var jaeger = builder.AddJaeger(ResourceNames.Jaeger);
+var jaeger = builder.AddJaeger(ResourceNames.Jaeger)
+    .WithContainerName(ResourceNames.Jaeger)
+    .WithLifetime(ContainerLifetime.Persistent);
 
-var otelCollector = builder
-    .AddOpenTelemetryCollector(ResourceNames.OpenTelemetryCollector, "../../../otelcollector/config.yaml")
+var otelCollector = builder.AddOpenTelemetryCollector(
+        name: ResourceNames.OpenTelemetryCollector,
+        configFileLocation: "../../../otelcollector/config.yaml")
     .WithEnvironment("PROMETHEUS_ENDPOINT", $"{prometheus.GetEndpoint("http")}/api/v1/otlp")
     .WithEnvironment("JAEGER_ENDPOINT", jaeger.GetEndpoint("otlp-grpc"))
+    .WithContainerName(ResourceNames.OpenTelemetryCollector)
+    .WithLifetime(ContainerLifetime.Persistent)
     .WaitFor(prometheus)
     .WaitFor(grafana)
     .WaitFor(jaeger);
 
 var redis = builder.AddRedis(ResourceNames.Redis)
-    .WithRedisInsight()
-    .WithRedisCommander()
+    .WithContainerName(ResourceNames.Redis)
+    .WithLifetime(ContainerLifetime.Persistent)
+    .WithRedisInsight(
+        redisInsight => redisInsight.WithContainerName(ResourceNames.RedisInsight))
+    .WithRedisCommander(
+        redisCommander => redisCommander.WithContainerName(ResourceNames.RedisCommander))
     .WaitFor(otelCollector);
 
 var postgres = builder.AddPostgres(ResourceNames.PostgreSql)
-    .WithPgWeb()
+    .WithPgWeb(pgWeb => pgWeb.WithContainerName(ResourceNames.PgWeb))
+    .WithContainerName(ResourceNames.PostgreSql)
+    .WithLifetime(ContainerLifetime.Persistent)
     .WaitFor(otelCollector);
 
 var database = postgres.AddDatabase(ResourceNames.ToursDatabase);
