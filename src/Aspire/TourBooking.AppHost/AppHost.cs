@@ -13,10 +13,20 @@ var grafana = builder.AddGrafana(
         dashboardsPath: "../../../grafana/dashboards")
     .WithEnvironment("PROMETHEUS_ENDPOINT", prometheus.GetEndpoint("http"));
 
-var otelCollector = builder.AddOpenTelemetryCollector(ResourceNames.OpenTelemetryCollector, "../../../otelcollector/config.yaml")
+var jaeger = builder.AddContainer("jaeger", "jaegertracing/jaeger:2.7.0")
+    .WithEndpoint(targetPort: 16686, name: "ui", scheme: "http")
+    .WithEndpoint(targetPort: 4317, name: "otlp-grpc", scheme: "http")
+    .WithEndpoint(targetPort: 4318, name: "otlp-http", scheme: "http")
+    .WithEndpoint(targetPort: 5778, name: "sampling", scheme: "http")
+    .WithHttpHealthCheck(path: "/", endpointName: "ui");
+
+var otelCollector = builder
+    .AddOpenTelemetryCollector(ResourceNames.OpenTelemetryCollector, "../../../otelcollector/config.yaml")
     .WithEnvironment("PROMETHEUS_ENDPOINT", $"{prometheus.GetEndpoint("http")}/api/v1/otlp")
+    .WithEnvironment("JAEGER_ENDPOINT", jaeger.GetEndpoint("otlp-grpc"))
     .WaitFor(prometheus)
-    .WaitFor(grafana);
+    .WaitFor(grafana)
+    .WaitFor(jaeger);
 
 var redis = builder.AddRedis(ResourceNames.Redis)
     .WithRedisInsight()

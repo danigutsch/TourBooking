@@ -23,6 +23,10 @@ exporters:
     endpoint: ${env:PROMETHEUS_ENDPOINT}
     tls:
       insecure: true
+  otlp/jaeger:
+    endpoint: ${env:JAEGER_ENDPOINT}
+    tls:
+      insecure: true
 
 extensions:
   health_check:
@@ -38,7 +42,7 @@ service:
     traces:
       receivers: [otlp]
       processors: [batch]
-      exporters: [otlp/aspire]
+      exporters: [otlp/aspire, otlp/jaeger]
     logs:
       receivers: [otlp]
       processors: [batch]
