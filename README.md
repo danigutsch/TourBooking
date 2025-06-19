@@ -2,9 +2,9 @@
 
 # Bike Tours Booking Platform
 
-A **cloud-native bike tours booking and management** system built with **.NET 9** and **.NET Aspire**, showcasing modern C# features, **Domain-Driven Design (DDD)**, and **clean architecture** principles. This repository demonstrates how to build a **production-ready distributed** application that focuses on scalability, maintainability, and exceptional customer experience in cloud-native environments.
+A **cloud-native bike tours booking and management** system built with the **latest stable .NET and C# features** as they become available, showcasing modern language capabilities, **Domain-Driven Design (DDD)**, and **clean architecture** principles. This repository demonstrates how to build a **production-ready distributed** application that focuses on scalability, maintainability, and exceptional customer experience in cloud-native environments.
 
-> **🚧 Project Status**: This is a new project currently in the planning and initial development phase. The roadmap below shows current progress and planned implementations.
+> **🚧 Project Status**: This project is in early development. Core architecture, infrastructure, and initial APIs are scaffolded. See the roadmap for progress.
 
 ---
 
@@ -22,10 +22,10 @@ A **cloud-native bike tours booking and management** system built with **.NET 9*
 
 ## Overview
 
-The **Bike Tours Booking Platform API** provides a comprehensive framework for managing bike tours, customer bookings, inventory, and e-commerce operations. Leveraging **.NET 9** and the **.NET Aspire** ecosystem, this project employs enterprise architectural patterns to ensure high availability, scalability, and testability for a seamless customer booking experience in cloud-native environments.
+The **Bike Tours Booking Platform API** provides a comprehensive framework for managing bike tours, customer bookings, inventory, and e-commerce operations. Leveraging the **latest stable .NET and .NET Aspire** ecosystem, this project employs enterprise architectural patterns to ensure high availability, scalability, and testability for a seamless customer booking experience in cloud-native environments.
 
 ### Key Benefits
-- **Modern .NET Stack**: Built on .NET 9 with latest C# features
+- **Modern .NET Stack**: Built with the latest stable C# features as they become available
 - **Cloud-Native Design**: Optimized for containerized deployment and microservices
 - **Enterprise Patterns**: Implements DDD, CQRS, and event-driven architecture
 - **Production Ready**: Comprehensive testing, monitoring, and observability
@@ -67,9 +67,9 @@ The **Bike Tours Booking Platform API** provides a comprehensive framework for m
 ## Implementation Roadmap
 
 ### 🏗️ **Architecture & Design**
-- [ ] Clean Architecture implementation
-- [ ] Domain-Driven Design patterns
-- [ ] CQRS pattern
+- [x] Clean Architecture implementation
+- [x] Domain-Driven Design patterns
+- [x] CQRS pattern
 - [ ] Event-driven architecture
 - [ ] Event Sourcing
 - [ ] Outbox pattern
@@ -82,29 +82,50 @@ The **Bike Tours Booking Platform API** provides a comprehensive framework for m
 ### 🏗️ **Infrastructure**
 
 #### Cloud & Hosting
-- [ ] .NET Aspire cloud-native setup
+- [x] .NET Aspire cloud-native setup
 - [ ] Basic authentication
 - [ ] Full-text search capabilities
+- [ ] Azure App Service / AWS Elastic Beanstalk
 
 #### Persistence
 **SQL Databases**
-- [ ] PostgreSQL persistence
-- [ ] SQLite support
+- PostgreSQL
+  - [x] Local
+  - [ ] Azure Database for PostgreSQL
+  - [ ] Amazon RDS for PostgreSQL
+- SQLite
+  - [ ] Local
+  - [ ] Azure SQL Edge
+  - [ ] AWS Aurora Serverless
 - [ ] Database maintenance
-- [ ] Data migration tools
+- Data migration tools
+  - [x] Local (EF Core Migrations)
+  - [ ] Flyway
+  - [ ] Liquibase
+  - [ ] Azure Data Factory
+  - [ ] AWS DMS
+- SQL Server
+  - [ ] Azure SQL Database
+  - [ ] Amazon RDS for SQL Server
 
 **NoSQL & Document Storage**
-- [ ] Document DB support
+- Document DB
+  - [ ] Local (e.g., MongoDB)
+  - [ ] Azure Cosmos DB
+  - [ ] Amazon DynamoDB
 - [ ] Document storage patterns
 
 #### Caching Systems
 **Memory Caching**
-- [ ] Memory cache management
+- [ ] .NET In-Memory Cache
 - [ ] Output caching
 - [ ] Response caching
 
 **Distributed Caching**
-- [ ] Redis distributed caching
+- Redis
+  - [ ] Local
+  - [ ] Azure Cache for Redis
+  - [ ] Amazon ElastiCache
 - [ ] Garnet caching integration
 
 **Hybrid & Advanced**
@@ -113,14 +134,14 @@ The **Bike Tours Booking Platform API** provides a comprehensive framework for m
 
 #### APIs & Endpoints
 **REST APIs**
-- [ ] Controller-based APIs
+- [x] Controller-based APIs
 - [ ] Minimal APIs
 - [ ] OpenAPI/Swagger documentation
 - [ ] API versioning
 
 **Alternative Protocols**
-- [ ] gRPC services
-- [ ] GraphQL endpoint
+- [ ] gRPC services (Azure API Management, AWS App Mesh)
+- [ ] GraphQL endpoint (Azure API Management, AWS AppSync)
 
 ### ⚡ **Performance & Optimization**
 
@@ -149,8 +170,8 @@ The **Bike Tours Booking Platform API** provides a comprehensive framework for m
 ### 🧪 **Testing & Quality Assurance**
 - [ ] Unit testing suite
 - [ ] Integration tests with containers
-- [ ] Health checks
-- [ ] OpenTelemetry observability
+- [x] Health checks
+- [x] OpenTelemetry observability
 - [ ] Problem Details error handling
 - [ ] Gherkin behavior tests
 - [ ] Feature flags & toggles
@@ -224,15 +245,20 @@ The **Bike Tours Booking Platform API** provides a comprehensive framework for m
 
 ### 🔐 **Security & Authentication**
 - [ ] Bearer token authentication
-- [ ] OpenID Connect/OAuth2
+- [ ] OpenID Connect (OIDC)
+- [ ] OAuth2
+- [ ] SSO (Single Sign-On)
+- [ ] Social media sign-on (Google, Facebook, Microsoft, Apple, GitHub, etc.)
+- [ ] Self-built authentication
 - [ ] Keycloak integration
 - [ ] Duende Identity Server
+- [ ] Azure AD / AWS Cognito integration
 - [ ] Rate limiting
 - [ ] Request idempotency
-- [ ] Secrets management
+- [ ] Secrets management (Azure Key Vault, AWS Secrets Manager)
 - [ ] API key management
 - [ ] Audit logging
-- [ ] Data encryption
+- [ ] Data encryption (Azure Managed HSM, AWS KMS)
 - [ ] GDPR compliance
 - [ ] Role-based file access
 - [ ] Security headers
@@ -287,9 +313,12 @@ The **Bike Tours Booking Platform API** provides a comprehensive framework for m
 ## Getting Started
 
 ### Prerequisites
-- [.NET 9 SDK](https://dotnet.microsoft.com/)  
-- [Docker Desktop](https://www.docker.com/products/docker-desktop/) (optional, for containerized development)
-- [Visual Studio 2022](https://visualstudio.microsoft.com/) or [VS Code](https://code.visualstudio.com/) with C# extension
+- [.NET SDK (latest stable)](https://dotnet.microsoft.com/)  
+- [Docker Desktop](https://www.docker.com/products/docker-desktop/) or [Podman](https://podman.io/) (**FOSS alternative**) or compatible container runtime (**required for Aspire orchestration and cloud-native development**)
+- [Visual Studio 2022](https://visualstudio.microsoft.com/), [VS Code](https://code.visualstudio.com/) with C# extension, or [JetBrains Rider](https://www.jetbrains.com/rider/)
+- [Aspire Workload & Tooling](https://learn.microsoft.com/en-us/dotnet/aspire/fundamentals/setup-tooling) (**required to run AppHost**)
+
+> For more information on .NET Aspire, see the [official documentation](https://learn.microsoft.com/en-us/dotnet/aspire/).
 
 ### Quick Start
 
@@ -306,7 +335,7 @@ The **Bike Tours Booking Platform API** provides a comprehensive framework for m
 
 3. **Run the application**:
    ```bash
-   dotnet run --project src/AppHost
+   dotnet run --project src/Aspire/TourBooking.AppHost
    ```
 
 4. **Access the application**:
@@ -324,27 +353,25 @@ The **Bike Tours Booking Platform API** provides a comprehensive framework for m
 
 ```
 src/
-├── API/                     # Web API endpoints and controllers
-├── Application/             # Use cases, CQRS handlers, and interfaces
-├── Domain/                  # Core business logic and domain models
-├── Infrastructure/          # Data persistence, external services, caching
-├── AppHost/                 # .NET Aspire orchestration
-└── Web/                     # Customer-facing web application
+├── Aspire/
+│   ├── TourBooking.AppHost/           # .NET Aspire orchestration and cloud infra
+│   └── TourBooking.Aspire.Constants/  # Aspire resource constants
+├── TourBooking.ApiService/            # Web API endpoints and controllers
+├── TourBooking.ApiService.Contracts/  # API contracts
+├── TourBooking.Core.Infrastructure/   # Infrastructure and dependency injection
+├── TourBooking.MigrationService/      # Database migration logic
+├── TourBooking.ServiceDefaults/       # Service defaults and extensions
+├── TourBooking.Tours.Application/     # Application layer (CQRS, interfaces)
+├── TourBooking.Tours.Domain/          # Domain models and logic
+├── TourBooking.Tours.Persistence/     # Persistence layer (EF Core, repositories)
+└── TourBooking.Web/                   # Customer-facing web application
 
 tests/
-├── UnitTests/               # Domain and application layer tests
-├── IntegrationTests/        # API and infrastructure tests
-├── FunctionalTests/         # End-to-end booking scenarios
-└── PerformanceTests/        # Load and stress tests
+└── TourBooking.WebTests/              # Web layer tests
 
-docs/
-├── architecture/            # Architecture diagrams and decisions
-├── api/                     # API documentation
-└── deployment/              # Deployment guides
-
-tools/
-├── scripts/                 # Build and deployment scripts
-└── docker/                  # Docker configurations
+grafana/
+otelcollector/
+prometheus/
 ```
 
 ### Key Design Principles
