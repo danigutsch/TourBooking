@@ -18,5 +18,5 @@ public static class GrafanaContainerImageTags
     /// <summary>
     /// The default tag for the Grafana image.
     /// </summary>
-    public const string Tag = "latest";
+    public const string Tag = "12.0.2";
 }
