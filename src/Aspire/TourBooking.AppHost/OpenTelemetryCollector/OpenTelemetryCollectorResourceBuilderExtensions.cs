@@ -49,6 +49,10 @@ public static class OpenTelemetryCollectorResourceBuilderExtensions
                 targetPort: 55679,
                 name: OpenTelemetryCollectorResource.ZPagesEndpointName,
                 scheme: "http")
+            .WithEndpoint(
+                targetPort: 1777,
+                name: OpenTelemetryCollectorResource.PprofEndpointName,
+                scheme: "http")
             .WithBindMount(configFileLocation, "/etc/otelcol-contrib/config.yaml")
             .WithEnvironment("ASPIRE_ENDPOINT", $"{dashboardOtlpEndpoint}")
             .WithEnvironment("ASPIRE_API_KEY", builder.Configuration[DashboardOtlpApiKeyVariableName])
