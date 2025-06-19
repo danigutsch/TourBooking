@@ -19,6 +19,7 @@ public sealed class OpenTelemetryCollectorResource(string name) : ContainerResou
     private EndpointReference? _otlpHttpEndpoint;
     private EndpointReference? _healthCheckEndpoint;
     private EndpointReference? _zPagesEndpoint;
+    private EndpointReference? _pprofEndpoint;
 
     /// <summary>
     /// Gets the gRPC endpoint reference for OTLP.
@@ -42,4 +43,9 @@ public sealed class OpenTelemetryCollectorResource(string name) : ContainerResou
     /// Gets the zPages endpoint reference.
     /// </summary>
     public EndpointReference ZPagesEndpoint => _zPagesEndpoint ??= new EndpointReference(this, ZPagesEndpointName);
+
+    /// <summary>
+    /// Gets the pprof endpoint reference.
+    /// </summary>
+    public EndpointReference PprofEndpoint => _pprofEndpoint ??= new EndpointReference(this, PprofEndpointName);
 }
