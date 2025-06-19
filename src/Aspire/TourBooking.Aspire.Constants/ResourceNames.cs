@@ -44,4 +44,8 @@ public static class ResourceNames
     /// Represents the identifier for the Grafana dashboard service.
     /// </summary>
     public const string Grafana = "grafana";
+    /// <summary>
+    /// Represents the identifier for the Jaeger tracing service.
+    /// </summary>
+    public const string Jaeger = "jaeger";
 }
