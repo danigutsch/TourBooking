@@ -120,6 +120,7 @@ public static class ServiceDefaultExtensions
     /// </summary>
     /// <param name="app">The web application instance.</param>
     /// <returns>The web application with mapped endpoints.</returns>
+    [MustDisposeResource(false)]
     public static WebApplication MapDefaultEndpoints(this WebApplication app)
     {
         ArgumentNullException.ThrowIfNull(app);
