@@ -18,7 +18,7 @@ internal static class GrafanaResourceBuilderExtensions
             .WithImageRegistry(GrafanaContainerImageTags.Registry)
             .WithBindMount(configPath, "/etc/grafana", isReadOnly: true)
             .WithBindMount(dashboardsPath, "/var/lib/grafana/dashboards", isReadOnly: true)
-            .WithEnvironment("DASHBOARD_OTLP_API_KEY", "AppHost:OtlpApiKey")
+            .WithEnvironment("DASHBOARD_OTLP_API_KEY", "AppHost__OtlpApiKey")
             .WithHttpEndpoint(targetPort: 3000, name: GrafanaResource.HttpEndpointName)
             .WithHttpHealthCheck("/api/health");
 
