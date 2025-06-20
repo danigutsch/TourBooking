@@ -1,4 +1,5 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Platform: Linux/Windows/macOS](https://img.shields.io/badge/platform-linux--windows--macos-blue)](https://dotnet.microsoft.com/en-us/platform/support/policy/dotnet-core)
 
 # Bike Tours Booking Platform
 
@@ -338,10 +339,13 @@ The **Bike Tours Booking Platform API** provides a comprehensive framework for m
 ## Getting Started
 
 ### Prerequisites
+- **Supported OS:** Linux, Windows, macOS
 - [.NET SDK (latest stable)](https://dotnet.microsoft.com/)  
 - [Docker Desktop](https://www.docker.com/products/docker-desktop/) or [Podman](https://podman.io/) (**FOSS alternative**) or compatible container runtime (**required for Aspire orchestration and cloud-native development**)
 - [Visual Studio 2022](https://visualstudio.microsoft.com/), [VS Code](https://code.visualstudio.com/) with C# extension, or [JetBrains Rider](https://www.jetbrains.com/rider/)
 - [Aspire Workload & Tooling](https://learn.microsoft.com/en-us/dotnet/aspire/fundamentals/setup-tooling) (**required to run AppHost**)
+
+> This project is cross-platform and can be developed and run on Linux, Windows, and macOS. All features and tooling are supported on these operating systems.
 
 > For more information on .NET Aspire, see the [official documentation](https://learn.microsoft.com/en-us/dotnet/aspire/).
 
