@@ -3,6 +3,7 @@ using TourBooking.Aspire.Constants;
 
 namespace TourBooking.Tests.EndToEnd;
 
+[Collection("Aspire")]
 public sealed class CreateTourTests : PageTest
 {
     private static readonly TimeSpan DefaultTimeout = TimeSpan.FromSeconds(30);

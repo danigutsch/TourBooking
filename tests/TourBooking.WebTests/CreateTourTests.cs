@@ -4,6 +4,7 @@ using TourBooking.Aspire.Constants;
 
 namespace TourBooking.WebTests;
 
+[Collection("Aspire")]
 public sealed class CreateTourTests
 {
     [Fact]
