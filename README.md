@@ -244,6 +244,8 @@ The **Bike Tours Booking Platform API** provides a comprehensive framework for m
 - [ ] Data synchronization
 
 ### 🔐 **Security & Authentication**
+
+#### Authentication & Authorization
 - [ ] Bearer token authentication
 - [ ] OpenID Connect (OIDC)
 - [ ] OAuth2
@@ -253,6 +255,8 @@ The **Bike Tours Booking Platform API** provides a comprehensive framework for m
 - [ ] Keycloak integration
 - [ ] Duende Identity Server
 - [ ] Azure AD / AWS Cognito integration
+
+#### Security Controls
 - [ ] Rate limiting
 - [ ] Request idempotency
 - [ ] Secrets management (Azure Key Vault, AWS Secrets Manager)
@@ -265,6 +269,8 @@ The **Bike Tours Booking Platform API** provides a comprehensive framework for m
 - [ ] CORS configuration
 
 ### 🛠️ **DevOps & Deployment**
+
+#### Infrastructure & Automation
 - [ ] Cloud deployment templates
 - [ ] Blue-green deployments
 - [ ] Infrastructure as Code
@@ -275,24 +281,41 @@ The **Bike Tours Booking Platform API** provides a comprehensive framework for m
 - [ ] Auto semantic versioning in CI
 - [ ] NuGet package distribution
 - [ ] Project templates
+
+#### Containerization & CI/CD
 - [ ] Development containers (.devcontainer)
 - [ ] Docker Compose setup
 - [ ] Kubernetes manifests
 - [ ] Helm charts
 - [ ] CI/CD pipelines
+- [ ] Trimmed .NET runtime images (Alpine, distroless, Aspire runtime-deps)
+- [ ] Multi-arch container images (ARM64/x64)
+- [ ] Container image vulnerability scanning
+- [ ] SBOM (Software Bill of Materials) generation
+- [ ] Image signing and verification
+- [ ] Multi-stage Docker builds for minimal images
+- [ ] Non-root container user setup
+- [ ] Container image hardening and attack surface reduction
+- [ ] Docker Slim or similar image minimization tools
 
 ### 📚 **Documentation & Knowledge**
+
+#### Architecture & Design Docs
 - [ ] Domain model diagrams
 - [ ] Bounded context map
 - [ ] Aggregate relationship diagrams
 - [ ] Event flow documentation
 - [ ] Architecture decision records (ADRs)
 - [ ] Domain description and glossary
+
+#### API & Deployment Docs
 - [ ] API documentation
 - [ ] Deployment guides
 - [ ] Development setup guides
 
 ### 🎯 **Business Features**
+
+#### Core Business
 - [ ] Seasonal tour scheduling  
 - [ ] Dynamic pricing algorithms
 - [ ] Tax calculation  
@@ -301,6 +324,8 @@ The **Bike Tours Booking Platform API** provides a comprehensive framework for m
 - [ ] AI integration for recommendations  
 - [ ] Customer loyalty programs
 - [ ] Review and rating system
+
+#### Internationalization & Operations
 - [ ] Multi-language support
 - [ ] Currency conversion
 - [ ] Weather integration
