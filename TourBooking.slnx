@@ -27,6 +27,7 @@
     <Project Path="src\TourBooking.Tours.Domain\TourBooking.Tours.Domain.csproj" />
   </Folder>
   <Folder Name="/tests/">
+    <Project Path="tests/TourBooking.Tests.EndToEnd/TourBooking.Tests.EndToEnd.csproj" Id="77a82e46-d31f-4c00-ab79-7122203bf5ac" />
     <Project Path="tests/TourBooking.WebTests/TourBooking.WebTests.csproj" Id="312d0db5-4a51-42d6-a8a4-73f498ad3198" />
   </Folder>
 </Solution>
