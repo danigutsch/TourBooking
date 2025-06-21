@@ -1,59 +1,19 @@
-using TourBooking.AppHost.Grafana;
-using TourBooking.AppHost.Jaeger;
-using TourBooking.AppHost.OpenTelemetryCollector;
-using TourBooking.AppHost.Prometheus;
+using TourBooking.AppHost;
 using TourBooking.Aspire.Constants;
 
 var builder = DistributedApplication.CreateBuilder(args);
 
-var prometheus = builder.AddPrometheus(ResourceNames.Prometheus, "../../../prometheus")
-    .WithContainerName(ResourceNames.Prometheus)
-    .WithLifetime(ContainerLifetime.Persistent);
+var prometheus = builder.AddPrometheus();
 
-var grafana = builder.AddGrafana(
-        name: ResourceNames.Grafana,
-        configPath: "../../../grafana/config",
-        dashboardsPath: "../../../grafana/dashboards")
-    .WithEnvironment("PROMETHEUS_ENDPOINT", prometheus.GetEndpoint("http"))
-    .WithContainerName(ResourceNames.Grafana)
-    .WithLifetime(ContainerLifetime.Persistent);
+var grafana = builder.AddGrafana(prometheus);
 
-var jaeger = builder.AddJaeger(ResourceNames.Jaeger)
-    .WithContainerName(ResourceNames.Jaeger)
-    .WithLifetime(ContainerLifetime.Persistent);
+var jaeger = builder.AddJaeger();
 
-var otelCollector = builder.AddOpenTelemetryCollector(
-        name: ResourceNames.OpenTelemetryCollector,
-        configFileLocation: "../../../otelcollector/config.yaml")
-    .WithEnvironment("PROMETHEUS_ENDPOINT", $"{prometheus.GetEndpoint("http")}/api/v1/otlp")
-    .WithEnvironment("JAEGER_ENDPOINT", jaeger.GetEndpoint("otlp-grpc"))
-    .WithContainerName(ResourceNames.OpenTelemetryCollector)
-    .WithLifetime(ContainerLifetime.Persistent)
-    .WaitFor(prometheus)
-    .WaitFor(grafana)
-    .WaitFor(jaeger);
+builder.AddOpenTelemetryCollector(prometheus, grafana, jaeger);
 
-var redis = builder.AddRedis(ResourceNames.Redis)
-    .WithContainerName(ResourceNames.Redis)
-    .WithLifetime(ContainerLifetime.Persistent)
-    .WithRedisInsight(
-        redisInsight => redisInsight
-            .WithContainerName(ResourceNames.RedisInsight)
-            .WithLifetime(ContainerLifetime.Persistent))
-    .WithRedisCommander(
-        redisCommander => redisCommander
-            .WithContainerName(ResourceNames.RedisCommander)
-            .WithLifetime(ContainerLifetime.Persistent))
-    .WaitFor(otelCollector);
+var redis = builder.AddRedis();
 
-var postgres = builder.AddPostgres(ResourceNames.PostgreSql)
-    .WithPgWeb(
-        pgWeb => pgWeb
-            .WithContainerName(ResourceNames.PgWeb)
-            .WithLifetime(ContainerLifetime.Persistent))
-    .WithContainerName(ResourceNames.PostgreSql)
-    .WithLifetime(ContainerLifetime.Persistent)
-    .WaitFor(otelCollector);
+var postgres = builder.AddPostgres();
 
 var database = postgres.AddDatabase(ResourceNames.ToursDatabase);
 
