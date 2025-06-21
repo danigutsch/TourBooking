@@ -33,14 +33,12 @@ public static class OpenTelemetryCollectorResourceBuilderExtensions
         var resourceBuilder = builder.AddResource(resource)
             .WithImage(OpenTelemetryCollectorContainerImageTags.Image, OpenTelemetryCollectorContainerImageTags.Tag)
             .WithImageRegistry(OpenTelemetryCollectorContainerImageTags.Registry)
-            .WithEndpoint(
+            .WithHttpEndpoint(
                 targetPort: 4317,
-                name: OpenTelemetryCollectorResource.OtlpGrpcEndpointName,
-                scheme: isHttpsEnabled ? "https" : "http")
-            .WithEndpoint(
+                name: OpenTelemetryCollectorResource.OtlpGrpcEndpointName)
+            .WithHttpEndpoint(
                 targetPort: 4318,
-                name: OpenTelemetryCollectorResource.OtlpHttpEndpointName,
-                scheme: isHttpsEnabled ? "https" : "http")
+                name: OpenTelemetryCollectorResource.OtlpHttpEndpointName)
             .WithHttpEndpoint(
                 targetPort: 13133,
                 name: OpenTelemetryCollectorResource.HealthCheckEndpointName)
