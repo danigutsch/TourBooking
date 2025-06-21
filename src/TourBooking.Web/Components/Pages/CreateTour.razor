@@ -1,44 +1,52 @@
 ﻿@page "/create-tour"
 @rendermode InteractiveServer
 @using System.ComponentModel.DataAnnotations
-
 @inject ToursApiClient ToursApi
 
 <PageTitle>Create Tour</PageTitle>
 
 <h1>Create Tour</h1>
 
-<p>Creates a tour.</p>
-
-<EditForm Model="@tourModel" OnValidSubmit="OnCreateTour" FormName="CreateTourForm">
-    <DataAnnotationsValidator />
-    <ValidationSummary />
-    <div class="mb-3">
-        <label for="name" class="form-label">Name</label>
-        <InputText id="name" class="form-control" @bind-Value="tourModel.Name" />
-    </div>
-    <div class="mb-3">
-        <label for="description" class="form-label">Description</label>
-        <InputText id="description" class="form-control" @bind-Value="tourModel.Description" />
-    </div>
-    <div class="mb-3">
-        <label for="price" class="form-label">Price</label>
-        <InputNumber id="price" class="form-control" @bind-Value="tourModel.Price" />
-    </div>
-    <div class="mb-3">
-        <label for="startDate" class="form-label">Start Date</label>
-        <InputDate id="startDate" class="form-control" @bind-Value="tourModel.StartDate" />
-    </div>
-    <div class="mb-3">
-        <label for="endDate" class="form-label">End Date</label>
-        <InputDate id="endDate" class="form-control" @bind-Value="tourModel.EndDate" />
-    </div>
-    <button type="submit" class="btn btn-primary">Create Tour</button>
-</EditForm>
-
-@if (!string.IsNullOrEmpty(message))
+@if (!RendererInfo.IsInteractive)
 {
-    <div class="alert alert-success mt-3">@message</div>
+    <p>Connecting to the assistant...</p>
+}
+else
+{
+    <p>Creates a tour.</p>
+
+    <EditForm Model="@tourModel" OnValidSubmit="OnCreateTour" FormName="CreateTourForm">
+        <fieldset disabled="@(!RendererInfo.IsInteractive)">
+            <DataAnnotationsValidator />
+            <ValidationSummary />
+            <div class="mb-3">
+                <label for="name" class="form-label">Name</label>
+                <InputText id="name" class="form-control" @bind-Value="tourModel.Name" />
+            </div>
+            <div class="mb-3">
+                <label for="description" class="form-label">Description</label>
+                <InputText id="description" class="form-control" @bind-Value="tourModel.Description" />
+            </div>
+            <div class="mb-3">
+                <label for="price" class="form-label">Price</label>
+                <InputNumber id="price" class="form-control" @bind-Value="tourModel.Price" />
+            </div>
+            <div class="mb-3">
+                <label for="startDate" class="form-label">Start Date</label>
+                <InputDate id="startDate" class="form-control" @bind-Value="tourModel.StartDate" />
+            </div>
+            <div class="mb-3">
+                <label for="endDate" class="form-label">End Date</label>
+                <InputDate id="endDate" class="form-control" @bind-Value="tourModel.EndDate" />
+            </div>
+            <button type="submit" class="btn btn-primary">Create Tour</button>
+        </fieldset>
+    </EditForm>
+
+    @if (!string.IsNullOrEmpty(message))
+    {
+        <div class="alert alert-success mt-3">@message</div>
+    }
 }
 
 @code {
