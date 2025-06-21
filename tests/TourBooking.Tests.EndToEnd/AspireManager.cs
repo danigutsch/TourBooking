@@ -1,8 +1,10 @@
 ﻿using Aspire.Hosting;
+using JetBrains.Annotations;
 using TourBooking.Aspire.Constants;
 
 namespace TourBooking.Tests.EndToEnd;
 
+[UsedImplicitly]
 public sealed class AspireManager : IAsyncLifetime
 {
     private static readonly TimeSpan DefaultTimeout = TimeSpan.FromSeconds(30);
@@ -22,7 +24,11 @@ public sealed class AspireManager : IAsyncLifetime
         var resourceNotificationService = App.Services.GetRequiredService<ResourceNotificationService>();
         await App.StartAsync(cancellationToken);
         ApiClient = App.CreateHttpClient(ResourceNames.WebFrontend);
-        await resourceNotificationService.WaitForResourceAsync(ResourceNames.WebFrontend, KnownResourceStates.Running, cancellationToken).WaitAsync(TimeSpan.FromSeconds(30), cancellationToken);
+        await resourceNotificationService.WaitForResourceAsync(
+            ResourceNames.WebFrontend,
+            KnownResourceStates.Running,
+            cancellationToken
+            ).WaitAsync(cancellationToken);
 
         FrontendEndpoint = App.GetEndpoint(ResourceNames.WebFrontend).ToString().TrimEnd('/');
     }
