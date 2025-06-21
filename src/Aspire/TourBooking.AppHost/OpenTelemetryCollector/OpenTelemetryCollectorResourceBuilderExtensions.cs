@@ -41,18 +41,15 @@ public static class OpenTelemetryCollectorResourceBuilderExtensions
                 targetPort: 4318,
                 name: OpenTelemetryCollectorResource.OtlpHttpEndpointName,
                 scheme: isHttpsEnabled ? "https" : "http")
-            .WithEndpoint(
+            .WithHttpEndpoint(
                 targetPort: 13133,
-                name: OpenTelemetryCollectorResource.HealthCheckEndpointName,
-                scheme: "http")
-            .WithEndpoint(
+                name: OpenTelemetryCollectorResource.HealthCheckEndpointName)
+            .WithHttpEndpoint(
                 targetPort: 55679,
-                name: OpenTelemetryCollectorResource.ZPagesEndpointName,
-                scheme: "http")
+                name: OpenTelemetryCollectorResource.ZPagesEndpointName)
             .WithEndpoint(
                 targetPort: 1777,
-                name: OpenTelemetryCollectorResource.PprofEndpointName,
-                scheme: "http")
+                name: OpenTelemetryCollectorResource.PprofEndpointName)
             .WithBindMount(configFileLocation, "/etc/otelcol-contrib/config.yaml")
             .WithEnvironment("ASPIRE_ENDPOINT", $"{dashboardOtlpEndpoint}")
             .WithEnvironment("ASPIRE_API_KEY", builder.Configuration[DashboardOtlpApiKeyVariableName])

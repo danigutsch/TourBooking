@@ -17,10 +17,10 @@ public static class JaegerBuilderExtensions
 
         var resource = new JaegerResource(name);
         var resourceBuilder = builder.AddResource(resource)
-            .WithEndpoint(targetPort: 16686, name: JaegerResource.UiEndpointName, scheme: "http")
-            .WithEndpoint(targetPort: 4317, name: JaegerResource.OtlpGrpcEndpointName, scheme: "http")
-            .WithEndpoint(targetPort: 4318, name: JaegerResource.OtlpHttpEndpointName, scheme: "http")
-            .WithEndpoint(targetPort: 5778, name: JaegerResource.SamplingEndpointName, scheme: "http")
+            .WithHttpEndpoint(targetPort: 16686, name: JaegerResource.UiEndpointName)
+            .WithHttpEndpoint(targetPort: 4317, name: JaegerResource.OtlpGrpcEndpointName)
+            .WithHttpEndpoint(targetPort: 4318, name: JaegerResource.OtlpHttpEndpointName)
+            .WithHttpEndpoint(targetPort: 5778, name: JaegerResource.SamplingEndpointName)
             .WithImage(JaegerContainerImageTags.Image, JaegerContainerImageTags.Tag)
             .WithImageRegistry(JaegerContainerImageTags.Registry)
             .WithHttpHealthCheck(path: "/", endpointName: JaegerResource.UiEndpointName);
