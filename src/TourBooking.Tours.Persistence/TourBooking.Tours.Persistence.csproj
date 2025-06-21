@@ -10,4 +10,10 @@
 	  <ProjectReference Include="..\TourBooking.Tours.Application\TourBooking.Tours.Application.csproj" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <Compile Include="..\Aspire\ResourceNames.cs">
+	    <Link>ResourceNames.cs</Link>
+	  </Compile>
+	</ItemGroup>
+
 </Project>

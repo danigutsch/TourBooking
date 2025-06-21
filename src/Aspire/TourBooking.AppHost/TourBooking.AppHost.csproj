@@ -23,4 +23,10 @@
     <PackageReference Include="JetBrains.Annotations" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Include="..\ResourceNames.cs">
+      <Link>ResourceNames.cs</Link>
+    </Compile>
+  </ItemGroup>
+
 </Project>

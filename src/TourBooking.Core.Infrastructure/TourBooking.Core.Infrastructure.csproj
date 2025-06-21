@@ -8,4 +8,10 @@
 	  <ProjectReference Include="..\Aspire\TourBooking.Aspire.Constants\TourBooking.Aspire.Constants.csproj" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <Compile Include="..\Aspire\ResourceNames.cs">
+	    <Link>ResourceNames.cs</Link>
+	  </Compile>
+	</ItemGroup>
+
 </Project>

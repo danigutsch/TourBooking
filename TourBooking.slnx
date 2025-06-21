@@ -8,7 +8,7 @@
     <File Path="README.md" />
   </Folder>
   <Folder Name="/src/">
-    <Project Path="src/TourBooking.ApiService.Contracts/TourBooking.ApiService.Contracts.csproj" Id="6b8a72e6-9f20-45a5-ab46-24f5996633ae" />
+    <Project Path="src/TourBooking.ApiService.Contracts/TourBooking.ApiService.Contracts.csproj" />
     <Project Path="src/TourBooking.ApiService/TourBooking.ApiService.csproj" />
     <Project Path="src/TourBooking.MigrationService/TourBooking.MigrationService.csproj" />
     <Project Path="src/TourBooking.ServiceDefaults/TourBooking.ServiceDefaults.csproj" />
@@ -16,18 +16,17 @@
   </Folder>
   <Folder Name="/src/Aspire/">
     <Project Path="src/Aspire/TourBooking.AppHost/TourBooking.AppHost.csproj" />
-    <Project Path="src/Aspire/TourBooking.Aspire.Constants/TourBooking.Aspire.Constants.csproj" Id="9bfb6303-6075-4185-bd16-4e1b0921f5e8" />
   </Folder>
   <Folder Name="/src/Core/">
-    <Project Path="src/TourBooking.Core.Infrastructure/TourBooking.Core.Infrastructure.csproj" Id="c666bf03-96b2-4f0a-961e-a43f49e2aec3" />
+    <Project Path="src/TourBooking.Core.Infrastructure/TourBooking.Core.Infrastructure.csproj" />
   </Folder>
   <Folder Name="/src/Tours/">
-    <Project Path="src/TourBooking.Tours.Application/TourBooking.Tours.Application.csproj" Id="e05c91ac-d59d-4e0b-9726-2a4e92581b8d" />
-    <Project Path="src/TourBooking.Tours.Persistence/TourBooking.Tours.Persistence.csproj" Id="370e250b-d6ff-4150-beac-6f8e68b1d760" />
+    <Project Path="src/TourBooking.Tours.Application/TourBooking.Tours.Application.csproj" />
+    <Project Path="src/TourBooking.Tours.Persistence/TourBooking.Tours.Persistence.csproj" />
     <Project Path="src\TourBooking.Tours.Domain\TourBooking.Tours.Domain.csproj" />
   </Folder>
   <Folder Name="/tests/">
-    <Project Path="tests/TourBooking.Tests.EndToEnd/TourBooking.Tests.EndToEnd.csproj" Id="77a82e46-d31f-4c00-ab79-7122203bf5ac" />
-    <Project Path="tests/TourBooking.WebTests/TourBooking.WebTests.csproj" Id="312d0db5-4a51-42d6-a8a4-73f498ad3198" />
+    <Project Path="tests/TourBooking.Tests.EndToEnd/TourBooking.Tests.EndToEnd.csproj" />
+    <Project Path="tests/TourBooking.WebTests/TourBooking.WebTests.csproj" />
   </Folder>
 </Solution>
