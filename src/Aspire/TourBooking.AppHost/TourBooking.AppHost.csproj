@@ -13,7 +13,6 @@
     <ProjectReference Include="..\..\TourBooking.ApiService\TourBooking.ApiService.csproj" />
     <ProjectReference Include="..\..\TourBooking.MigrationService\TourBooking.MigrationService.csproj" />
     <ProjectReference Include="..\..\TourBooking.Web\TourBooking.Web.csproj" />
-    <ProjectReference Include="..\TourBooking.Aspire.Constants\TourBooking.Aspire.Constants.csproj" IsAspireProjectResource="false" />
   </ItemGroup>
 
   <ItemGroup>
