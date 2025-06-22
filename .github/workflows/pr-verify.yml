@@ -16,12 +16,10 @@ jobs:
       - name: Cache .NET SDK
         uses: actions/cache@v4
         with:
-          path: |
-            ~/.dotnet
-            ~/.nuget/packages
-          key: ${{ runner.os }}-dotnet-${{ hashFiles('**/global.json', '**/*.csproj') }}
+          path: ~/.nuget/packages
+          key: ${{ runner.os }}-nuget-${{ hashFiles('**/packages.lock.json') }}
           restore-keys: |
-            ${{ runner.os }}-dotnet-
+            ${{ runner.os }}-nuget-
           
       - name: Restore dependencies
         run: dotnet restore
