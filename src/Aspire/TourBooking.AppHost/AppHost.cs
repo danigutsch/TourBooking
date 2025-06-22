@@ -1,14 +1,11 @@
-
-using Microsoft.Extensions.Hosting;
 using TourBooking.AppHost;
 using TourBooking.Aspire.Constants;
 
 var builder = DistributedApplication.CreateBuilder(args);
 
-if (builder.Environment.IsDevelopment())
-{
-    builder.AddObservability();
-}
+#if DEBUG
+builder.AddObservability();
+#endif
 
 var redis = builder.AddRedis();
 
