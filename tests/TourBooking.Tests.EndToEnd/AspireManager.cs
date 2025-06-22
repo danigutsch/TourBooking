@@ -7,7 +7,7 @@ namespace TourBooking.Tests.EndToEnd;
 [UsedImplicitly]
 public sealed class AspireManager : IAsyncLifetime
 {
-    private static readonly TimeSpan DefaultTimeout = TimeSpan.FromSeconds(30);
+    private static readonly TimeSpan DefaultTimeout = TimeSpan.FromSeconds(120);
 
     public DistributedApplication App { get; private set; } = null!;
     public HttpClient ApiClient { get; private set; } = null!;
