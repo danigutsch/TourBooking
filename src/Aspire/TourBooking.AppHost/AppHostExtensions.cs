@@ -50,25 +50,28 @@ internal static class AppHostExtensions
             .WaitFor(grafana)
             .WaitFor(jaeger);
 
-    public static IResourceBuilder<RedisResource> AddRedis(this IDistributedApplicationBuilder builder) =>
-        builder.AddRedis(ResourceNames.Redis)
-            .WithContainerName(ResourceNames.Redis)
-            .WithLifetime(ContainerLifetime.Persistent)
-            .WithRedisInsight(
-                redisInsight => redisInsight
-                    .WithContainerName(ResourceNames.RedisInsight)
-                    .WithLifetime(ContainerLifetime.Persistent))
-            .WithRedisCommander(
-                redisCommander => redisCommander
-                    .WithContainerName(ResourceNames.RedisCommander)
-                    .WithLifetime(ContainerLifetime.Persistent));
+    public static IResourceBuilder<RedisResource> AddRedis(this IDistributedApplicationBuilder builder)
+    {
+        var redis = builder.AddRedis(ResourceNames.Redis);
 
-    public static IResourceBuilder<PostgresServerResource> AddPostgres(this IDistributedApplicationBuilder builder) =>
-        builder.AddPostgres(ResourceNames.PostgreSql)
-            .WithPgWeb(
-                pgWeb => pgWeb
-                    .WithContainerName(ResourceNames.PgWeb)
-                    .WithLifetime(ContainerLifetime.Persistent))
-            .WithContainerName(ResourceNames.PostgreSql)
-            .WithLifetime(ContainerLifetime.Persistent);
+#if DEBUG
+        redis.WithRedisInsight()
+            .WithRedisCommander();
+#endif
+        
+        return redis;
+    }
+
+
+    public static IResourceBuilder<PostgresServerResource> AddPostgres(this IDistributedApplicationBuilder builder)
+    {
+        var postgres = builder.AddPostgres(ResourceNames.PostgreSql);
+
+#if DEBUG
+        postgres.WithPgWeb();
+#endif
+        
+        return postgres;
+    }
+
 }
