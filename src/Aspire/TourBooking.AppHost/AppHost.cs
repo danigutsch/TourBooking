@@ -14,12 +14,14 @@ var migrationService = builder.AddProject<Projects.TourBooking_MigrationService>
     .WaitFor(database);
 
 var apiService = builder.AddProject<Projects.TourBooking_ApiService>(ResourceNames.ApiService)
+    .WithHttpHealthCheck("health")
     .WaitFor(redis)
     .WithReference(database)
     .WaitFor(database)
     .WaitForCompletion(migrationService);
 
 builder.AddProject<Projects.TourBooking_Web>(ResourceNames.WebFrontend)
+    .WithHttpHealthCheck("health")
     .WithExternalHttpEndpoints()
     .WithReference(redis)
     .WaitFor(redis)
