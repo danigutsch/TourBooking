@@ -8,6 +8,17 @@ namespace TourBooking.AppHost;
 
 internal static class AppHostExtensions
 {
+    public static IResourceBuilder<OpenTelemetryCollectorResource> AddObservability(this IDistributedApplicationBuilder builder)
+    {
+        var prometheus = builder.AddPrometheus();
+
+        var grafana = builder.AddGrafana(prometheus);
+
+        var jaeger = builder.AddJaeger();
+
+        return builder.AddOpenTelemetryCollector(prometheus, grafana, jaeger);
+    }
+
     public static IResourceBuilder<PrometheusResource> AddPrometheus(this IDistributedApplicationBuilder builder) =>
         builder.AddPrometheus(ResourceNames.Prometheus, "../../../prometheus")
             .WithContainerName(ResourceNames.Prometheus)
