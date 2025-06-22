@@ -1,5 +1,3 @@
-
-using Microsoft.Extensions.Hosting;
 using TourBooking.AppHost;
 using TourBooking.Aspire.Constants;
 
