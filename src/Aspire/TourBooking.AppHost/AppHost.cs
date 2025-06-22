@@ -1,15 +1,14 @@
+
+using Microsoft.Extensions.Hosting;
 using TourBooking.AppHost;
 using TourBooking.Aspire.Constants;
 
 var builder = DistributedApplication.CreateBuilder(args);
 
-var prometheus = builder.AddPrometheus();
-
-var grafana = builder.AddGrafana(prometheus);
-
-var jaeger = builder.AddJaeger();
-
-builder.AddOpenTelemetryCollector(prometheus, grafana, jaeger);
+if (builder.Environment.IsDevelopment())
+{
+    builder.AddObservability();
+}
 
 var redis = builder.AddRedis();
 
