@@ -12,6 +12,8 @@
 		<AnalysisLevel>latest</AnalysisLevel>
 		<AnalysisMode>All</AnalysisMode>
 		<LangVersion>latest</LangVersion>
+		<RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
+		<RestoreLockedMode>true</RestoreLockedMode>
 	</PropertyGroup>
 
 	<ItemGroup>
