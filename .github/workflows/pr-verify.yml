@@ -5,6 +5,7 @@ on: [pull_request]
 jobs:
   pr-verify:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     
     steps:
       - name: Checkout code
@@ -26,3 +27,9 @@ jobs:
         
       - name: Build
         run: dotnet build --configuration Release --no-restore
+
+      - name: Install Playwright
+        run: pwsh $(find . -type f -name 'playwright.ps1' | head -n 1) install --with-deps
+
+      - name: Run tests
+        run: dotnet test --configuration Release --no-build --verbosity normal
