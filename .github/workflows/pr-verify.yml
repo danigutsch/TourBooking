@@ -13,8 +13,11 @@ jobs:
       - name: Set up .NET Core
         uses: actions/setup-dotnet@v4
           
-      - name: Install dependencies
+      - name: Restore dependencies
         run: dotnet restore
         
-      - name: Build the project
+      - name: Build
         run: dotnet build --configuration Release --no-restore
+
+      - name: Run tests
+        run: dotnet test --configuration Release --no-build --verbosity normal
