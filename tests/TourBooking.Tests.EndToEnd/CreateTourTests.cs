@@ -49,6 +49,7 @@ public sealed class CreateTourTests(AspireManager aspire) : PageTest, IClassFixt
     {
         var options = base.ContextOptions();
         options.BaseURL = _frontendEndpoint;
+        options.IgnoreHTTPSErrors = true;
         return options;
     }
 }
