@@ -3,10 +3,6 @@ using TourBooking.Aspire.Constants;
 
 var builder = DistributedApplication.CreateBuilder(args);
 
-#if DEBUG
-builder.AddObservability();
-#endif
-
 var redis = builder.AddRedis();
 
 var postgres = builder.AddPostgres();
