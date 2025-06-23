@@ -15,7 +15,6 @@ public sealed class CreateTourTests(AspireManager aspire) : PageTest, IClassFixt
         // Arrange
 
         // Act
-        await Page.
         await Page.GotoAsync($"{_frontendEndpoint}/create-tour");
         await Page.WaitForSelectorAsync("h1,form");
 
@@ -50,7 +49,6 @@ public sealed class CreateTourTests(AspireManager aspire) : PageTest, IClassFixt
     {
         var options = base.ContextOptions();
         options.BaseURL = _frontendEndpoint;
-        options.IgnoreHTTPSErrors = true;
         return options;
     }
 }
