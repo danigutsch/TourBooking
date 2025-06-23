@@ -44,4 +44,11 @@ public sealed class CreateTourTests(AspireManager aspire) : PageTest, IClassFixt
         var successMessage = await Page.Locator(".alert-success").InnerTextAsync();
         Assert.Contains("Tour created successfully", successMessage, StringComparison.OrdinalIgnoreCase);
     }
+
+    public override BrowserNewContextOptions ContextOptions()
+    {
+        var options = base.ContextOptions();
+        options.BaseURL = _frontendEndpoint;
+        options.IgnoreHTTPSErrors = true;
+    }
 }
