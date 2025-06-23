@@ -15,7 +15,7 @@ public sealed class CreateTourTests(AspireManager aspire) : PageTest, IClassFixt
         // Arrange
 
         // Act
-        await Page.GotoAsync($"{_frontendEndpoint}/create-tour");
+        await Page.GotoAsync("/create-tour");
         await Page.WaitForSelectorAsync("h1,form");
 
         // Assert
@@ -29,7 +29,7 @@ public sealed class CreateTourTests(AspireManager aspire) : PageTest, IClassFixt
         // Arrange
 
         // Act
-        await Page.GotoAsync($"{_frontendEndpoint}/create-tour");
+        await Page.GotoAsync("/create-tour");
 
         await Page.GetByLabel("Name").FillAsync("Amazing Tour");
         await Page.GetByLabel("Description").FillAsync("A wonderful tour");
