@@ -1,6 +1,8 @@
 name: PR Verify
 
-on: [pull_request]
+on:
+  pull_request:
+    branches: [main]
 
 jobs:
   pr-verify:
