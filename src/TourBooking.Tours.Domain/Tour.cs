@@ -17,6 +17,31 @@ public sealed class Tour
     /// <exception cref="ArgumentNullException">Thrown when the clock parameter is null.</exception>
     public Tour(string name, string description, decimal price, DateOnly startDate, DateOnly endDate)
     {
+        if (string.IsNullOrWhiteSpace(name) || name.Length is < 3 or > 100)
+        {
+            throw new ArgumentException("Name length must be between 3 and 100 characters and cannot be null, empty, or whitespace.", nameof(name));
+        }
+
+        if (description is null)
+        {
+            throw new ArgumentNullException(nameof(description), "Description cannot be null.");
+        }
+
+        if (description.Length is < 10 || description.Length > 500)
+        {
+            throw new ArgumentException("Description length must be between 10 and 500 characters.", nameof(description));
+        }
+        
+        if (price <= 0)
+        {
+            throw new ArgumentException("Price must be greater than zero.", nameof(price));
+        }
+
+        if (endDate <= startDate)
+        {
+            throw new ArgumentException("End date must be after start date.", nameof(endDate));
+        }
+
         Id = Guid.CreateVersion7(TimeProvider.System.GetUtcNow());
         Name = name;
         Description = description;
@@ -37,7 +62,7 @@ public sealed class Tour
     public string Name { get; }
 
     /// <summary>
-    /// Gets the detailed description of the tour, including route information and highlights.
+    /// Gets the detailed description of the tour.
     /// </summary>
     public string Description { get; }
 

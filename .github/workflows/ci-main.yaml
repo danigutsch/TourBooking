@@ -1,0 +1,42 @@
+name: CI - main
+
+permissions:
+  contents: read
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  CI:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up .NET Core
+        uses: actions/setup-dotnet@v4
+
+      - name: Cache .NET SDK
+        uses: actions/cache@v4
+        with:
+          path: ~/.nuget/packages
+          key: ${{ runner.os }}-nuget-${{ hashFiles('**/packages.lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-nuget-
+
+      - name: Restore dependencies
+        run: dotnet restore
+
+      - name: Build
+        run: dotnet build --configuration Release --no-restore
+
+      - name: Publish
+        run: |
+          dotnet publish src/Aspire/TourBooking.AppHost/TourBooking.AppHost.csproj --configuration Release --no-build --output ./artifacts/AppHost
+          dotnet publish src/Aspire/TourBooking.ApiService/TourBooking.ApiService.csproj --configuration Release --no-build --output ./artifacts/ApiService
+          dotnet publish src/Aspire/TourBooking.Web/TourBooking.Web.csproj --configuration Release --no-build --output ./artifacts/Web
+          dotnet publish src/Aspire/TourBooking.MigrationService/TourBooking.MigrationService.csproj --configuration Release --no-build --output ./artifacts/MigrationService
