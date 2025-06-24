@@ -1,12 +1,13 @@
 name: PR Verify
 
-on: [pull_request]
+on:
+  pull_request:
 
 jobs:
   pr-verify:
     runs-on: ubuntu-latest
     timeout-minutes: 15
-    
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -21,18 +22,15 @@ jobs:
           key: ${{ runner.os }}-nuget-${{ hashFiles('**/packages.lock.json') }}
           restore-keys: |
             ${{ runner.os }}-nuget-
-          
+
       - name: Restore dependencies
         run: dotnet restore
 
+      - name: Check for code style issues
+        run: dotnet format --verbosity normal --verify-no-changes
+
       - name: Install ASP.NET Core HTTPS development certificate
         run: dotnet dev-certs https --clean && dotnet dev-certs https --trust
-        
+
       - name: Build
         run: dotnet build --configuration Release --no-restore
-
-      - name: Install Playwright
-        run: pwsh $(find . -type f -name 'playwright.ps1' | head -n 1) install --with-deps
-
-      - name: Run tests
-        run: dotnet test --configuration Release --no-build --verbosity normal

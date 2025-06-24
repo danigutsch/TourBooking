@@ -168,13 +168,17 @@ The **Bike Tours Booking Platform API** provides a comprehensive framework for m
 - [ ] Parallel processing
 - [ ] Resource management
 
-### 🧪 **Testing & Quality Assurance**
+### 🧪 **Testing**
 - [ ] Unit testing suite
 - [ ] Integration tests with containers
+- [x] UI tests with Playwright
+- [ ] Mutation testing
+- [ ] Gherkin behavior tests
+
+### ✅ **Quality Assurance**
 - [x] Health checks
 - [x] OpenTelemetry observability
 - [ ] Problem Details error handling
-- [ ] Gherkin behavior tests
 - [ ] Feature flags & toggles
 - [ ] Snapshot testing
 - [ ] Multi-configuration testing
