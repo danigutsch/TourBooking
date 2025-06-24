@@ -114,4 +114,21 @@ public class TourTests
             Assert.IsType<ArgumentException>(action);
         }
     }
+
+    [Theory]
+    [InlineData(null)]
+    [InlineData("")]
+    [InlineData("   ")]
+    public void Name_Cannot_Be_Null_Or_Whitespace(string? name)
+    {
+        // Arrange
+        var today = DateTime.UtcNow.ToDateOnly();
+        var endDate = today.AddDays(5);
+
+        // Act
+        var action = Record.Exception(() => new Tour(name!, "A valid description", 100.0m, today, endDate));
+
+        // Assert
+        Assert.IsType<ArgumentException>(action);
+    }
 }
