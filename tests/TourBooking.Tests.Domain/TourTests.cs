@@ -62,4 +62,30 @@ public class TourTests
             Assert.IsType<ArgumentException>(action);
         }
     }
+
+    [Theory]
+    [InlineData(0, false)]
+    [InlineData(-1, false)]
+    [InlineData(0.01, true)]
+    [InlineData(1, true)]
+    [InlineData(100, true)]
+    public void Price_Must_Be_Greater_Than_Zero(decimal price, bool canCreate)
+    {
+        // Arrange
+        var today = DateTime.UtcNow.ToDateOnly();
+        var endDate = today.AddDays(5);
+
+        // Act
+        var action = Record.Exception(() => new Tour("Valid Name", "A valid description", price, today, endDate));
+
+        // Assert
+        if (canCreate)
+        {
+            Assert.Null(action);
+        }
+        else
+        {
+            Assert.IsType<ArgumentException>(action);
+        }
+    }
 }

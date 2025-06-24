@@ -22,6 +22,11 @@ public sealed class Tour
             throw new ArgumentException("Name length must be between 3 and 100 characters.", nameof(name));
         }
 
+        if (description is null || description.Length is < 10 || description.Length > 500)
+        {
+            throw new ArgumentException("Description length must be between 10 and 500 characters.", nameof(description));
+        }
+        
         Id = Guid.CreateVersion7(TimeProvider.System.GetUtcNow());
         Name = name;
         Description = description;
