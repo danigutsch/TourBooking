@@ -36,3 +36,6 @@ jobs:
 
       - name: Run tests
         run: dotnet test --configuration Release --no-build --verbosity normal
+
+      - name: Check for code style issues
+        run: dotnet format --check --verbosity normal --verify-no-changes
