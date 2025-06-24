@@ -362,17 +362,37 @@ The **Bike Tours Booking Platform API** provides a comprehensive framework for m
    dotnet tool restore
    ```
 
-3. **Run the application**:
+3. **Build the solution** (required before Playwright browser install):
+   ```bash
+   dotnet build
+   ```
+
+4. **Install Playwright browsers (required for end-to-end UI tests)**:
+   ```bash
+   pwsh ./tests/TourBooking.Tests.EndToEnd/bin/*/playwright.ps1 install --with-deps
+   ```
+   > Use the wildcard (*) to match your build configuration and .NET version (e.g., Debug/net9.0 or Release/net9.0). For details, see the [Playwright .NET docs](https://playwright.dev/dotnet/docs/intro).
+
+5. **Run the application**:
    ```bash
    dotnet run --project src/Aspire/TourBooking.AppHost
    ```
 
-4. **Access the application**:
+6. **Access the application**:
    - API: `https://localhost:7001`
    - Swagger UI: `https://localhost:7001/swagger`
    - Aspire Dashboard: `https://localhost:15888`
 
+7. **Run all tests**:
+   ```bash
+   dotnet test --configuration Release
+   ```
+   - To run only unit tests: `dotnet test --filter "Category=Unit" --configuration Release`
+   - To run integration/API tests: `dotnet test tests/TourBooking.WebTests --configuration Release`
+   - To run end-to-end UI tests: `dotnet test tests/TourBooking.Tests.EndToEnd --configuration Release`
 
+> Aspire-based tests require Docker or a compatible container runtime running.
+> Playwright browsers must be installed before running E2E tests.
 
 ---
 
