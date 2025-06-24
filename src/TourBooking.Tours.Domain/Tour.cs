@@ -37,7 +37,7 @@ public sealed class Tour
     public string Name { get; }
 
     /// <summary>
-    /// Gets the detailed description of the tour, including route information and highlights.
+    /// Gets the detailed description of the tour.
     /// </summary>
     public string Description { get; }
 
