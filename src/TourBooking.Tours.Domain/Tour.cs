@@ -17,6 +17,11 @@ public sealed class Tour
     /// <exception cref="ArgumentNullException">Thrown when the clock parameter is null.</exception>
     public Tour(string name, string description, decimal price, DateOnly startDate, DateOnly endDate)
     {
+        if (name is null || name.Length is < 3 or > 100)
+        {
+            throw new ArgumentException("Name length must be between 3 and 100 characters.", nameof(name));
+        }
+
         Id = Guid.CreateVersion7(TimeProvider.System.GetUtcNow());
         Name = name;
         Description = description;
