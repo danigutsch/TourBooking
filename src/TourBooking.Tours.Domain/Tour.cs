@@ -17,9 +17,9 @@ public sealed class Tour
     /// <exception cref="ArgumentNullException">Thrown when the clock parameter is null.</exception>
     public Tour(string name, string description, decimal price, DateOnly startDate, DateOnly endDate)
     {
-        if (name is null || name.Length is < 3 or > 100)
+        if (string.IsNullOrWhiteSpace(name) || name.Length is < 3 or > 100)
         {
-            throw new ArgumentException("Name length must be between 3 and 100 characters.", nameof(name));
+            throw new ArgumentException("Name length must be between 3 and 100 characters and cannot be null, empty, or whitespace.", nameof(name));
         }
 
         if (description is null || description.Length is < 10 || description.Length > 500)
