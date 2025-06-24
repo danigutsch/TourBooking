@@ -27,6 +27,11 @@ public sealed class Tour
             throw new ArgumentException("Description length must be between 10 and 500 characters.", nameof(description));
         }
         
+        if (price <= 0)
+        {
+            throw new ArgumentException("Price must be greater than zero.", nameof(price));
+        }
+
         Id = Guid.CreateVersion7(TimeProvider.System.GetUtcNow());
         Name = name;
         Description = description;
