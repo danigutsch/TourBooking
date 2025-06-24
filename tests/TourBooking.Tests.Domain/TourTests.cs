@@ -1,7 +1,9 @@
 using TourBooking.Tours.Domain;
+using static TourBooking.Tests.TestCategories;
 
 namespace TourBooking.Tests.Domain;
 
+[Trait("Category", Unit)]
 public class TourTests
 {
     [Theory]

@@ -8,6 +8,10 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+	  <Compile Include="..\TestCategories.cs" Link="TestCategories.cs" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<Content Include="xunit.runner.json" CopyToOutputDirectory="PreserveNewest" />
 	</ItemGroup>
 
