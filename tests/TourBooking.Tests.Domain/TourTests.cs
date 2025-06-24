@@ -131,4 +131,18 @@ public class TourTests
         // Assert
         Assert.IsType<ArgumentException>(action);
     }
+
+    [Fact]
+    public void Id_Is_Not_Empty_After_Creation()
+    {
+        // Arrange
+        var today = DateTime.UtcNow.ToDateOnly();
+        var endDate = today.AddDays(5);
+
+        // Act
+        var tour = new Tour("Valid Name", "A valid description", 100.0m, today, endDate);
+
+        // Assert
+        Assert.NotEqual(Guid.Empty, tour.Id);
+    }
 }
