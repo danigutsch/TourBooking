@@ -32,6 +32,11 @@ public sealed class Tour
             throw new ArgumentException("Price must be greater than zero.", nameof(price));
         }
 
+        if (endDate <= startDate)
+        {
+            throw new ArgumentException("End date must be after start date.", nameof(endDate));
+        }
+
         Id = Guid.CreateVersion7(TimeProvider.System.GetUtcNow());
         Name = name;
         Description = description;
