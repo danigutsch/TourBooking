@@ -37,6 +37,6 @@ jobs:
       - name: Publish
         run: |
           dotnet publish src/Aspire/TourBooking.AppHost/TourBooking.AppHost.csproj --configuration Release --no-build --output ./artifacts/AppHost
-          dotnet publish src/Aspire/TourBooking.ApiService/TourBooking.ApiService.csproj --configuration Release --no-build --output ./artifacts/ApiService
-          dotnet publish src/Aspire/TourBooking.Web/TourBooking.Web.csproj --configuration Release --no-build --output ./artifacts/Web
-          dotnet publish src/Aspire/TourBooking.MigrationService/TourBooking.MigrationService.csproj --configuration Release --no-build --output ./artifacts/MigrationService
+          dotnet publish src/TourBooking.ApiService/TourBooking.ApiService.csproj --configuration Release --no-build --output ./artifacts/ApiService
+          dotnet publish src/TourBooking.Web/TourBooking.Web.csproj --configuration Release --no-build --output ./artifacts/Web
+          dotnet publish src/TourBooking.MigrationService/TourBooking.MigrationService.csproj --configuration Release --no-build --output ./artifacts/MigrationService
