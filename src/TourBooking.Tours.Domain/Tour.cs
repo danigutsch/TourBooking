@@ -22,12 +22,12 @@ public sealed class Tour
             throw new ArgumentException("Name length must be between 3 and 100 characters and cannot be null, empty, or whitespace.", nameof(name));
         }
 
-        if (description is null)
+        if (string.IsNullOrWhiteSpace(description))
         {
-            throw new ArgumentNullException(nameof(description), "Description cannot be null.");
+            throw new ArgumentException("Description cannot be null, empty, or consist only of whitespace.", nameof(description));
         }
 
-        if (description.Length is < 10 || description.Length > 500)
+        if (description.Length is < 10 or > 500)
         {
             throw new ArgumentException("Description length must be between 10 and 500 characters.", nameof(description));
         }
