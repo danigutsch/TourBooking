@@ -88,4 +88,28 @@ public class TourTests
             Assert.IsType<ArgumentException>(action);
         }
     }
+
+    [Theory]
+    [InlineData("2025-06-24", "2025-06-23", false)] // end before start
+    [InlineData("2025-06-24", "2025-06-24", false)]  // same day (not allowed)
+    [InlineData("2025-06-24", "2025-06-25", true)]  // end after start
+    public void EndDate_Must_Be_After_StartDate(string start, string end, bool canCreate)
+    {
+        // Arrange
+        var startDate = DateOnly.Parse(start, System.Globalization.CultureInfo.InvariantCulture);
+        var endDate = DateOnly.Parse(end, System.Globalization.CultureInfo.InvariantCulture);
+
+        // Act
+        var action = Record.Exception(() => new Tour("Valid Name", "A valid description", 100.0m, startDate, endDate));
+
+        // Assert
+        if (canCreate)
+        {
+            Assert.Null(action);
+        }
+        else
+        {
+            Assert.IsType<ArgumentException>(action);
+        }
+    }
 }
