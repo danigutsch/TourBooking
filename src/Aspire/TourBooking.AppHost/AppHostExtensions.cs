@@ -58,7 +58,7 @@ internal static class AppHostExtensions
         redis.WithRedisInsight()
             .WithRedisCommander();
 #endif
-        
+
         return redis;
     }
 
@@ -70,7 +70,7 @@ internal static class AppHostExtensions
 #if DEBUG
         postgres.WithPgWeb();
 #endif
-        
+
         return postgres;
     }
 
