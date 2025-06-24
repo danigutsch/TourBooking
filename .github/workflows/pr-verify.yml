@@ -26,6 +26,9 @@ jobs:
       - name: Restore dependencies
         run: dotnet restore
 
+      - name: Check for code style issues
+        run: dotnet format --verbosity normal --verify-no-changes
+
       - name: Install ASP.NET Core HTTPS development certificate
         run: dotnet dev-certs https --clean && dotnet dev-certs https --trust
 
@@ -37,6 +40,3 @@ jobs:
 
       - name: Run tests
         run: dotnet test --configuration Release --no-build --verbosity normal
-
-      - name: Check for code style issues
-        run: dotnet format --verbosity normal --verify-no-changes
