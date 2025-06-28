@@ -4,6 +4,7 @@ using Microsoft.Playwright.Xunit;
 
 namespace TourBooking.Tests.EndToEnd;
 
+[Trait("Category", TestCategories.EndToEnd)]
 [Collection("Aspire")]
 public sealed class CreateTourTests(AspireManager aspire) : PageTest, IClassFixture<AspireManager>
 {
