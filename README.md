@@ -70,7 +70,7 @@ The **Bike Tours Booking Platform API** provides a comprehensive framework for m
 ### 🏗️ **Architecture & Design**
 - [x] Clean Architecture implementation
 - [x] Domain-Driven Design patterns
-- [x] CQRS pattern
+- [ ] CQRS pattern
 - [ ] Event-driven architecture
 - [ ] Event Sourcing
 - [ ] Outbox pattern
