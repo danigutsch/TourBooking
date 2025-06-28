@@ -357,7 +357,7 @@ The **Bike Tours Booking Platform API** provides a comprehensive framework for m
 
 1. **Clone the repository**:
    ```bash
-   git clone https://github.com/danigutsch/BikeToursBooking.git
+   git clone https://github.com/danigutsch/ToursBooking.git
    cd BikeToursBooking
    ```
 
