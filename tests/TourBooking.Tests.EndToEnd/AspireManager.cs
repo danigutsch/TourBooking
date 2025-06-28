@@ -13,7 +13,7 @@ public sealed class AspireManager : IAsyncLifetime
     public HttpClient ApiClient { get; private set; } = null!;
     public string FrontendEndpoint { get; private set; } = null!;
 
-    public async Task InitializeAsync()
+    public async ValueTask InitializeAsync()
     {
         using var cts = new CancellationTokenSource(DefaultTimeout);
         var cancellationToken = cts.Token;
@@ -33,5 +33,5 @@ public sealed class AspireManager : IAsyncLifetime
         FrontendEndpoint = App.GetEndpoint(ResourceNames.WebFrontend).ToString().TrimEnd('/');
     }
 
-    public async Task DisposeAsync() => await (App?.DisposeAsync() ?? ValueTask.CompletedTask);
+    public async ValueTask DisposeAsync() => await (App?.DisposeAsync() ?? ValueTask.CompletedTask);
 }

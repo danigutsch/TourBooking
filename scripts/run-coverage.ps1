@@ -93,52 +93,27 @@ try {
             continue
         }
         
-        # Check if project uses Microsoft Testing Platform
-        $projectContent = Get-Content $project -Raw
-        $usesMtp = $projectContent -match "UseMicrosoftTestingPlatformRunner.*true"
+        # For Microsoft Testing Platform projects, use dotnet run with coverage arguments
+        $mtpCommand = "dotnet run --project `"$project`" --configuration $Configuration --verbosity quiet -- --coverage --coverage-output-format cobertura --coverage-output `"${projectName}-coverage.cobertura.xml`" --coverage-settings CodeCoverage.runsettings --results-directory `"$CoverageDir`""
+        Write-Host "Executing: $mtpCommand" -ForegroundColor Gray
         
-        if ($usesMtp) {
-            # For Microsoft Testing Platform projects, use dotnet run with coverage arguments
-            $mtpCommand = "dotnet run --project `"$project`" --configuration $Configuration --verbosity quiet -- --coverage --coverage-output-format cobertura --coverage-output `"${projectName}-coverage.cobertura.xml`" --coverage-settings codeCoverage.runsettings --results-directory `"$CoverageDir`""
-            Write-Host "Executing: $mtpCommand" -ForegroundColor Gray
-            
-            dotnet run --project $project `
-                --configuration $Configuration `
-                --verbosity quiet `
-                -- `
-                --coverage `
-                --coverage-output-format cobertura `
-                --coverage-output "${projectName}-coverage.cobertura.xml" `
-                --coverage-settings codeCoverage.runsettings `
-                --results-directory $CoverageDir `
-                2>&1 | Where-Object { 
-                    $_ -notmatch "^\(\d+,\d+s\)$" -and 
-                    $_ -notmatch "^  " -and 
-                    $_ -notmatch "Restore" -and
-                    $_ -notmatch "Determining projects to restore" -and
-                    $_ -notmatch "Nothing to do" -and
-                    $_ -match "(Test run summary|total:|failed:|succeeded:|skipped:|duration:|coverage|error|warning)"
-                }
-        } else {
-            # For VSTest projects, use traditional dotnet test
-            $testCommand = "dotnet test `"$project`" --configuration $Configuration --verbosity quiet --settings coverlet.runsettings --collect:`"XPlat Code Coverage`" --results-directory `"$CoverageDir`" --logger `"trx;LogFileName=${projectName}.trx`" --nologo"
-            Write-Host "Executing: $testCommand" -ForegroundColor Gray
-            
-            dotnet test $project `
-                --configuration $Configuration `
-                --verbosity quiet `
-                --settings coverlet.runsettings `
-                --collect:"XPlat Code Coverage" `
-                --results-directory $CoverageDir `
-                --logger "trx;LogFileName=${projectName}.trx" `
-                --nologo `
-                2>&1 | Where-Object { 
-                    $_ -notmatch "Determining projects to restore" -and 
-                    $_ -notmatch "Nothing to do" -and
-                    $_ -notmatch "^\s*$" -and
-                    $_ -match "(Passed!|Failed!|Total tests:|Test run summary|Attachments:|error|warning)"
-                }
-        }
+        dotnet run --project $project `
+            --configuration $Configuration `
+            --verbosity quiet `
+            -- `
+            --coverage `
+            --coverage-output-format cobertura `
+            --coverage-output "${projectName}-coverage.cobertura.xml" `
+            --coverage-settings codeCoverage.runsettings `
+            --results-directory $CoverageDir `
+            2>&1 | Where-Object { 
+                $_ -notmatch "^\(\d+,\d+s\)$" -and 
+                $_ -notmatch "^  " -and 
+                $_ -notmatch "Restore" -and
+                $_ -notmatch "Determining projects to restore" -and
+                $_ -notmatch "Nothing to do" -and
+                $_ -match "(Test run summary|total:|failed:|succeeded:|skipped:|duration:|coverage|error|warning)"
+            }
         
         if ($LASTEXITCODE -ne 0) {
             Write-Warning "Tests failed for $projectName with exit code $LASTEXITCODE, but continuing with coverage collection"
