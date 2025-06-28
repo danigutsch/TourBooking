@@ -11,24 +11,24 @@ public class WorkerAwareTest : ExceptionCapturer
     private Worker _currentWorker = null!;
 
     public int WorkerIndex { get; internal set; }
-    private static readonly ConcurrentStack<Worker> _allWorkers = new();
+    private static readonly ConcurrentStack<Worker> AllWorkers = new();
 
     public async Task<T> RegisterService<T>(string name, Func<Task<T>> factory) where T : class, IWorkerService
     {
         ArgumentNullException.ThrowIfNull(factory);
 
-        if (!_currentWorker.Services.TryGetValue(name, out _))
+        if (!_currentWorker.Services.TryGetValue(name, out var service))
         {
             _currentWorker.Services[name] = await factory().ConfigureAwait(false);
         }
 
-        return (_currentWorker.Services[name] as T)!;
+        return (service as T)!;
     }
 
     public override async ValueTask InitializeAsync()
     {
         await base.InitializeAsync().ConfigureAwait(false);
-        if (!_allWorkers.TryPop(out _currentWorker!))
+        if (!AllWorkers.TryPop(out _currentWorker!))
         {
             _currentWorker = new Worker();
         }
@@ -51,7 +51,7 @@ public class WorkerAwareTest : ExceptionCapturer
                 await kv.Value.ResetAsync().ConfigureAwait(false);
             }
 
-            _allWorkers.Push(_currentWorker);
+            AllWorkers.Push(_currentWorker);
         }
         else
         {
