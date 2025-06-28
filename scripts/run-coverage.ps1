@@ -94,17 +94,17 @@ try {
         }
         
         # For Microsoft Testing Platform projects, use dotnet run with coverage arguments
-        $mtpCommand = "dotnet run --project `"$project`" --configuration $Configuration --verbosity quiet -- --coverage --coverage-output-format cobertura --coverage-output `"${projectName}-coverage.cobertura.xml`" --coverage-settings CodeCoverage.runsettings --results-directory `"$CoverageDir`""
+        $mtpCommand = "dotnet run --project `"$project`" --configuration $Configuration --verbosity normal -- --coverage --coverage-output-format cobertura --coverage-output `"${projectName}-coverage.cobertura.xml`" --coverage-settings CodeCoverage.runsettings --results-directory `"$CoverageDir`""
         Write-Host "Executing: $mtpCommand" -ForegroundColor Gray
         
         dotnet run --project $project `
             --configuration $Configuration `
-            --verbosity quiet `
+            --verbosity normal `
             -- `
             --coverage `
             --coverage-output-format cobertura `
             --coverage-output "${projectName}-coverage.cobertura.xml" `
-            --coverage-settings codeCoverage.runsettings `
+            --coverage-settings CodeCoverage.runsettings `
             --results-directory $CoverageDir `
             2>&1 | Where-Object { 
                 $_ -notmatch "^\(\d+,\d+s\)$" -and 
