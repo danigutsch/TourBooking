@@ -1,9 +1,11 @@
 using System.Net.Http.Json;
 using TourBooking.ApiService.Contracts;
 using TourBooking.Aspire.Constants;
+using TourBooking.Tests;
 
 namespace TourBooking.WebTests;
 
+[Trait("Category", TestCategories.Integration)]
 [Collection("Aspire")]
 public sealed class CreateTourTests
 {
