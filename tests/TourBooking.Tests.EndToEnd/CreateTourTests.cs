@@ -1,6 +1,6 @@
 using System.Globalization;
 using Microsoft.Playwright;
-using Microsoft.Playwright.Xunit;
+using TourBooking.Tests.EndToEnd.Playwright;
 
 namespace TourBooking.Tests.EndToEnd;
 

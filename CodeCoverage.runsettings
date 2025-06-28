@@ -6,16 +6,6 @@
       <DataCollector friendlyName="Code Coverage" uri="datacollector://Microsoft/CodeCoverage/2.0" assemblyQualifiedName="Microsoft.VisualStudio.Coverage.DynamicCoverageDataCollector, Microsoft.VisualStudio.TraceCollector, Version=17.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
         <Configuration>
           <CodeCoverage>
-            <!-- Only include TourBooking assemblies -->
-            <ModulePaths>
-              <Include>
-                <ModulePath>.*TourBooking\..*\.dll$</ModulePath>
-              </Include>
-              <Exclude>
-                <ModulePath>.*TourBooking\..*\.Tests\..*\.dll$</ModulePath>
-                <ModulePath>.*TourBooking\.AppHost\.dll$</ModulePath>
-              </Exclude>
-            </ModulePaths>
             
             <Attributes>
               <Exclude>
@@ -25,7 +15,14 @@
                 <Attribute>^System\.Diagnostics\.CodeAnalysis\.ExcludeFromCodeCoverageAttribute$</Attribute>
               </Exclude>
             </Attributes>
-            
+
+            <CollectFromChildProcesses>True</CollectFromChildProcesses>
+            <AllowLowIntegrityProcesses>True</AllowLowIntegrityProcesses>
+            <EnableStaticNativeInstrumentation>True</EnableStaticNativeInstrumentation>
+            <EnableDynamicNativeInstrumentation>False</EnableDynamicNativeInstrumentation>
+            <EnableStaticNativeInstrumentationRestore>False</EnableStaticNativeInstrumentationRestore>
+            <IncludeTestAssembly>True</IncludeTestAssembly>
+
           </CodeCoverage>
         </Configuration>
       </DataCollector>
