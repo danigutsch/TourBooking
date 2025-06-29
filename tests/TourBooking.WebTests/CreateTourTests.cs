@@ -6,6 +6,7 @@ using TourBooking.Tests;
 namespace TourBooking.WebTests;
 
 [Property("Category", TestCategories.Integration)]
+[NotInParallel("Aspire")]
 public sealed class CreateTourTests
 {
     [Test]
