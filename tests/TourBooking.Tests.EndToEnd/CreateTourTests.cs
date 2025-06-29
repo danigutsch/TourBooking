@@ -1,16 +1,16 @@
-using System.Globalization;
 using Microsoft.Playwright;
-using TourBooking.Tests.EndToEnd.Playwright;
+using System.Globalization;
+using TUnit.Playwright;
 
 namespace TourBooking.Tests.EndToEnd;
 
-[Trait("Category", TestCategories.EndToEnd)]
-[Collection("Aspire")]
-public sealed class CreateTourTests(AspireManager aspire) : PageTest, IClassFixture<AspireManager>
+[Property("Category", TestCategories.EndToEnd)]
+public sealed class CreateTourTests : PageTest
 {
-    private readonly string _frontendEndpoint = aspire.FrontendEndpoint;
+    [ClassDataSource<AspireManager>(Shared = SharedType.PerTestSession)]
+    public required AspireManager Aspire { get; init; }
 
-    [Fact]
+    [Test]
     public async Task Create_Tour_Page_Is_Reachable()
     {
         // Arrange
@@ -21,35 +21,33 @@ public sealed class CreateTourTests(AspireManager aspire) : PageTest, IClassFixt
 
         // Assert
         var title = await Page.TitleAsync();
-        Assert.Equal("Create Tour", title);
+        await Assert.That(title).IsEqualTo("Create Tour");
     }
 
-    [Fact]
+    [Test]
     public async Task Create_Tour_Successfully()
     {
         // Arrange
 
         // Act
         await Page.GotoAsync("/create-tour");
-
         await Page.GetByLabel("Name").FillAsync("Amazing Tour");
         await Page.GetByLabel("Description").FillAsync("A wonderful tour");
         await Page.GetByLabel("Price").FillAsync("100.00");
         await Page.GetByLabel("Start Date").FillAsync(DateTime.UtcNow.ToString("yyyy-MM-dd", DateTimeFormatInfo.InvariantInfo));
         await Page.GetByLabel("End Date").FillAsync(DateTime.UtcNow.AddDays(5).ToString("yyyy-MM-dd", DateTimeFormatInfo.InvariantInfo));
-
         await Page.GetByRole(AriaRole.Button, new PageGetByRoleOptions { Name = "Create Tour" }).ClickAsync();
 
         // Assert
         await Page.WaitForSelectorAsync(".alert-success");
         var successMessage = await Page.Locator(".alert-success").InnerTextAsync();
-        Assert.Contains("Tour created successfully", successMessage, StringComparison.OrdinalIgnoreCase);
+        await Assert.That(successMessage).Contains("Tour created successfully", StringComparison.OrdinalIgnoreCase);
     }
 
-    public override BrowserNewContextOptions ContextOptions()
+    public override BrowserNewContextOptions ContextOptions(TestContext testContext)
     {
-        var options = base.ContextOptions();
-        options.BaseURL = _frontendEndpoint;
+        var options = base.ContextOptions(testContext);
+        options.BaseURL = Aspire.FrontendEndpoint;
         options.IgnoreHTTPSErrors = true;
         return options;
     }
