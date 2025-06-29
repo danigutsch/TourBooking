@@ -5,6 +5,7 @@ using TUnit.Playwright;
 namespace TourBooking.Tests.EndToEnd;
 
 [Property("Category", TestCategories.EndToEnd)]
+[NotInParallel("Aspire")]
 public sealed class CreateTourTests : PageTest
 {
     [ClassDataSource<AspireManager>(Shared = SharedType.PerTestSession)]
