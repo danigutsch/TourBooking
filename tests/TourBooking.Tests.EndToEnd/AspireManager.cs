@@ -1,11 +1,12 @@
 ﻿using Aspire.Hosting;
 using JetBrains.Annotations;
 using TourBooking.Aspire.Constants;
+using TUnit.Core.Interfaces;
 
 namespace TourBooking.Tests.EndToEnd;
 
 [UsedImplicitly]
-public sealed class AspireManager : IAsyncLifetime
+public sealed class AspireManager : IAsyncInitializer, IAsyncDisposable
 {
     private static readonly TimeSpan DefaultTimeout = TimeSpan.FromSeconds(300);
 
@@ -13,7 +14,7 @@ public sealed class AspireManager : IAsyncLifetime
     public HttpClient ApiClient { get; private set; } = null!;
     public string FrontendEndpoint { get; private set; } = null!;
 
-    public async ValueTask InitializeAsync()
+    public async Task InitializeAsync()
     {
         using var cts = new CancellationTokenSource(DefaultTimeout);
         var cancellationToken = cts.Token;

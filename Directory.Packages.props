@@ -1,41 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project>
-  <PropertyGroup>
-    <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
-    <CentralPackageTransitivePinningEnabled>true</CentralPackageTransitivePinningEnabled>
-    <NoWarn>$(NoWarn);NU1507</NoWarn>
-  </PropertyGroup>
-  <ItemGroup>
-    <PackageVersion Include="Aspire.Hosting.AppHost" Version="9.3.1" />
-    <PackageVersion Include="Aspire.Hosting.PostgreSQL" Version="9.3.1" />
-    <PackageVersion Include="Aspire.Hosting.Redis" Version="9.3.1" />
-    <PackageVersion Include="Aspire.Hosting.Testing" Version="9.3.1" />
-    <PackageVersion Include="Aspire.Npgsql.EntityFrameworkCore.PostgreSQL" Version="9.3.1" />
-    <PackageVersion Include="Aspire.StackExchange.Redis.OutputCaching" Version="9.3.1" />
-    <PackageVersion Include="Microsoft.Playwright.TestAdapter" Version="1.53.0" />
-    <PackageVersion Include="Microsoft.Testing.Extensions.CodeCoverage" Version="17.14.2" />
-    <PackageVersion Include="JetBrains.Annotations" Version="2024.3.0" />
-    <PackageVersion Include="Microsoft.AspNetCore.OpenApi" Version="9.0.6" />
-    <PackageVersion Include="Microsoft.EntityFrameworkCore.Tools" Version="9.0.6" />
-    <PackageVersion Include="Microsoft.Extensions.Hosting" Version="9.0.6" />
-    <PackageVersion Include="Microsoft.Extensions.Http.Resilience" Version="9.6.0" />
-    <PackageVersion Include="Microsoft.Extensions.ServiceDiscovery" Version="9.3.1" />
-    <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.14.1" />
-    <PackageVersion Include="Microsoft.Playwright.Xunit" Version="1.52.0" />
-    <PackageVersion Include="Npgsql.OpenTelemetry" Version="9.0.3" />
-    <PackageVersion Include="OpenTelemetry.Exporter.OpenTelemetryProtocol" Version="1.12.0" />
-    <PackageVersion Include="OpenTelemetry.Extensions.Hosting" Version="1.12.0" />
-    <PackageVersion Include="OpenTelemetry.Instrumentation.AspNetCore" Version="1.12.0" />
-    <PackageVersion Include="OpenTelemetry.Instrumentation.EntityFrameworkCore" Version="1.12.0-beta.1" />
-    <PackageVersion Include="OpenTelemetry.Instrumentation.GrpcNetClient" Version="1.12.0-beta.1" />
-    <PackageVersion Include="OpenTelemetry.Instrumentation.Http" Version="1.12.0" />
-    <PackageVersion Include="OpenTelemetry.Instrumentation.Runtime" Version="1.12.0" />
-    <PackageVersion Include="OpenTelemetry.Instrumentation.StackExchangeRedis" Version="1.12.0-beta.1" />
-    <PackageVersion Include="StreamJsonRpc" Version="2.21.69" />
-    <PackageVersion Include="TUnit" Version="0.25.21" />
-    <PackageVersion Include="TUnit.Playwright" Version="0.25.21" />
-    <PackageVersion Include="xunit.v3" Version="2.0.3" />
-    <PackageVersion Include="xunit.runner.visualstudio" Version="3.1.1" />
-    <PackageVersion Include="SonarAnalyzer.CSharp" Version="10.11.0.117924" />
-  </ItemGroup>
+	<PropertyGroup>
+		<ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+		<CentralPackageTransitivePinningEnabled>true</CentralPackageTransitivePinningEnabled>
+		<NoWarn>$(NoWarn);NU1507</NoWarn>
+	</PropertyGroup>
+	<ItemGroup>
+		<PackageVersion Include="Aspire.Hosting.AppHost" Version="9.3.1" />
+		<PackageVersion Include="Aspire.Hosting.PostgreSQL" Version="9.3.1" />
+		<PackageVersion Include="Aspire.Hosting.Redis" Version="9.3.1" />
+		<PackageVersion Include="Aspire.Hosting.Testing" Version="9.3.1" />
+		<PackageVersion Include="Aspire.Npgsql.EntityFrameworkCore.PostgreSQL" Version="9.3.1" />
+		<PackageVersion Include="Aspire.StackExchange.Redis.OutputCaching" Version="9.3.1" />
+		<PackageVersion Include="Microsoft.Playwright.TestAdapter" Version="1.53.0" />
+		<PackageVersion Include="Microsoft.Testing.Extensions.CodeCoverage" Version="17.14.2" />
+		<PackageVersion Include="JetBrains.Annotations" Version="2024.3.0" />
+		<PackageVersion Include="Microsoft.AspNetCore.OpenApi" Version="9.0.6" />
+		<PackageVersion Include="Microsoft.EntityFrameworkCore.Tools" Version="9.0.6" />
+		<PackageVersion Include="Microsoft.Extensions.Hosting" Version="9.0.6" />
+		<PackageVersion Include="Microsoft.Extensions.Http.Resilience" Version="9.6.0" />
+		<PackageVersion Include="Microsoft.Extensions.ServiceDiscovery" Version="9.3.1" />
+		<PackageVersion Include="Npgsql.OpenTelemetry" Version="9.0.3" />
+		<PackageVersion Include="OpenTelemetry.Exporter.OpenTelemetryProtocol" Version="1.12.0" />
+		<PackageVersion Include="OpenTelemetry.Extensions.Hosting" Version="1.12.0" />
+		<PackageVersion Include="OpenTelemetry.Instrumentation.AspNetCore" Version="1.12.0" />
+		<PackageVersion Include="OpenTelemetry.Instrumentation.EntityFrameworkCore" Version="1.12.0-beta.1" />
+		<PackageVersion Include="OpenTelemetry.Instrumentation.GrpcNetClient" Version="1.12.0-beta.1" />
+		<PackageVersion Include="OpenTelemetry.Instrumentation.Http" Version="1.12.0" />
+		<PackageVersion Include="OpenTelemetry.Instrumentation.Runtime" Version="1.12.0" />
+		<PackageVersion Include="OpenTelemetry.Instrumentation.StackExchangeRedis" Version="1.12.0-beta.1" />
+		<PackageVersion Include="StreamJsonRpc" Version="2.21.69" />
+		<PackageVersion Include="TUnit" Version="0.25.21" />
+		<PackageVersion Include="TUnit.Playwright" Version="0.25.21" />
+		<PackageVersion Include="SonarAnalyzer.CSharp" Version="10.11.0.117924" />
+	</ItemGroup>
 </Project>
