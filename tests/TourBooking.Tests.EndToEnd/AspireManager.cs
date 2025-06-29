@@ -1,11 +1,12 @@
 ﻿using Aspire.Hosting;
 using JetBrains.Annotations;
 using TourBooking.Aspire.Constants;
+using TUnit.Core.Interfaces;
 
 namespace TourBooking.Tests.EndToEnd;
 
 [UsedImplicitly]
-public sealed class AspireManager : IAsyncLifetime
+public sealed class AspireManager : IAsyncInitializer, IAsyncDisposable
 {
     private static readonly TimeSpan DefaultTimeout = TimeSpan.FromSeconds(300);
 
@@ -33,5 +34,5 @@ public sealed class AspireManager : IAsyncLifetime
         FrontendEndpoint = App.GetEndpoint(ResourceNames.WebFrontend).ToString().TrimEnd('/');
     }
 
-    public async Task DisposeAsync() => await (App?.DisposeAsync() ?? ValueTask.CompletedTask);
+    public async ValueTask DisposeAsync() => await (App?.DisposeAsync() ?? ValueTask.CompletedTask);
 }

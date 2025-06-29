@@ -6,7 +6,7 @@
 /// <remarks>This class contains constant string values that represent unique identifiers for specific resources
 /// such as databases, services, and caching systems. These identifiers can be used to reference or configure the
 /// corresponding resources in the application.</remarks>
-public static class ResourceNames
+internal static class ResourceNames
 {
     /// <summary>
     /// Represents the identifier for the Redis caching system.

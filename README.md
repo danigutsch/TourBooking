@@ -70,7 +70,7 @@ The **Bike Tours Booking Platform API** provides a comprehensive framework for m
 ### 🏗️ **Architecture & Design**
 - [x] Clean Architecture implementation
 - [x] Domain-Driven Design patterns
-- [x] CQRS pattern
+- [ ] CQRS pattern
 - [ ] Event-driven architecture
 - [ ] Event Sourcing
 - [ ] Outbox pattern
@@ -169,9 +169,18 @@ The **Bike Tours Booking Platform API** provides a comprehensive framework for m
 - [ ] Resource management
 
 ### 🧪 **Testing**
-- [ ] Unit testing suite
-- [ ] Integration tests with containers
+
+#### Core Testing
+- [x] Unit testing suite
+- [x] Integration tests with containers
 - [x] UI tests with Playwright
+- [x] Code coverage analysis
+- [x] Coverage report generation
+
+#### Advanced Testing
+- [ ] Performance testing (benchmarking)
+- [ ] Load testing (stress & capacity)
+- [ ] Snapshot testing (API/UI consistency)
 - [ ] Mutation testing
 - [ ] Gherkin behavior tests
 
@@ -357,7 +366,7 @@ The **Bike Tours Booking Platform API** provides a comprehensive framework for m
 
 1. **Clone the repository**:
    ```bash
-   git clone https://github.com/danigutsch/BikeToursBooking.git
+   git clone https://github.com/danigutsch/ToursBooking.git
    cd BikeToursBooking
    ```
 
@@ -437,6 +446,44 @@ prometheus/
 - **Separation of Concerns**: Clear boundaries between layers and responsibilities
 - **Cloud-Native Patterns**: Built for scalability and resilience
 - **Developer Experience**: Fast feedback loops and productive tooling
+
+### Testing Strategy
+
+The project implements a comprehensive three-tier testing approach with integrated code coverage analysis:
+
+#### Test Projects Structure
+- **`TourBooking.Tests.Domain`**: Unit tests for domain logic using Microsoft Testing Platform with xUnit v3
+- **`TourBooking.WebTests`**: Integration tests with Aspire hosting using Microsoft Testing Platform with xUnit v3
+- **`TourBooking.Tests.EndToEnd`**: UI tests with Playwright using VSTest with xUnit v2
+
+#### Code Coverage Configuration
+- **Dual Testing Framework Support**: Configured for both Microsoft Testing Platform and VSTest
+- **External Assembly Filtering**: Automatically excludes external dependencies (Aspire, StackExchange, Microsoft frameworks)
+- **TourBooking-Only Coverage**: Focuses coverage analysis on project-specific code only
+- **HTML Report Generation**: Comprehensive coverage reports using ReportGenerator
+
+#### Running Tests with Coverage
+```bash
+# Run all tests with code coverage
+pwsh ./scripts/run-coverage.ps1 -Configuration Release
+
+# Include end-to-end tests in coverage
+pwsh ./scripts/run-coverage.ps1 -Configuration Release -IncludeE2E
+
+# Open coverage report in browser
+pwsh ./scripts/run-coverage.ps1 -Configuration Release -OpenReport
+```
+
+#### Coverage Results
+- **Current Coverage**: ~35% line coverage for TourBooking assemblies
+- **Report Location**: `CoverageReport/index.html`
+- **Filtered Assemblies**: Only includes `TourBooking.*` assemblies in coverage analysis
+- **Coverage Formats**: Supports Cobertura XML and HTML reports
+
+#### Planned Advanced Testing
+- **Performance Testing**: Benchmark critical paths (tour search, booking creation, payment processing)
+- **Load Testing**: Stress testing for concurrent bookings and high-traffic scenarios
+- **Snapshot Testing**: Ensure API contract consistency and UI component stability over time
 
 ---
 
