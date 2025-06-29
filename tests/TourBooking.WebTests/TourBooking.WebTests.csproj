@@ -8,6 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Include="..\..\src\Aspire\ResourceNames.cs" Link="ResourceNames.cs" />
     <Compile Include="..\TestCategories.cs" Link="TestCategories.cs" />
   </ItemGroup>
 
