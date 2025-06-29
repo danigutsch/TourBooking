@@ -56,12 +56,12 @@
       },
       "TUnit": {
         "type": "Direct",
-        "requested": "[0.24.0, )",
-        "resolved": "0.24.0",
-        "contentHash": "m5m1Xj3OJw568Rqvj8/GIHoBSTFDM+rWJ4sT3exbYU0V3hJVZi6nAeUSVZjjsQbtWBoMBynJf5u9xYIptnnYtg==",
+        "requested": "[0.25.21, )",
+        "resolved": "0.25.21",
+        "contentHash": "AwREFWGJ6SUSY507NIpnsp5tbPER6+YQ7vak3sYKaFySL/wdwvdaxaBpF6A9eSIW/F6vqKq581+WfphEPbTfJA==",
         "dependencies": {
-          "TUnit.Assertions": "0.24.0",
-          "TUnit.Engine": "0.24.0"
+          "TUnit.Assertions": "0.25.21",
+          "TUnit.Engine": "0.25.21"
         }
       },
       "Aspire.Dashboard.Sdk.win-x64": {
@@ -811,24 +811,24 @@
       },
       "TUnit.Assertions": {
         "type": "Transitive",
-        "resolved": "0.24.0",
-        "contentHash": "/ThCY6qQ8/g8sKaR4ewkCUmhJRzkrY81IqcSBaQDkpMFNuXD3dyadzYxA5eJ9nN5a48YcMWgRtX0rNJWMLmW4g=="
+        "resolved": "0.25.21",
+        "contentHash": "eaccIw/l6jP/6es8HAiAoffXynL2xIe6riB1IK8WTmdbIGggvY7LeSsuwbLuKV/baEEl9pWnTyg9W4TjpNuk6w=="
       },
       "TUnit.Core": {
         "type": "Transitive",
-        "resolved": "0.24.0",
-        "contentHash": "ib5SDUmlNM1qfTYbVZNB6EW5oFEWrwqgeWnrTNOBTVpE6f+C24+SxFhaj+27gZd8AQhjHa1HZ2C8eXPUA10Jkg=="
+        "resolved": "0.25.21",
+        "contentHash": "vlYyHa2oxvrFtDPu7Jw0yibY5KU7fDcSMcGj3yuWumIkh3oh/o9AT11kfzuef/kUSdzRbyQzAsu+V/4GbB3UQA=="
       },
       "TUnit.Engine": {
         "type": "Transitive",
-        "resolved": "0.24.0",
-        "contentHash": "4N92ycflCheugQZlYWEnjgIDs54kRGp+cGSFf2IHO+uQ/XohTVGMwSNxsvxZinGJ1t0Tu1e4e7Phizu7Y46H9g==",
+        "resolved": "0.25.21",
+        "contentHash": "+Ki0ZSMkjvQ1cWkInPg1YpxaXwijFmoMVZ+y/28HQRXM6HU2PE/YAMgRI9aX0X6z7K8EfhOJbnm10TwP/ibLqw==",
         "dependencies": {
           "EnumerableAsyncProcessor": "2.1.0",
           "Microsoft.Testing.Extensions.TrxReport.Abstractions": "1.7.1",
           "Microsoft.Testing.Platform": "1.7.1",
           "Microsoft.Testing.Platform.MSBuild": "1.4.3",
-          "TUnit.Core": "0.24.0"
+          "TUnit.Core": "0.25.21"
         }
       },
       "YamlDotNet": {
