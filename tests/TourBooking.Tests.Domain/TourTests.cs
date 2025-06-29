@@ -4,7 +4,7 @@ using static TourBooking.Tests.TestCategories;
 
 namespace TourBooking.Tests.Domain;
 
-[Property("Category", Unit)]
+[Category(Unit)]
 public class TourTests
 {
     private const int MinNameLength = 3;
