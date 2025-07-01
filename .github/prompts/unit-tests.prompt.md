@@ -15,7 +15,7 @@ mode: "agent"
 ## Testing Framework Requirements
 
 - Use TUnit as the testing framework
-- Use Stryker for mutation testing to ensure tests fail when production code changes
+- DO NOT use Stryker for mutation testing since it's not supported yet
 - Create and reuse our own assertions library for common assertions, in each project for now
 - Create and reuse our own mocking library for common mocking scenarios, in each project for now
 - Create and reuse our own test data builders for complex entities, in each project for now
