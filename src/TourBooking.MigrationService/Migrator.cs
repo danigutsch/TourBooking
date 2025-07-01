@@ -1,16 +1,25 @@
 using System.Diagnostics;
+using JetBrains.Annotations;
 using TourBooking.Tours.Application;
 
 namespace TourBooking.MigrationService;
 
+[MustDisposeResource]
 internal sealed class Migrator(
     IServiceProvider serviceProvider,
     IHostEnvironment hostEnvironment,
     IHostApplicationLifetime hostApplicationLifetime,
+    IConfiguration configuration,
     ILogger<Migrator> logger
     )
     : BackgroundService
 {
+    /// <summary>
+    /// Path to the directory containing the migration scripts for the Tours database.
+    /// THIS IS REQUIRED.
+    /// </summary>
+    private const string ToursMigrationsPath = "TOURS_MIGRATIONS_PATH";
+
     public const string ActivitySourceName = "TourBooking.MigrationService";
 
     private readonly ActivitySource _activitySource = new(ActivitySourceName);
@@ -21,10 +30,13 @@ internal sealed class Migrator(
 
         logger.MigratorRunning();
 
-        using var scope = serviceProvider.CreateScope();
-        var migrationManager = scope.ServiceProvider.GetRequiredService<IMigrationManager>();
+        var scriptsPath = configuration.GetValue<string>(ToursMigrationsPath)
+                          ?? throw new InvalidOperationException("Tours database migration scripts path is not configured.");
 
-        const string scriptsPath = "MigrationScripts";
+        scriptsPath = scriptsPath.Replace('/', Path.DirectorySeparatorChar)
+                                 .Replace('\\', Path.DirectorySeparatorChar);
+
+        scriptsPath = Path.Combine(AppContext.BaseDirectory, scriptsPath);
 
         if (!Directory.Exists(scriptsPath))
         {
@@ -54,6 +66,9 @@ internal sealed class Migrator(
             logger.NoScriptFound(lastMigration.FullName);
             throw new InvalidOperationException("Migration script is empty.");
         }
+
+        using var scope = serviceProvider.CreateScope();
+        var migrationManager = scope.ServiceProvider.GetRequiredService<IMigrationManager>();
 
         try
         {
