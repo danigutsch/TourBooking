@@ -20,4 +20,10 @@
 		<ProjectReference Include="..\TourBooking.ServiceDefaults\TourBooking.ServiceDefaults.csproj" />
 		<ProjectReference Include="..\TourBooking.Tours.Persistence\TourBooking.Tours.Persistence.csproj" />
 	</ItemGroup>
+
+	<ItemGroup>
+	  <None Include="..\..\scripts\db\postgres\tours\20250614201917_InitialCreate_MigrationScript.sql" Link="scripts\db\postgres\tours\20250614201917_InitialCreate_MigrationScript.sql">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </None>
+	</ItemGroup>
 </Project>
