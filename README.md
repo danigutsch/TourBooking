@@ -181,7 +181,7 @@ The **Bike Tours Booking Platform API** provides a comprehensive framework for m
 - [ ] Performance testing (benchmarking)
 - [ ] Load testing (stress & capacity)
 - [ ] Snapshot testing (API/UI consistency)
-- [ ] Mutation testing
+- [ ] Mutation testing (awaiting [Stryker.NET Microsoft Testing Platform support](https://github.com/stryker-mutator/stryker-net/issues/3094))
 - [ ] Gherkin behavior tests
 
 ### ✅ **Quality Assurance**
