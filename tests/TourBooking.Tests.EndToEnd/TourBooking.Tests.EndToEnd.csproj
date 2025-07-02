@@ -23,6 +23,7 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\..\src\Aspire\TourBooking.AppHost\TourBooking.AppHost.csproj" />
+		<ProjectReference Include="..\TourBooking.Tests.Shared\TourBooking.Tests.Shared.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>

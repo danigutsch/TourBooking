@@ -133,6 +133,9 @@
           "TUnit.Core": "0.25.21"
         }
       },
+      "tourbooking.tests.shared": {
+        "type": "Project"
+      },
       "tourbooking.tours.domain": {
         "type": "Project"
       }

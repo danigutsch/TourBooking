@@ -1,3 +1,4 @@
+using TourBooking.Tests.Shared;
 using TourBooking.Tours.Domain;
 using TUnit.Assertions.AssertConditions.Throws;
 using static TourBooking.Tests.TestCategories;

@@ -18,6 +18,7 @@
 
 	<ItemGroup>
 	  <ProjectReference Include="..\..\src\TourBooking.Tours.Domain\TourBooking.Tours.Domain.csproj" />
+	  <ProjectReference Include="..\TourBooking.Tests.Shared\TourBooking.Tests.Shared.csproj" />
 	</ItemGroup>
 
 </Project>

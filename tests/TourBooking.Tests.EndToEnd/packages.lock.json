@@ -872,6 +872,9 @@
           "JetBrains.Annotations": "[2024.3.0, )"
         }
       },
+      "tourbooking.tests.shared": {
+        "type": "Project"
+      },
       "Aspire.Hosting.AppHost": {
         "type": "CentralTransitive",
         "requested": "[9.3.1, )",
