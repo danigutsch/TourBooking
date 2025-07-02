@@ -27,11 +27,11 @@ if (app.Environment.IsDevelopment())
     app.MapOpenApi();
 }
 
-app.MapPost("/tours", async (CreateTourRequest request, IToursRepository repository, IUnitOfWork uow, CancellationToken ct) =>
+app.MapPost("/tours", async (CreateTourRequest request, IToursStore store, IUnitOfWork uow, CancellationToken ct) =>
 {
     var tour = new Tour(request.Name, request.Description, request.Price, request.StartDate, request.EndDate);
 
-    repository.Add(tour);
+    store.Add(tour);
 
     await uow.SaveChanges(ct);
 
