@@ -10,17 +10,20 @@ mode: "agent"
 - DO explore the specific class/method to understand business logic, edge cases, and dependencies before writing tests.
 - DO use sequential thinking to plan test coverage and identify edge cases systematically.
 - DO search memory for existing test patterns and architectural decisions before starting.
+- DO update memory with new insights gained during test generation after I confirm a test was successfully created.
 
 ## Testing Framework Requirements
 
-- Use xUnit as the testing framework
-- Use FluentAssertions for assertions  
-- Use Moq for mocking dependencies
-- Use Bogus for generating realistic test data (when appropriate)
+- Use TUnit as the testing framework
+- DO NOT use Stryker for mutation testing since it's not supported yet
+- Create and reuse our own assertions library for common assertions, in each project for now
+- Create and reuse our own mocking library for common mocking scenarios, in each project for now
+- Create and reuse our own test data builders for complex entities, in each project for now
+- Create and reuse our own data generators for realistic test data, in each project for now
 
 ## Test Structure and Organization
 
-- Use Given-When-Then format for test method names (e.g., `GivenValidTour_WhenCreating_ThenShouldInitializeCorrectly`)
+- Use natural language for test method names (e.g., `Return_Available_Tours_When_Searching_By_Location`)
 - Structure test methods with Arrange-Act-Assert pattern with clear comments
 - Group related tests into logical test classes with descriptive names
 - Use file-scoped namespaces to organize test classes
@@ -54,5 +57,8 @@ mode: "agent"
 1. Use sequential thinking to analyze the target class/method and plan comprehensive test coverage
 2. Search memory for relevant context about the domain model and existing patterns
 3. Explore the codebase to understand dependencies, business rules, and architectural constraints
-4. Design test cases covering all scenarios identified in your analysis
-5. Generate well-structured, maintainable test code following TourBooking conventions
+4. Explain me your analysis and test plan, and confirm with me before generating code
+5. Design test cases covering all scenarios identified in your analysis
+6. Generate well-structured, maintainable test code following TourBooking conventions
+7. Always run tests after generation to ensure they pass and meet mutation testing requirements
+

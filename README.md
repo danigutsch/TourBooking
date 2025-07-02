@@ -181,7 +181,7 @@ The **Bike Tours Booking Platform API** provides a comprehensive framework for m
 - [ ] Performance testing (benchmarking)
 - [ ] Load testing (stress & capacity)
 - [ ] Snapshot testing (API/UI consistency)
-- [ ] Mutation testing
+- [ ] Mutation testing (awaiting [Stryker.NET Microsoft Testing Platform support](https://github.com/stryker-mutator/stryker-net/issues/3094))
 - [ ] Gherkin behavior tests
 
 ### ✅ **Quality Assurance**
@@ -400,7 +400,7 @@ The **Bike Tours Booking Platform API** provides a comprehensive framework for m
    ```bash
    dotnet test --configuration Release
    ```
-   - To run only unit tests: `dotnet test --filter "Category=Unit" --configuration Release`
+   - To run only unit tests: `dotnet test -- --treenode-filter "/*/*/*/*[Category=Unit]" --configuration Release`
    - To run integration/API tests: `dotnet test tests/TourBooking.WebTests --configuration Release`
    - To run end-to-end UI tests: `dotnet test tests/TourBooking.Tests.EndToEnd --configuration Release`
 
@@ -473,6 +473,23 @@ pwsh ./scripts/run-coverage.ps1 -Configuration Release -IncludeE2E
 # Open coverage report in browser
 pwsh ./scripts/run-coverage.ps1 -Configuration Release -OpenReport
 ```
+
+#### Running Tests by Category
+
+The project uses TUnit for testing, which requires specific syntax for filtering:
+
+```bash
+# Run unit tests only
+dotnet test -- --treenode-filter "/*/*/*/*[Category=Unit]"
+
+# Run integration tests only  
+dotnet test -- --treenode-filter "/*/*/*/*[Category=Integration]"
+
+# Run end-to-end tests only
+dotnet test -- --treenode-filter "/*/*/*/*[Category=EndToEnd]"
+```
+
+> **Note**: TUnit uses `-- --treenode-filter` syntax for category filtering with `dotnet test`, unlike traditional xUnit/NUnit filtering.
 
 #### Coverage Results
 - **Current Coverage**: ~35% line coverage for TourBooking assemblies

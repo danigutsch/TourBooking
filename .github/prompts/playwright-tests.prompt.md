@@ -39,7 +39,7 @@ When asked to create tests for a user scenario:
 
 ## Test Organization
 
-- Save tests in the `tests/` directory with descriptive filenames
+- Save tests with descriptive filenames according to existing conventions
 - Use page object models for complex user interfaces
 - Create reusable fixtures for common test data and setup
 - Include proper test data cleanup and state management
@@ -59,4 +59,5 @@ When asked to create tests for a user scenario:
 2. Search memory for application architecture and existing integration patterns
 3. Explore the codebase to understand the frontend structure and API endpoints
 4. Plan test scenarios that cover both happy paths and error conditions
-5. Design page objects and helpers that promote test maintainability
+5. Explain your analysis and test plan to me, and confirm before generating code
+6. Design page objects and helpers that promote test maintainability
