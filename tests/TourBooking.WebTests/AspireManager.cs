@@ -3,7 +3,7 @@ using JetBrains.Annotations;
 using TourBooking.Aspire.Constants;
 using TUnit.Core.Interfaces;
 
-namespace TourBooking.Tests.EndToEnd;
+namespace TourBooking.WebTests;
 
 [UsedImplicitly]
 [MustDisposeResource]
@@ -25,7 +25,7 @@ public sealed class AspireManager : IAsyncInitializer, IAsyncDisposable
         App = await appHost.BuildAsync(cancellationToken);
         var resourceNotificationService = App.Services.GetRequiredService<ResourceNotificationService>();
         await App.StartAsync(cancellationToken);
-        ApiClient = App.CreateHttpClient(ResourceNames.WebFrontend);
+        ApiClient = App.CreateHttpClient(ResourceNames.ApiService);
         await resourceNotificationService.WaitForResourceAsync(
             ResourceNames.WebFrontend,
             KnownResourceStates.Running,
