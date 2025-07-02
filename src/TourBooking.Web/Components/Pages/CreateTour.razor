@@ -1,6 +1,7 @@
 ﻿@page "/create-tour"
 @rendermode InteractiveServer
 @using System.ComponentModel.DataAnnotations
+@using TourBooking.ApiService.Contracts
 @inject ToursApiClient ToursApi
 
 <PageTitle>Create Tour</PageTitle>
@@ -55,7 +56,7 @@ else
 
     private async Task OnCreateTour()
     {
-        await ToursApi.CreateTour(new ApiService.Contracts.CreateTourRequest(
+        await ToursApi.CreateTour(new CreateTourDto(
             tourModel.Name,
             tourModel.Description,
             tourModel.Price,

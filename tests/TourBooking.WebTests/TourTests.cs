@@ -34,7 +34,7 @@ public sealed class TourTests
         var today = DateTime.UtcNow.ToDateOnly();
 
         // Act
-        var request = new CreateTourRequest("Test Tour", "A wonderful tour", 100.0m, today, today.AddDays(5));
+        var request = new CreateTourDto("Test Tour", "A wonderful tour", 100.0m, today, today.AddDays(5));
         var response = await ApiClient.PostAsJsonAsync(new Uri("/tours", UriKind.Relative), request, TestContext.Current?.CancellationToken ?? cts.Token);
 
         // Assert
