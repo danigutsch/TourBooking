@@ -1,3 +1,4 @@
+using TourBooking.ApiService.Contracts;
 using TourBooking.Aspire.Constants;
 using TourBooking.Core.Infrastructure;
 using TourBooking.ServiceDefaults;

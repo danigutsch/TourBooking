@@ -1,0 +1,58 @@
+@page "/tours"
+@using System.Collections
+@using TourBooking.ApiService.Contracts
+@rendermode InteractiveServer
+@inject ToursApiClient ToursApi
+
+<PageTitle>Tours</PageTitle>
+
+<h1>Available Tours</h1>
+
+@if (tours is null)
+{
+    <p>Loading tours...</p>
+}
+else if (tours.Length == 0)
+{
+    <p>No tours available.</p>
+}
+else
+{
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Price</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var tour in tours)
+            {
+                <tr>
+                    <td>@tour.Name</td>
+                    <td>@tour.Description</td>
+                    <td>@tour.Price.ToString("C")</td>
+                    <td>@tour.StartDate.ToString("yyyy-MM-dd")</td>
+                    <td>@tour.EndDate.ToString("yyyy-MM-dd")</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+
+
+    private GetTourModel[]? tours;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var tourDtos = await ToursApi.GetAllTours(CancellationToken.None);
+        tours = [.. tourDtos.Select(t => new GetTourModel(t.Name, t.Description, t.Price, t.StartDate, t.EndDate))];
+    }
+
+    private sealed record GetTourModel(string Name, string Description, decimal Price, DateOnly StartDate, DateOnly EndDate);
+}

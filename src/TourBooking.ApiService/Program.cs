@@ -29,9 +29,9 @@ if (app.Environment.IsDevelopment())
 
 var toursGroup = app.MapGroup("/tours");
 
-toursGroup.MapPost("/", async (CreateTourRequest request, IToursStore store, IUnitOfWork uow, CancellationToken ct) =>
+toursGroup.MapPost("/", async (CreateTourDto dto, IToursStore store, IUnitOfWork uow, CancellationToken ct) =>
 {
-    var tour = new Tour(request.Name, request.Description, request.Price, request.StartDate, request.EndDate);
+    var tour = new Tour(dto.Name, dto.Description, dto.Price, dto.StartDate, dto.EndDate);
 
     store.Add(tour);
 
