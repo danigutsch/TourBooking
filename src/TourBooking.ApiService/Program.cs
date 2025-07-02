@@ -27,7 +27,9 @@ if (app.Environment.IsDevelopment())
     app.MapOpenApi();
 }
 
-app.MapPost("/tours", async (CreateTourRequest request, IToursStore store, IUnitOfWork uow, CancellationToken ct) =>
+var toursGroup = app.MapGroup("/tours");
+
+toursGroup.MapPost("/", async (CreateTourRequest request, IToursStore store, IUnitOfWork uow, CancellationToken ct) =>
 {
     var tour = new Tour(request.Name, request.Description, request.Price, request.StartDate, request.EndDate);
 
@@ -38,6 +40,14 @@ app.MapPost("/tours", async (CreateTourRequest request, IToursStore store, IUnit
     return TypedResults.Ok();
 })
 .WithName("CreateTour");
+
+toursGroup.MapGet("/", async (IToursStore store, CancellationToken ct) =>
+{
+    var tours = await store.GetAll(ct);
+
+    return TypedResults.Ok(tours);
+})
+.WithName("GetAllTours");
 
 app.MapDefaultEndpoints();
 
