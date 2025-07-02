@@ -18,7 +18,7 @@ public static class ToursPersistenceDependencyInjection
     /// </summary>
     /// <remarks>This method registers the <see cref="ToursDbContext"/> with a PostgreSQL connection string
     /// named <see cref="ResourceNames.ToursDatabase"/>. It also adds scoped services for <see cref="IUnitOfWork"/> and <see
-    /// cref="IToursRepository"/> implementations.</remarks>
+    /// cref="IToursStore"/> implementations.</remarks>
     /// <typeparam name="TBuilder">The type of the application builder, which must implement <see cref="IHostApplicationBuilder"/>.</typeparam>
     /// <param name="builder">The application builder used to configure services and database context for the Tours module.</param>
     public static void AddToursPersistenceServices<TBuilder>(this TBuilder builder) where TBuilder : IHostApplicationBuilder
@@ -26,7 +26,7 @@ public static class ToursPersistenceDependencyInjection
         builder.AddNpgsqlDbContext<ToursDbContext>(ResourceNames.ToursDatabase);
 
         builder.Services.TryAddScoped<IUnitOfWork>(provider => provider.GetRequiredService<ToursDbContext>());
-        builder.Services.TryAddScoped<IToursRepository, ToursRepository>();
+        builder.Services.TryAddScoped<IToursStore, ToursStore>();
     }
 
     /// <summary>
