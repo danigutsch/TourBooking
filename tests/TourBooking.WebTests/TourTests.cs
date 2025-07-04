@@ -2,6 +2,7 @@ using System.Net.Http.Json;
 using TourBooking.ApiService.Contracts;
 using TourBooking.Tests;
 using TourBooking.Tests.Shared;
+using TourBooking.Web.Contracts;
 
 namespace TourBooking.WebTests;
 
@@ -20,7 +21,7 @@ public sealed class TourTests
         using var cts = new CancellationTokenSource(TimeSpan.FromSeconds(30));
 
         // Act
-        var response = await ApiClient.GetAsync(new Uri("/tours", UriKind.Relative), TestContext.Current?.CancellationToken ?? cts.Token);
+        var response = await ApiClient.GetAsync(ToursEndpoints.GetTours, TestContext.Current?.CancellationToken ?? cts.Token);
 
         // Assert
         await Assert.That(response.StatusCode).IsEqualTo(HttpStatusCode.OK);

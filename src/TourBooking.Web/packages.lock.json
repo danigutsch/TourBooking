@@ -511,6 +511,12 @@
           "OpenTelemetry.Instrumentation.StackExchangeRedis": "[1.12.0-beta.1, )"
         }
       },
+      "tourbooking.web.contracts": {
+        "type": "Project",
+        "dependencies": {
+          "JetBrains.Annotations": "[2024.3.0, )"
+        }
+      },
       "Aspire.StackExchange.Redis.OutputCaching": {
         "type": "CentralTransitive",
         "requested": "[9.3.1, )",

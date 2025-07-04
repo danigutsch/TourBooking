@@ -1,4 +1,5 @@
 ﻿using System.Text.Json.Serialization;
+using JetBrains.Annotations;
 
 namespace TourBooking.ApiService.Contracts;
 
@@ -8,4 +9,5 @@ namespace TourBooking.ApiService.Contracts;
 /// </summary>
 [JsonSerializable(typeof(GetTourDto))]
 [JsonSerializable(typeof(CreateTourDto))]
+[PublicAPI]
 public partial class ToursContext : JsonSerializerContext;

@@ -1,5 +1,6 @@
 using Microsoft.Playwright;
 using System.Globalization;
+using TourBooking.Web.Contracts;
 using TUnit.Playwright;
 
 namespace TourBooking.Tests.EndToEnd;
@@ -29,7 +30,7 @@ public sealed class TourTests : PageTest
         // Arrange
 
         // Act
-        await Page.GotoAsync("/create-tour");
+        await Page.GotoAsync(ToursEndpoints.CreateTourPath);
         await Page.WaitForSelectorAsync("h1,form");
 
         // Assert
@@ -43,7 +44,7 @@ public sealed class TourTests : PageTest
         // Arrange
 
         // Act
-        await Page.GotoAsync("/create-tour");
+        await Page.GotoAsync(ToursEndpoints.CreateTourPath);
         await Page.GetByLabel("Name").FillAsync("Amazing Tour");
         await Page.GetByLabel("Description").FillAsync("A wonderful tour");
         await Page.GetByLabel("Price").FillAsync("100.00");
