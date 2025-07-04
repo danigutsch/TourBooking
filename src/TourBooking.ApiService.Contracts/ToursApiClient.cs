@@ -12,6 +12,7 @@ namespace TourBooking.ApiService.Contracts;
 /// such as creating a new tour.
 /// </remarks>
 [UsedImplicitly]
+[PublicAPI]
 public sealed class ToursApiClient(HttpClient httpClient)
 {
     private static readonly Uri CreateTourRoute = new("/tours", UriKind.Relative);

@@ -875,6 +875,12 @@
       "tourbooking.tests.shared": {
         "type": "Project"
       },
+      "tourbooking.web.contracts": {
+        "type": "Project",
+        "dependencies": {
+          "JetBrains.Annotations": "[2024.3.0, )"
+        }
+      },
       "Aspire.Hosting.AppHost": {
         "type": "CentralTransitive",
         "requested": "[9.3.1, )",
