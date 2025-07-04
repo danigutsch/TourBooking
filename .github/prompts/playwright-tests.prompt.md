@@ -1,6 +1,6 @@
 ---
 description: "Generate end-to-end Playwright tests for the TourBooking platform that validate complete user workflows and business scenarios with proper exploration and verification."
-tools: ["playwright", "codebase", "sequential-thinking", "memory"]
+tools: ["playwright", "codebase", "sequentialthinking", "memory"]
 mode: "agent"
 ---
 
