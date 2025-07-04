@@ -11,6 +11,19 @@ public sealed class TourTests : PageTest
     public required AspireManager Aspire { get; init; }
 
     [Test]
+    public async Task Get_Tours_Page_Is_Reachable()
+    {
+        // Arrange
+
+        // Act
+        await Page.GotoAsync("/tours");
+
+        // Assert
+        var title = await Page.TitleAsync();
+        await Assert.That(title).IsEqualTo("Tours");
+    }
+
+    [Test]
     public async Task Create_Tour_Page_Is_Reachable()
     {
         // Arrange
