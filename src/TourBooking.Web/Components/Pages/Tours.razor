@@ -7,11 +7,11 @@
 
 <h1>Available Tours</h1>
 
-@if (tours is null)
+@if (_tours is null)
 {
     <p>Loading tours...</p>
 }
-else if (tours.Length == 0)
+else if (_tours.Length == 0)
 {
     <p>No tours available.</p>
     <p>Would you like to <NavLink href="/tours/create">create a new tour</NavLink>?</p>
@@ -29,7 +29,7 @@ else
             </tr>
         </thead>
         <tbody>
-            @foreach (var tour in tours)
+            @foreach (var tour in _tours)
             {
                 <tr>
                     <td>@tour.Name</td>
@@ -46,12 +46,12 @@ else
 @code {
 
 
-    private GetTourModel[]? tours;
+    private GetTourModel[]? _tours;
 
     protected override async Task OnInitializedAsync()
     {
         var tourDtos = await ToursApi.GetAllTours(CancellationToken.None);
-        tours = [.. tourDtos.Select(t => new GetTourModel(t.Name, t.Description, t.Price, t.StartDate, t.EndDate))];
+        _tours = [.. tourDtos.Select(t => new GetTourModel(t.Name, t.Description, t.Price, t.StartDate, t.EndDate))];
     }
 
     private sealed record GetTourModel(string Name, string Description, decimal Price, DateOnly StartDate, DateOnly EndDate);
