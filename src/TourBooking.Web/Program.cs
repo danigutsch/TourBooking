@@ -2,7 +2,6 @@ using TourBooking.ApiService.Contracts;
 using TourBooking.Aspire.Constants;
 using TourBooking.Core.Infrastructure;
 using TourBooking.ServiceDefaults;
-using TourBooking.Web;
 using TourBooking.Web.Components;
 
 var builder = WebApplication.CreateBuilder(args);
