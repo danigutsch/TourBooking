@@ -25,6 +25,20 @@ public sealed class TourTests : PageTest
     }
 
     [Test]
+    public async Task Get_Tours_List_Is_Populated()
+    {
+        // Arrange
+
+        // Act
+        await Page.GotoAsync("/tours");
+        await Page.WaitForSelectorAsync("table");
+
+        // Assert
+        var rows = await Page.Locator("table tbody tr").CountAsync();
+        await Assert.That(rows).IsGreaterThan(0);
+    }
+
+    [Test]
     public async Task Create_Tour_Page_Is_Reachable()
     {
         // Arrange
