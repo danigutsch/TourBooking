@@ -861,6 +861,12 @@
         "resolved": "16.3.0",
         "contentHash": "SgMOdxbz8X65z8hraIs6hOEdnkH6hESTAIUa7viEngHOYaH+6q5XJmwr1+yb9vJpNQ19hCQY69xbFsLtXpobQA=="
       },
+      "tourbooking.apiservice.contracts": {
+        "type": "Project",
+        "dependencies": {
+          "JetBrains.Annotations": "[2024.3.0, )"
+        }
+      },
       "tourbooking.apphost": {
         "type": "Project",
         "dependencies": {
@@ -873,7 +879,10 @@
         }
       },
       "tourbooking.tests.shared": {
-        "type": "Project"
+        "type": "Project",
+        "dependencies": {
+          "TourBooking.ApiService.Contracts": "[1.0.0, )"
+        }
       },
       "tourbooking.web.contracts": {
         "type": "Project",

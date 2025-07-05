@@ -4,4 +4,8 @@
 		<NoWarn>$(NoWarn);CA1716</NoWarn>
 	</PropertyGroup>
 
+	<ItemGroup>
+	  <ProjectReference Include="..\..\src\TourBooking.ApiService.Contracts\TourBooking.ApiService.Contracts.csproj" />
+	</ItemGroup>
+
 </Project>
