@@ -17,7 +17,7 @@ public sealed class TourTests : PageTest
         // Arrange
 
         // Act
-        await Page.GotoAsync("/tours");
+        await Page.GotoAsync(ToursWebEndpoints.GetToursPath);
 
         // Assert
         var title = await Page.TitleAsync();
@@ -30,7 +30,7 @@ public sealed class TourTests : PageTest
         // Arrange
 
         // Act
-        await Page.GotoAsync("/tours");
+        await Page.GotoAsync(ToursWebEndpoints.GetToursPath);
         await Page.WaitForSelectorAsync("table");
 
         // Assert
@@ -44,7 +44,7 @@ public sealed class TourTests : PageTest
         // Arrange
 
         // Act
-        await Page.GotoAsync(ToursEndpoints.CreateTourPath);
+        await Page.GotoAsync(ToursWebEndpoints.CreateTourPath);
         await Page.WaitForSelectorAsync("h1,form");
 
         // Assert
@@ -58,7 +58,7 @@ public sealed class TourTests : PageTest
         // Arrange
 
         // Act
-        await Page.GotoAsync(ToursEndpoints.CreateTourPath);
+        await Page.GotoAsync(ToursWebEndpoints.CreateTourPath);
         await Page.GetByLabel("Name").FillAsync("Amazing Tour");
         await Page.GetByLabel("Description").FillAsync("A wonderful tour");
         await Page.GetByLabel("Price").FillAsync("100.00");

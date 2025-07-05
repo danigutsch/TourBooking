@@ -1,4 +1,5 @@
 using System.Net.Http.Json;
+using TourBooking.ApiService.Contracts;
 using TourBooking.Tests;
 using TourBooking.Tests.Shared;
 using TourBooking.Web.Contracts;
@@ -20,21 +21,21 @@ public sealed class TourTests
         using var cts = new CancellationTokenSource(TimeSpan.FromSeconds(30));
 
         // Act
-        var response = await ApiClient.GetAsync(ToursEndpoints.GetTours, TestContext.Current?.CancellationToken ?? cts.Token);
+        var response = await ApiClient.GetAsync(ToursWebEndpoints.GetTours, TestContext.Current?.CancellationToken ?? cts.Token);
 
         // Assert
         await Assert.That(response.StatusCode).IsEqualTo(HttpStatusCode.OK);
     }
 
     [Test]
-    public async Task CreateTourApiReturnsSuccess()
+    public async Task Creates_Tour()
     {
         // Arrange
         using var cts = new CancellationTokenSource(TimeSpan.FromSeconds(30));
 
         // Act
         var request = TourDtoFactory.Create();
-        var response = await ApiClient.PostAsJsonAsync(new Uri("/tours", UriKind.Relative), request, TestContext.Current?.CancellationToken ?? cts.Token);
+        var response = await ApiClient.PostAsJsonAsync(ToursApiEndpoints.CreateTour, request, TestContext.Current?.CancellationToken ?? cts.Token);
 
         // Assert
         await Assert.That(response.StatusCode).IsEqualTo(HttpStatusCode.OK);
