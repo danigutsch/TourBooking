@@ -27,7 +27,7 @@ if (app.Environment.IsDevelopment())
     app.MapOpenApi();
 }
 
-var toursGroup = app.MapGroup("/tours");
+var toursGroup = app.MapGroup(ToursApiEndpoints.ToursBasePath);
 
 toursGroup.MapPost("/", async (CreateTourDto dto, IToursStore store, IUnitOfWork uow, CancellationToken ct) =>
 {

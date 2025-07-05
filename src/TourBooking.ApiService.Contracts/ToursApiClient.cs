@@ -15,15 +15,12 @@ namespace TourBooking.ApiService.Contracts;
 [PublicAPI]
 public sealed class ToursApiClient(HttpClient httpClient)
 {
-    private static readonly Uri CreateTourRoute = new("/tours", UriKind.Relative);
-    private static readonly Uri GetAllToursRoute = new("/tours", UriKind.Relative);
-
     /// <summary>
     /// Creates a new tour.
     /// </summary>
     public async Task CreateTour(CreateTourDto request, CancellationToken cancellationToken)
     {
-        var response = await httpClient.PostAsJsonAsync(CreateTourRoute, request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.PostAsJsonAsync(ToursApiEndpoints.CreateTour, request, cancellationToken).ConfigureAwait(false);
 
         response.EnsureSuccessStatusCode();
     }
@@ -33,7 +30,7 @@ public sealed class ToursApiClient(HttpClient httpClient)
     /// </summary>
     public async Task<GetTourDto[]> GetAllTours(CancellationToken cancellationToken)
     {
-        var response = await httpClient.GetAsync(GetAllToursRoute, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.GetAsync(ToursApiEndpoints.GetTours, cancellationToken).ConfigureAwait(false);
 
         response.EnsureSuccessStatusCode();
 

@@ -1,12 +1,12 @@
 ﻿using JetBrains.Annotations;
 
-namespace TourBooking.Web.Contracts;
+namespace TourBooking.ApiService.Contracts;
 
 /// <summary>
 /// Defines the routes for the Tours API.
 /// </summary>
 [PublicAPI]
-public static class ToursEndpoints
+public static class ToursApiEndpoints
 {
     /// <summary>
     /// The base path for the Tours API.
@@ -31,7 +31,7 @@ public static class ToursEndpoints
     /// <summary>
     /// The path to create a new tour.
     /// </summary>
-    public const string CreateTourPath = "/tours/create";
+    public const string CreateTourPath = "/tours";
 
     /// <summary>
     /// Represents the relative URI for creating a tour.
