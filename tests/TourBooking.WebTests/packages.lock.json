@@ -854,7 +854,10 @@
         }
       },
       "tourbooking.tests.shared": {
-        "type": "Project"
+        "type": "Project",
+        "dependencies": {
+          "TourBooking.ApiService.Contracts": "[1.0.0, )"
+        }
       },
       "tourbooking.web.contracts": {
         "type": "Project",

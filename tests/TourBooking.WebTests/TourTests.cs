@@ -1,5 +1,4 @@
 using System.Net.Http.Json;
-using TourBooking.ApiService.Contracts;
 using TourBooking.Tests;
 using TourBooking.Tests.Shared;
 using TourBooking.Web.Contracts;
@@ -32,10 +31,9 @@ public sealed class TourTests
     {
         // Arrange
         using var cts = new CancellationTokenSource(TimeSpan.FromSeconds(30));
-        var today = DateTime.UtcNow.ToDateOnly();
 
         // Act
-        var request = new CreateTourDto("Test Tour", "A wonderful tour", 100.0m, today, today.AddDays(5));
+        var request = TourDtoFactory.Create();
         var response = await ApiClient.PostAsJsonAsync(new Uri("/tours", UriKind.Relative), request, TestContext.Current?.CancellationToken ?? cts.Token);
 
         // Assert
