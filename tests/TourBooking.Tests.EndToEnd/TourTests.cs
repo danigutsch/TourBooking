@@ -8,8 +8,8 @@ namespace TourBooking.Tests.EndToEnd;
 [Category(TestCategories.EndToEnd)]
 public sealed class TourTests : PageTest
 {
-    [ClassDataSource<TestHost>(Shared = SharedType.PerTestSession)]
-    public required TestHost TestHost { get; init; }
+    [ClassDataSource<IntegrationTestHost>(Shared = SharedType.PerTestSession)]
+    public required IntegrationTestHost IntegrationTestHost { get; init; }
 
     [Test]
     public async Task Get_Tours_Page_Is_Reachable()
@@ -75,7 +75,7 @@ public sealed class TourTests : PageTest
     public override BrowserNewContextOptions ContextOptions(TestContext testContext)
     {
         var options = base.ContextOptions(testContext);
-        options.BaseURL = TestHost.FrontendEndpoint;
+        options.BaseURL = IntegrationTestHost.FrontendEndpoint;
         options.IgnoreHTTPSErrors = true;
         return options;
     }
