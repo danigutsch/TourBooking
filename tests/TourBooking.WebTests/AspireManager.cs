@@ -33,8 +33,6 @@ public sealed class AspireManager : IAsyncInitializer, IAsyncDisposable
         var resourceNotificationService = App.Services.GetRequiredService<ResourceNotificationService>();
         await App.StartAsync(cancellationToken);
 
-        // Use client from Aspire when compatible with code coverage.
-
         await resourceNotificationService.WaitForResourceAsync(
             ResourceNames.WebFrontend,
             KnownResourceStates.Running,
