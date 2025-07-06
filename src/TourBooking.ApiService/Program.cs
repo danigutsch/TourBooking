@@ -1,7 +1,5 @@
-using TourBooking.ApiService.Contracts;
+using TourBooking.ApiService.Endpoints;
 using TourBooking.ServiceDefaults;
-using TourBooking.Tours.Application;
-using TourBooking.Tours.Domain;
 using TourBooking.Tours.Persistence;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -27,27 +25,7 @@ if (app.Environment.IsDevelopment())
     app.MapOpenApi();
 }
 
-var toursGroup = app.MapGroup(ToursApiEndpoints.ToursBasePath);
-
-toursGroup.MapPost("/", async (CreateTourDto dto, IToursStore store, IUnitOfWork uow, CancellationToken ct) =>
-{
-    var tour = new Tour(dto.Name, dto.Description, dto.Price, dto.StartDate, dto.EndDate);
-
-    store.Add(tour);
-
-    await uow.SaveChanges(ct);
-
-    return TypedResults.Ok();
-})
-.WithName("CreateTour");
-
-toursGroup.MapGet("/", async (IToursStore store, CancellationToken ct) =>
-{
-    var tours = await store.GetAll(ct);
-
-    return TypedResults.Ok(tours);
-})
-.WithName("GetAllTours");
+app.MapToursApi();
 
 app.MapDefaultEndpoints();
 
