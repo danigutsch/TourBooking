@@ -10,13 +10,11 @@
   <Folder Name="/src/">
     <Project Path="src/TourBooking.ApiService.Contracts/TourBooking.ApiService.Contracts.csproj" />
     <Project Path="src/TourBooking.ApiService/TourBooking.ApiService.csproj" />
+    <Project Path="src/TourBooking.AppHost/TourBooking.AppHost.csproj" />
     <Project Path="src/TourBooking.MigrationService/TourBooking.MigrationService.csproj" />
     <Project Path="src/TourBooking.ServiceDefaults/TourBooking.ServiceDefaults.csproj" />
     <Project Path="src/TourBooking.Web.Contracts/TourBooking.Web.Contracts.csproj" Id="b6433237-9b69-47fa-9a93-2b827598df61" />
     <Project Path="src/TourBooking.Web/TourBooking.Web.csproj" />
-  </Folder>
-  <Folder Name="/src/Aspire/">
-    <Project Path="src/Aspire/TourBooking.AppHost/TourBooking.AppHost.csproj" />
   </Folder>
   <Folder Name="/src/Core/">
     <Project Path="src/TourBooking.Core.Infrastructure/TourBooking.Core.Infrastructure.csproj" />

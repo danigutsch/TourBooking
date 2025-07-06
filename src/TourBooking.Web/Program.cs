@@ -1,5 +1,5 @@
 using TourBooking.ApiService.Contracts;
-using TourBooking.Aspire.Constants;
+using TourBooking.Constants;
 using TourBooking.Core.Infrastructure;
 using TourBooking.ServiceDefaults;
 using TourBooking.Web.Components;

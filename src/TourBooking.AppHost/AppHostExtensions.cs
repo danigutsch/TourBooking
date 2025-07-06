@@ -2,8 +2,8 @@ using TourBooking.AppHost.Grafana;
 using TourBooking.AppHost.Jaeger;
 using TourBooking.AppHost.OpenTelemetryCollector;
 using TourBooking.AppHost.Prometheus;
-using TourBooking.Aspire.Constants;
 using CommunityToolkit.Diagnostics;
+using TourBooking.Constants;
 
 namespace TourBooking.AppHost;
 
