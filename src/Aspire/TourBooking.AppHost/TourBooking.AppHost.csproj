@@ -5,7 +5,7 @@
 	<PropertyGroup>
 		<OutputType>Exe</OutputType>
 		<UserSecretsId>1a459173-7949-4a52-9a05-5498632be101</UserSecretsId>
-		<NoWarn>$(NoWarn);CA2007</NoWarn>
+		<NoWarn>$(NoWarn);CA2007;CS1591</NoWarn>
 	</PropertyGroup>
 
 	<ItemGroup>
