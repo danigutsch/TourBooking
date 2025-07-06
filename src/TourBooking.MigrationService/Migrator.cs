@@ -38,42 +38,35 @@ internal sealed class Migrator(
 
         scriptsPath = Path.Combine(AppContext.BaseDirectory, scriptsPath);
 
-        if (!Directory.Exists(scriptsPath))
-        {
-            activity?.SetStatus(ActivityStatusCode.Error);
-            logger.DirectoryDoesNotExist(scriptsPath);
-            throw new InvalidOperationException("Migration scripts directory does not exist.");
-        }
-
-        var files = new DirectoryInfo(scriptsPath).GetFiles("*.sql", SearchOption.TopDirectoryOnly);
-        if (files.Length == 0)
-        {
-            activity?.SetStatus(ActivityStatusCode.Error);
-            logger.NoScriptFound(scriptsPath);
-            throw new InvalidOperationException("No migration script found in the specified directory.");
-        }
-
-        var lastMigration = files
-            .OrderByDescending(file => file.Name)
-            .First();
-
-        logger.ApplyingMigration(lastMigration.Name);
-
-        var migrationScript = await File.ReadAllTextAsync(lastMigration.FullName, stoppingToken);
-        if (string.IsNullOrWhiteSpace(migrationScript))
-        {
-            activity?.SetStatus(ActivityStatusCode.Error);
-            logger.NoScriptFound(lastMigration.FullName);
-            throw new InvalidOperationException("Migration script is empty.");
-        }
-
         using var scope = serviceProvider.CreateScope();
         var migrationManager = scope.ServiceProvider.GetRequiredService<IMigrationManager>();
 
+        string? scriptName = null;
         try
         {
-            await migrationManager.ExecuteMigrationScript(migrationScript, stoppingToken);
-            logger.MigrationApplied(lastMigration.Name);
+            scriptName = await migrationManager.ApplyLatestMigration(scriptsPath, stoppingToken);
+            logger.MigrationApplied(scriptName);
+        }
+        catch (InvalidOperationException ex)
+        {
+            activity?.SetStatus(ActivityStatusCode.Error);
+            if (ex.Message.Contains("does not exist", StringComparison.OrdinalIgnoreCase))
+            {
+                logger.DirectoryDoesNotExist(scriptsPath);
+            }
+            else if (ex.Message.Contains("No migration script found", StringComparison.OrdinalIgnoreCase))
+            {
+                logger.NoScriptFound(scriptsPath);
+            }
+            else if (ex.Message.Contains("Migration script is empty", StringComparison.OrdinalIgnoreCase))
+            {
+                logger.NoScriptFound(scriptName ?? scriptsPath);
+            }
+            else
+            {
+                logger.NoScriptFound(scriptsPath);
+            }
+            throw;
         }
         catch (Exception e)
         {

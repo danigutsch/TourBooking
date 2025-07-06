@@ -14,4 +14,13 @@ public interface IMigrationManager
     /// <param name="sqlScript">The SQL script to be executed.</param>
     /// <param name="ct">The cancellation token for the operation.</param>
     Task ExecuteMigrationScript(string sqlScript, CancellationToken ct);
+
+    /// <summary>
+    /// Applies the latest migration script from the specified directory and returns the script name.
+    /// </summary>
+    /// <param name="scriptsPath">Path to the directory containing migration scripts.</param>
+    /// <param name="ct">Cancellation token.</param>
+    /// <returns>The name of the applied migration script.</returns>
+    /// <exception cref="InvalidOperationException">Thrown if directory or script is missing or empty.</exception>
+    Task<string> ApplyLatestMigration(string scriptsPath, CancellationToken ct);
 }
