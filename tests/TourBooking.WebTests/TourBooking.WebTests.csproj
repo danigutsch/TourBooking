@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
 		<OutputType>Exe</OutputType>
@@ -21,6 +21,7 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\..\src\Aspire\TourBooking.AppHost\TourBooking.AppHost.csproj" />
+		<ProjectReference Include="..\..\src\TourBooking.ApiService\TourBooking.ApiService.csproj" />
 		<ProjectReference Include="..\..\src\TourBooking.ApiService.Contracts\TourBooking.ApiService.Contracts.csproj" />
 		<ProjectReference Include="..\..\src\TourBooking.Web.Contracts\TourBooking.Web.Contracts.csproj" />
 		<ProjectReference Include="..\TourBooking.Tests.Shared\TourBooking.Tests.Shared.csproj" />
