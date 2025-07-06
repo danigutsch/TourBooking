@@ -12,7 +12,7 @@ param(
     
     [Parameter(HelpMessage = "Verbosity level")]
     [ValidateSet("quiet", "minimal", "normal", "detailed", "diagnostic")]
-    [string]$Verbosity = "normal"
+    [string]$Verbosity = "minimal"
 )
 
 $ErrorActionPreference = "Stop"
@@ -82,51 +82,41 @@ try {
             continue
         }
         
-        # For Microsoft Testing Platform projects, use dotnet run with coverage arguments
-        $mtpCommand = "dotnet run --project `"$project`" --configuration $Configuration --verbosity normal -- --coverage --coverage-output-format cobertura --coverage-output `"${projectName}-coverage.cobertura.xml`" --coverage-settings CodeCoverage.runsettings --results-directory `"$CoverageDir`""
-        Write-Host "Executing: $mtpCommand" -ForegroundColor Gray
+        # For TUnit/Microsoft Testing Platform projects, use dotnet run with coverage arguments
+        Write-Status "Running TUnit tests with coverage for $projectName..."
         
         dotnet run --project $project `
             --configuration $Configuration `
-            --verbosity normal `
+            --verbosity $Verbosity `
             -- `
             --coverage `
             --coverage-output-format cobertura `
             --coverage-output "${projectName}-coverage.cobertura.xml" `
             --coverage-settings CodeCoverage.runsettings `
-            --results-directory $CoverageDir `
-            2>&1 | Where-Object { 
-                $_ -notmatch "^\(\d+,\d+s\)$" -and 
-                $_ -notmatch "^  " -and 
-                $_ -notmatch "Restore" -and
-                $_ -notmatch "Determining projects to restore" -and
-                $_ -notmatch "Nothing to do" -and
-                $_ -match "(Test run summary|total:|failed:|succeeded:|skipped:|duration:|coverage|error|warning)"
-            }
+            --results-directory $CoverageDir
         
         if ($LASTEXITCODE -ne 0) {
             Write-Warning "Tests failed for $projectName with exit code $LASTEXITCODE, but continuing with coverage collection"
         }
     }
 
-    # Find coverage files (multiple formats)
+    # Find coverage files (multiple locations for TUnit/MTP)
     $CoverageFiles = @()
-    $CoverageFiles += Get-ChildItem -Path $CoverageDir -Recurse -Filter "coverage.cobertura.xml" -ErrorAction SilentlyContinue
-    $CoverageFiles += Get-ChildItem -Path $CoverageDir -Recurse -Filter "*-coverage.cobertura.xml" -ErrorAction SilentlyContinue
-    $CoverageFiles += Get-ChildItem -Path $CoverageDir -Recurse -Filter "*.cobertura.xml" -ErrorAction SilentlyContinue
     
-    # Also check for coverage files in project-specific bin directories (MTP projects)
+    # Look in the main TestResults directory
+    $CoverageFiles += Get-ChildItem -Path $CoverageDir -Recurse -Filter "*.cobertura.xml" -ErrorAction SilentlyContinue
+    $CoverageFiles += Get-ChildItem -Path $CoverageDir -Recurse -Filter "*coverage*.xml" -ErrorAction SilentlyContinue
+    
+    # Also check for coverage files in project-specific directories (TUnit generates them relative to project)
     $testProjectDirs = @(
-        "tests\TourBooking.Tests.Domain\bin\$Configuration\net9.0\TestResults",
-        "tests\TourBooking.WebTests\bin\$Configuration\net9.0\TestResults",
-        "tests\TourBooking.Tests.EndToEnd\bin\$Configuration\net9.0\TestResults"
+        "tests\TourBooking.Tests.Domain",
+        "tests\TourBooking.WebTests", 
+        "tests\TourBooking.Tests.EndToEnd"
     )
     
     foreach ($dir in $testProjectDirs) {
         if (Test-Path $dir) {
-            $projectCoverageFiles = @()
-            $projectCoverageFiles += Get-ChildItem -Path $dir -Recurse -Filter "*.cobertura.xml" -ErrorAction SilentlyContinue
-            $projectCoverageFiles += Get-ChildItem -Path $dir -Recurse -Filter "*coverage*.xml" -ErrorAction SilentlyContinue
+            $projectCoverageFiles = Get-ChildItem -Path $dir -Recurse -Filter "*coverage*.xml" -ErrorAction SilentlyContinue
             if ($projectCoverageFiles.Count -gt 0) {
                 foreach ($file in $projectCoverageFiles) {
                     $CoverageFiles += $file
@@ -134,6 +124,9 @@ try {
             }
         }
     }
+    
+    # Remove duplicates based on full path
+    $CoverageFiles = $CoverageFiles | Sort-Object FullName | Get-Unique -AsString
     
     if ($CoverageFiles.Count -eq 0) {
         throw "No coverage files found. Make sure tests ran successfully and coverage collection is working."
@@ -157,11 +150,7 @@ try {
         -verbosity:Warning `
         -title:"TourBooking Code Coverage Report" `
         -tag:"$((Get-Date).ToString('yyyy-MM-dd_HH-mm-ss'))" `
-        -filefilters:"-https://**;+**" `
-        2>&1 | Where-Object { 
-            $_ -notmatch "Error during reading file 'https://" -and
-            $_ -match "(Writing report|Report generation took|ERROR|WARNING|generated|Processing)" 
-        }
+        -filefilters:"-https://**;+**"
 
     if ($LASTEXITCODE -ne 0) {
         throw "Failed to generate coverage report"

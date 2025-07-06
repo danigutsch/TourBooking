@@ -411,30 +411,19 @@ The **Bike Tours Booking Platform API** provides a comprehensive framework for m
 
 ## Development
 
-### Project Structure
+### Architecture Patterns
 
-```
-src/
-├── Aspire/
-│   ├── TourBooking.AppHost/           # .NET Aspire orchestration and cloud infra
-│   └── TourBooking.Aspire.Constants/  # Aspire resource constants
-├── TourBooking.ApiService/            # Web API endpoints and controllers
-├── TourBooking.ApiService.Contracts/  # API contracts
-├── TourBooking.Core.Infrastructure/   # Infrastructure and dependency injection
-├── TourBooking.MigrationService/      # Database migration logic
-├── TourBooking.ServiceDefaults/       # Service defaults and extensions
-├── TourBooking.Tours.Application/     # Application layer (CQRS, interfaces)
-├── TourBooking.Tours.Domain/          # Domain models and logic
-├── TourBooking.Tours.Persistence/     # Persistence layer (EF Core, repositories)
-└── TourBooking.Web/                   # Customer-facing web application
+#### Contracts Projects Pattern
+Each major service includes a dedicated contracts project to facilitate integration and consumption by other applications:
 
-tests/
-└── TourBooking.WebTests/              # Web layer tests
+- **`TourBooking.ApiService.Contracts`**: Contains DTOs, interfaces, and contracts for the main API service, enabling other services to integrate without tight coupling
+- **`TourBooking.Web.Contracts`**: Provides contracts for the web application, supporting modular frontend development and potential micro-frontend architecture
 
-grafana/
-otelcollector/
-prometheus/
-```
+This pattern promotes:
+- **Loose Coupling**: Services can reference contracts without depending on implementation details
+- **Versioning**: Contracts can be versioned independently from implementations
+- **Integration**: External applications can consume services through well-defined contracts
+- **Testing**: Contracts facilitate mocking and testing across service boundaries
 
 ### Key Design Principles
 
@@ -452,15 +441,16 @@ prometheus/
 The project implements a comprehensive three-tier testing approach with integrated code coverage analysis:
 
 #### Test Projects Structure
-- **`TourBooking.Tests.Domain`**: Unit tests for domain logic using Microsoft Testing Platform with xUnit v3
-- **`TourBooking.WebTests`**: Integration tests with Aspire hosting using Microsoft Testing Platform with xUnit v3
-- **`TourBooking.Tests.EndToEnd`**: UI tests with Playwright using VSTest with xUnit v2
+- **Unit Tests**: Domain logic testing with comprehensive business rule validation
+- **Integration Tests**: API and service integration testing with containerized dependencies
+- **End-to-End Tests**: Full application workflow testing using Playwright for UI automation
+- **Shared Test Utilities**: Common testing infrastructure and helpers
 
 #### Code Coverage Configuration
-- **Dual Testing Framework Support**: Configured for both Microsoft Testing Platform and VSTest
-- **External Assembly Filtering**: Automatically excludes external dependencies (Aspire, StackExchange, Microsoft frameworks)
-- **TourBooking-Only Coverage**: Focuses coverage analysis on project-specific code only
-- **HTML Report Generation**: Comprehensive coverage reports using ReportGenerator
+- **Comprehensive Analysis**: Automated coverage analysis across all test types
+- **External Assembly Filtering**: Automatically excludes external dependencies and generated code
+- **Focused Coverage**: Analysis limited to `TourBooking.*` assemblies, excluding migrations and infrastructure noise
+- **Multiple Formats**: Generates both XML (Cobertura) and HTML reports for CI/CD and local development
 
 #### Running Tests with Coverage
 ```bash
@@ -492,10 +482,37 @@ dotnet test -- --treenode-filter "/*/*/*/*[Category=EndToEnd]"
 > **Note**: TUnit uses `-- --treenode-filter` syntax for category filtering with `dotnet test`, unlike traditional xUnit/NUnit filtering.
 
 #### Coverage Results
-- **Current Coverage**: ~35% line coverage for TourBooking assemblies
+- **Coverage Reports**: Comprehensive HTML and XML coverage reports generated using ReportGenerator
 - **Report Location**: `CoverageReport/index.html`
-- **Filtered Assemblies**: Only includes `TourBooking.*` assemblies in coverage analysis
+- **Filtered Assemblies**: Only includes `TourBooking.*` assemblies in coverage analysis, excluding migrations and external dependencies
 - **Coverage Formats**: Supports Cobertura XML and HTML reports
+
+#### Creating Coverage Badges
+To create coverage badges for your repository:
+
+1. **Generate Coverage Report**:
+   ```bash
+   pwsh ./scripts/run-coverage.ps1 -Configuration Release
+   ```
+
+2. **Extract Coverage Data**:
+   The script generates badges in `CoverageReport/` directory:
+   - `badge_linecoverage.svg` - Line coverage badge
+   - `badge_branchcoverage.svg` - Branch coverage badge
+   - `badge_combined.svg` - Combined coverage badge
+
+3. **Add to README**:
+   ```markdown
+   ![Line Coverage](./CoverageReport/badge_linecoverage.svg)
+   ![Branch Coverage](./CoverageReport/badge_branchcoverage.svg)
+   ```
+
+4. **Shields.io Integration**:
+   Use the generated coverage percentage with [Shields.io](https://shields.io/):
+   ```markdown
+   ![Coverage](https://img.shields.io/badge/coverage-XX%25-brightgreen)
+   ```
+   Replace `XX` with your actual coverage percentage from the report.
 
 #### Planned Advanced Testing
 - **Performance Testing**: Benchmark critical paths (tour search, booking creation, payment processing)
