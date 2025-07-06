@@ -8,8 +8,8 @@ namespace TourBooking.Tests.EndToEnd;
 [Category(TestCategories.EndToEnd)]
 public sealed class TourTests : PageTest
 {
-    [ClassDataSource<AspireManager>(Shared = SharedType.PerTestSession)]
-    public required AspireManager Aspire { get; init; }
+    [ClassDataSource<TestHost>(Shared = SharedType.PerTestSession)]
+    public required TestHost TestHost { get; init; }
 
     [Test]
     public async Task Get_Tours_Page_Is_Reachable()
@@ -75,7 +75,7 @@ public sealed class TourTests : PageTest
     public override BrowserNewContextOptions ContextOptions(TestContext testContext)
     {
         var options = base.ContextOptions(testContext);
-        options.BaseURL = Aspire.FrontendEndpoint;
+        options.BaseURL = TestHost.FrontendEndpoint;
         options.IgnoreHTTPSErrors = true;
         return options;
     }

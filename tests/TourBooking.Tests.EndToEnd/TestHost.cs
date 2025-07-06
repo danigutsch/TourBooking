@@ -9,7 +9,7 @@ namespace TourBooking.Tests.EndToEnd;
 
 [UsedImplicitly]
 [MustDisposeResource]
-public sealed class AspireManager : IAsyncInitializer, IAsyncDisposable
+public sealed class TestHost : IAsyncInitializer, IAsyncDisposable
 {
     private static readonly TimeSpan DefaultTimeout = TimeSpan.FromSeconds(300);
 
