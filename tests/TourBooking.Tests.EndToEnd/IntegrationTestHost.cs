@@ -64,7 +64,8 @@ public sealed class IntegrationTestHost : IAsyncInitializer, IAsyncDisposable
     public async ValueTask DisposeAsync()
     {
         await App.DisposeAsync();
-        await ApiFixture.DisposeAsync()
+        await ApiFixture.DisposeAsync();
+        await WebFixture.DisposeAsync()
             .ConfigureAwait(false);
     }
 }
