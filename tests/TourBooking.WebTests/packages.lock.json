@@ -958,6 +958,7 @@
           "Aspire.Hosting.Orchestration.win-x64": "[9.3.1, )",
           "Aspire.Hosting.PostgreSQL": "[9.3.1, )",
           "Aspire.Hosting.Redis": "[9.3.1, )",
+          "CommunityToolkit.Diagnostics": "[8.4.0, )",
           "JetBrains.Annotations": "[2024.3.0, )"
         }
       },
