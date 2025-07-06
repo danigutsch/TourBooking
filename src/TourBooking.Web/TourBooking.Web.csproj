@@ -19,9 +19,4 @@
 		<ProjectReference Include="..\TourBooking.Web.Contracts\TourBooking.Web.Contracts.csproj" />
 	</ItemGroup>
 
-	<ItemGroup>
-		<InternalsVisibleTo Include="TourBooking.Tests.AppHost" />
-		<InternalsVisibleTo Include="TourBooking.Tests.EndToEnd" />
-	</ItemGroup>
-
 </Project>

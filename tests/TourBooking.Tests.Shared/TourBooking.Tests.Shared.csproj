@@ -15,7 +15,8 @@
 
 	<ItemGroup>
 	  <ProjectReference Include="..\..\src\TourBooking.ApiService.Contracts\TourBooking.ApiService.Contracts.csproj" />
-	  <ProjectReference Include="..\..\src\TourBooking.ApiService\TourBooking.ApiService.csproj" />
+	  <ProjectReference Include="..\..\src\TourBooking.ApiService\TourBooking.ApiService.csproj" Aliases="api" />
+	  <ProjectReference Include="..\..\src\TourBooking.Web\TourBooking.Web.csproj" Aliases="web" />
 	</ItemGroup>
 
 </Project>
