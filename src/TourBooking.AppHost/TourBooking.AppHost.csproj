@@ -9,12 +9,6 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\..\TourBooking.ApiService\TourBooking.ApiService.csproj" />
-		<ProjectReference Include="..\..\TourBooking.MigrationService\TourBooking.MigrationService.csproj" />
-		<ProjectReference Include="..\..\TourBooking.Web\TourBooking.Web.csproj" />
-	</ItemGroup>
-
-	<ItemGroup>
 		<PackageReference Include="Aspire.Hosting.AppHost" />
 		<PackageReference Include="Aspire.Hosting.PostgreSQL" />
 		<PackageReference Include="Aspire.Hosting.Redis" />
@@ -26,6 +20,12 @@
 		<Compile Include="..\ResourceNames.cs">
 			<Link>ResourceNames.cs</Link>
 		</Compile>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\TourBooking.ApiService\TourBooking.ApiService.csproj" />
+	  <ProjectReference Include="..\TourBooking.MigrationService\TourBooking.MigrationService.csproj" />
+	  <ProjectReference Include="..\TourBooking.Web\TourBooking.Web.csproj" />
 	</ItemGroup>
 
 </Project>
