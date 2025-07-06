@@ -64,50 +64,34 @@ try {
     # This avoids issues with .slnx files in PowerShell context
     Write-Status "Building will be handled by dotnet test..."
 
-    # Define test projects
-    $TestProjects = @(
-        "tests\TourBooking.Tests.Domain\TourBooking.Tests.Domain.csproj",
-        "tests\TourBooking.WebTests\TourBooking.WebTests.csproj",
-        "tests\TourBooking.Tests.EndToEnd\TourBooking.Tests.EndToEnd.csproj"
-    )
-
-    # Run tests with coverage
-    foreach ($project in $TestProjects) {
-        $projectName = Split-Path -Leaf (Split-Path -Parent $project)
-        Write-Status "Running tests for $projectName..."
-        
-        # Check if project exists
-        if (-not (Test-Path $project)) {
-            Write-Warning "Project file not found: $project"
-            continue
-        }
-        
-        # For TUnit/Microsoft Testing Platform projects, use dotnet run with coverage arguments
-        Write-Status "Running TUnit tests with coverage for $projectName..."
-        
-        dotnet run --project $project `
-            --configuration $Configuration `
-            --verbosity $Verbosity `
-            -- `
-            --coverage `
-            --coverage-output-format cobertura `
-            --coverage-output "${projectName}-coverage.cobertura.xml" `
-            --coverage-settings CodeCoverage.runsettings `
-            --results-directory $CoverageDir
-        
-        if ($LASTEXITCODE -ne 0) {
-            Write-Warning "Tests failed for $projectName with exit code $LASTEXITCODE, but continuing with coverage collection"
-        }
+    # Run all tests with coverage in a single command
+    Write-Status "Running all TUnit tests with coverage..."
+    
+    $coverageSettingsPath = Join-Path (Get-Location) "CodeCoverage.runsettings"
+    
+    dotnet test `
+        --configuration $Configuration `
+        --verbosity $Verbosity `
+        --no-build `
+        -- `
+        --coverage `
+        --coverage-output-format cobertura `
+        --coverage-output "coverage.cobertura.xml" `
+        --coverage-settings $coverageSettingsPath `
+        --results-directory $CoverageDir
+    
+    if ($LASTEXITCODE -ne 0) {
+        Write-Warning "Some tests failed with exit code $LASTEXITCODE, but continuing with coverage collection"
     }
 
-    # Find coverage files (multiple locations for TUnit/MTP)
+    # Find coverage files
     $CoverageFiles = @()
     
-    # Look in the main TestResults directory
+    # Look in the main TestResults directory for the single coverage file
     $CoverageFiles += Get-ChildItem -Path $CoverageDir -Recurse -Filter "*.cobertura.xml" -ErrorAction SilentlyContinue
     $CoverageFiles += Get-ChildItem -Path $CoverageDir -Recurse -Filter "*coverage*.xml" -ErrorAction SilentlyContinue
     
-    # Also check for coverage files in project-specific directories (TUnit generates them relative to project)
+    # Also check for coverage files in test project directories (TUnit generates them there)
     $testProjectDirs = @(
         "tests\TourBooking.Tests.Domain",
         "tests\TourBooking.WebTests", 
