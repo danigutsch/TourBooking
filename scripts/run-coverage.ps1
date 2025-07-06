@@ -7,9 +7,6 @@ param(
     [Parameter(HelpMessage = "Test configuration (Debug or Release)")]
     [string]$Configuration = "Release",
     
-    [Parameter(HelpMessage = "Include End-to-End tests in coverage")]
-    [switch]$IncludeE2E = $false,
-    
     [Parameter(HelpMessage = "Open HTML report after generation")]
     [switch]$OpenReport = $false,
     
@@ -47,7 +44,6 @@ Set-Location (Split-Path -Parent $ScriptDir)  # Go up one level to repo root
 
 Write-Status "Starting code coverage collection..."
 Write-Status "Configuration: $Configuration"
-Write-Status "Include E2E tests: $IncludeE2E"
 
 # Define directories
 $CoverageDir = "TestResults"
@@ -71,16 +67,9 @@ try {
     # Define test projects
     $TestProjects = @(
         "tests\TourBooking.Tests.Domain\TourBooking.Tests.Domain.csproj",
-        "tests\TourBooking.WebTests\TourBooking.WebTests.csproj"
+        "tests\TourBooking.WebTests\TourBooking.WebTests.csproj",
+        "tests\TourBooking.Tests.EndToEnd\TourBooking.Tests.EndToEnd.csproj"
     )
-
-    if ($IncludeE2E) {
-        $TestProjects += "tests\TourBooking.Tests.EndToEnd\TourBooking.Tests.EndToEnd.csproj"
-        Write-Status "Including End-to-End tests in coverage collection"
-        Write-Warning "E2E tests may include external assemblies that inflate coverage numbers"
-    } else {
-        Write-Status "Excluding End-to-End tests from coverage (use -IncludeE2E to include)"
-    }
 
     # Run tests with coverage
     foreach ($project in $TestProjects) {

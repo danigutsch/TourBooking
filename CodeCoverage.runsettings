@@ -2,6 +2,12 @@
 <Configuration>
   <CodeCoverage>
     
+    <ModulePaths>
+      <Exclude>
+        <ModulePath>.*TourBooking\.AppHost\.dll$</ModulePath>
+      </Exclude>
+    </ModulePaths>
+    
     <Attributes>
       <Exclude>
         <Attribute>^System\.Diagnostics\.DebuggerHiddenAttribute$</Attribute>
