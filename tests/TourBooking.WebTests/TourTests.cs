@@ -12,8 +12,6 @@ public sealed class TourTests
     [ClassDataSource<AspireManager>(Shared = SharedType.PerTestSession)]
     public required AspireManager Aspire { get; init; }
 
-    private HttpClient ApiClient => Aspire.ApiClient;
-
     [Test]
     public async Task Gets_All_Tours()
     {
@@ -21,7 +19,7 @@ public sealed class TourTests
         using var cts = new CancellationTokenSource(TimeSpan.FromSeconds(30));
 
         // Act
-        var response = await ApiClient.GetAsync(ToursWebEndpoints.GetTours, TestContext.Current?.CancellationToken ?? cts.Token);
+        var response = await Aspire.ApiHttpClient.GetAsync(ToursWebEndpoints.GetTours, TestContext.Current?.CancellationToken ?? cts.Token);
 
         // Assert
         await Assert.That(response.StatusCode).IsEqualTo(HttpStatusCode.OK);
@@ -35,7 +33,7 @@ public sealed class TourTests
 
         // Act
         var request = TourDtoFactory.Create();
-        var response = await ApiClient.PostAsJsonAsync(ToursApiEndpoints.CreateTour, request, TestContext.Current?.CancellationToken ?? cts.Token);
+        var response = await Aspire.ApiHttpClient.PostAsJsonAsync(ToursApiEndpoints.CreateTour, request, TestContext.Current?.CancellationToken ?? cts.Token);
 
         // Assert
         await Assert.That(response.StatusCode).IsEqualTo(HttpStatusCode.OK);

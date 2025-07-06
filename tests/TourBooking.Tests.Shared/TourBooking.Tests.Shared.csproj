@@ -5,7 +5,17 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+	  <Compile Include="..\..\src\Aspire\ResourceNames.cs" Link="ResourceNames.cs" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <PackageReference Include="CommunityToolkit.Diagnostics" />
+	  <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" />
+	</ItemGroup>
+
+	<ItemGroup>
 	  <ProjectReference Include="..\..\src\TourBooking.ApiService.Contracts\TourBooking.ApiService.Contracts.csproj" />
+	  <ProjectReference Include="..\..\src\TourBooking.ApiService\TourBooking.ApiService.csproj" />
 	</ItemGroup>
 
 </Project>
