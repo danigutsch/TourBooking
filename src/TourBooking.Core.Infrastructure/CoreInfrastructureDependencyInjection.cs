@@ -1,5 +1,5 @@
 ﻿using Microsoft.Extensions.Hosting;
-using TourBooking.Aspire.Constants;
+using TourBooking.Constants;
 
 namespace TourBooking.Core.Infrastructure;
 

@@ -1,5 +1,5 @@
 using TourBooking.AppHost;
-using TourBooking.Aspire.Constants;
+using TourBooking.Constants;
 
 var builder = DistributedApplication.CreateBuilder(args);
 

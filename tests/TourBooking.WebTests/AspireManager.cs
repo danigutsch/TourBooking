@@ -1,7 +1,7 @@
 ﻿using Aspire.Hosting;
 using JetBrains.Annotations;
 using TourBooking.ApiService.Contracts;
-using TourBooking.Aspire.Constants;
+using TourBooking.Constants;
 using TourBooking.Tests.Shared;
 using TUnit.Core.Interfaces;
 

@@ -10,7 +10,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<Compile Include="..\..\src\Aspire\ResourceNames.cs" Link="ResourceNames.cs" />
+		<Compile Include="..\..\src\ResourceNames.cs" Link="ResourceNames.cs" />
 		<Compile Include="..\TestCategories.cs" Link="TestCategories.cs" />
 	</ItemGroup>
 
@@ -22,7 +22,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\..\src\Aspire\TourBooking.AppHost\TourBooking.AppHost.csproj" />
+		<ProjectReference Include="..\..\src\TourBooking.AppHost\TourBooking.AppHost.csproj" />
 		<ProjectReference Include="..\TourBooking.Tests.Shared\TourBooking.Tests.Shared.csproj" />
 	</ItemGroup>
 

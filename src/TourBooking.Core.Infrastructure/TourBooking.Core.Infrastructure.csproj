@@ -5,7 +5,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Compile Include="..\Aspire\ResourceNames.cs">
+	  <Compile Include="..\ResourceNames.cs">
 	    <Link>ResourceNames.cs</Link>
 	  </Compile>
 	</ItemGroup>

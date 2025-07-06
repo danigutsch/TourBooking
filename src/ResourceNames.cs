@@ -1,4 +1,4 @@
-﻿namespace TourBooking.Aspire.Constants;
+﻿namespace TourBooking.Constants;
 
 /// <summary>
 /// Provides a collection of predefined resource identifiers for various system components.
