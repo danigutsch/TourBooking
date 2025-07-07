@@ -1,4 +1,4 @@
-﻿using TourBooking.ApiService.Contracts;
+﻿using TourBooking.ApiService.Contracts.Models;
 
 namespace TourBooking.Tests.Shared;
 

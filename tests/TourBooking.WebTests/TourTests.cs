@@ -35,6 +35,6 @@ public sealed class TourTests
         var response = await Aspire.ApiHttpClient.PostAsJsonAsync(ToursApiEndpoints.CreateTour, request, TestContext.Current?.CancellationToken ?? cts.Token);
 
         // Assert
-        await Assert.That(response.StatusCode).IsEqualTo(HttpStatusCode.OK);
+        await Assert.That(response.StatusCode).IsEqualTo(HttpStatusCode.Created);
     }
 }

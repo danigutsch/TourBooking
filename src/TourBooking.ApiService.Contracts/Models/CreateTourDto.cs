@@ -1,12 +1,12 @@
 ﻿using JetBrains.Annotations;
 
-namespace TourBooking.ApiService.Contracts;
+namespace TourBooking.ApiService.Contracts.Models;
 
 /// <summary>
-/// Represents the data transfer object for retrieving information about a tour.
+/// Represents the data required to create a new tour.
 /// </summary>
 [PublicAPI]
-public sealed record GetTourDto(
+public sealed record CreateTourDto(
     string Name,
     string Description,
     decimal Price,
