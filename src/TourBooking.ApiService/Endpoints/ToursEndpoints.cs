@@ -1,4 +1,5 @@
 using TourBooking.ApiService.Contracts;
+using TourBooking.ApiService.Contracts.Models;
 using TourBooking.Tours.Application;
 using TourBooking.Tours.Domain;
 
@@ -42,7 +43,7 @@ internal static class ToursEndpoints
             .WithName("GetAllTours")
             .WithSummary("Get all tours")
             .WithDescription("Retrieves all available bike tours")
-            .Produces<IEnumerable<Tour>>(StatusCodes.Status200OK)
+            .Produces<IEnumerable<Tour>>()
             .WithTags("Tours");
 
         return group;

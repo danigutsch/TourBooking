@@ -1,5 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 using JetBrains.Annotations;
+using TourBooking.ApiService.Contracts.Models;
 
 namespace TourBooking.ApiService.Contracts;
 

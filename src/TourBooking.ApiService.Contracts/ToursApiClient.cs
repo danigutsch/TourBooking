@@ -1,6 +1,7 @@
 using System.Net.Http.Json;
 using System.Text.Json;
 using JetBrains.Annotations;
+using TourBooking.ApiService.Contracts.Models;
 
 namespace TourBooking.ApiService.Contracts;
 
