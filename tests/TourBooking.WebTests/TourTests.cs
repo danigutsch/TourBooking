@@ -30,7 +30,7 @@ public sealed class TourTests
 
         // Act
         var request = TourDtoFactory.Create();
-        var createdTour = await Aspire.ApiClient.CreateTour(request, TestContext.Current?.CancellationToken ?? cts.Token);
+        var (createdTour, url) = await Aspire.ApiClient.CreateTour(request, TestContext.Current?.CancellationToken ?? cts.Token);
 
         // Assert
         await Assert.That(createdTour).IsNotNull();
@@ -39,5 +39,7 @@ public sealed class TourTests
         await Assert.That(createdTour.Price).IsEqualTo(request.Price);
         await Assert.That(createdTour.StartDate).IsEqualTo(request.StartDate);
         await Assert.That(createdTour.EndDate).IsEqualTo(request.EndDate);
+
+        await Assert.That(url).IsNotDefault();
     }
 }

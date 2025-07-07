@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Http.HttpResults;
 using TourBooking.ApiService.Contracts;
 using TourBooking.ApiService.Contracts.Models;
 using TourBooking.Tours.Application;
@@ -34,7 +35,6 @@ internal static class ToursEndpoints
             .WithName("CreateTour")
             .WithSummary("Create a new tour")
             .WithDescription("Creates a new bike tour with the specified details. The Location header will contain the URI of the created tour.")
-            .Produces<GetTourDto>(StatusCodes.Status201Created)
             .ProducesValidationProblem()
             .WithTags("Tours");
 
@@ -42,7 +42,6 @@ internal static class ToursEndpoints
             .WithName("GetAllTours")
             .WithSummary("Get all tours")
             .WithDescription("Retrieves all available bike tours")
-            .Produces<IEnumerable<GetTourDto>>()
             .WithTags("Tours");
 
         return group;
@@ -56,7 +55,7 @@ internal static class ToursEndpoints
     /// <param name="uow">The unit of work.</param>
     /// <param name="ct">The cancellation token.</param>
     /// <returns>The created tour with a 201 Created status. The Location header contains the URI of the created resource.</returns>
-    private static async Task<IResult> CreateTour(
+    private static async Task<Created<GetTourDto>> CreateTour(
         CreateTourDto dto,
         IToursStore store,
         IUnitOfWork uow,
@@ -77,7 +76,7 @@ internal static class ToursEndpoints
     /// <param name="store">The tours store.</param>
     /// <param name="ct">The cancellation token.</param>
     /// <returns>All available tours.</returns>
-    private static async Task<IResult> GetAllTours(
+    private static async Task<Ok<IEnumerable<GetTourDto>>> GetAllTours(
         IToursStore store,
         CancellationToken ct)
     {
