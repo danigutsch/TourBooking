@@ -19,11 +19,16 @@ public sealed class ToursApiClient(HttpClient httpClient)
     /// <summary>
     /// Creates a new tour.
     /// </summary>
-    public async Task CreateTour(CreateTourDto request, CancellationToken cancellationToken)
+    public async Task<GetTourDto> CreateTour(CreateTourDto request, CancellationToken cancellationToken)
     {
-        var response = await httpClient.PostAsJsonAsync(ToursApiEndpoints.CreateTour, request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.PostAsJsonAsync(ToursApiEndpoints.CreateTour, request, ToursApiJsonContext.Default.CreateTourDto, cancellationToken).ConfigureAwait(false);
 
         response.EnsureSuccessStatusCode();
+
+        var createdTour = await response.Content.ReadFromJsonAsync(ToursApiJsonContext.Default.GetTourDto, cancellationToken).ConfigureAwait(false)
+                          ?? throw new JsonException("Failed to deserialize created tour data.");
+
+        return createdTour;
     }
 
     /// <summary>
@@ -35,7 +40,7 @@ public sealed class ToursApiClient(HttpClient httpClient)
 
         response.EnsureSuccessStatusCode();
 
-        var tours = await response.Content.ReadFromJsonAsync<GetTourDto[]>(cancellationToken).ConfigureAwait(false)
+        var tours = await response.Content.ReadFromJsonAsync(ToursApiJsonContext.Default.GetTourDtoArray, cancellationToken).ConfigureAwait(false)
             ?? throw new JsonException("Failed to deserialize tours data.");
 
         return tours;

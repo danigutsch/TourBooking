@@ -83,13 +83,9 @@ public static class AppHostExtensions
     {
         Guard.IsNotNull(builder);
 
-        var redis = builder.AddRedis(ResourceNames.Redis);
-
-        if (Environment.GetEnvironmentVariable(EnvironmentVariables.AspireIncludeDevTools) is "true")
-        {
-            redis.WithRedisInsight()
-                .WithRedisCommander();
-        }
+        var redis = builder.AddRedis(ResourceNames.Redis)
+            .WithLifetime(ContainerLifetime.Persistent)
+            .WithContainerName("redis");
 
         return redis;
     }
@@ -99,12 +95,9 @@ public static class AppHostExtensions
     {
         Guard.IsNotNull(builder);
 
-        var postgres = builder.AddPostgres(ResourceNames.PostgreSql);
-
-        if (Environment.GetEnvironmentVariable(EnvironmentVariables.AspireIncludeDevTools) is "true")
-        {
-            postgres.WithPgWeb();
-        }
+        var postgres = builder.AddPostgres(ResourceNames.PostgreSql)
+            .WithLifetime(ContainerLifetime.Persistent)
+            .WithContainerName("postgres");
 
         return postgres;
     }
