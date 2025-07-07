@@ -20,8 +20,9 @@
 
 ### Before Every Edit
 1. Check README.md in base directory for current project status and roadmap
-2. Identify domain context: Tours/Bookings/Customers/Payments
-3. Verify architectural layer: Domain/Application/Infrastructure/API
+2. Before creating a new file, verify the functionality does not already exist
+3. Always create a plan and get user confirmation before proceeding
+4. For large files (>300 lines), create a detailed plan and get explicit user confirmation before proceeding
 4. Ensure edit respects aggregate boundaries
 5. When committing new or modified .csproj files, verify they don't override settings in Directory.Build.props
 
