@@ -1,14 +1,20 @@
+using TourBooking.ApiService.Contracts;
 using TourBooking.ApiService.Endpoints;
 using TourBooking.ServiceDefaults;
 using TourBooking.Tours.Persistence;
 
-var builder = WebApplication.CreateBuilder(args);
+var builder = WebApplication.CreateSlimBuilder(args);
 
 builder.AddToursPersistenceServices();
 
 builder.AddServiceDefaults();
 
 builder.Services.AddProblemDetails();
+
+builder.Services.ConfigureHttpJsonOptions(options =>
+{
+    options.SerializerOptions.TypeInfoResolverChain.Insert(0, ToursContext.Default);
+});
 
 builder.Services.AddOpenApi();
 

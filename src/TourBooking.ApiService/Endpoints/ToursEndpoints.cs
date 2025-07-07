@@ -18,8 +18,7 @@ internal static class ToursEndpoints
     public static RouteGroupBuilder MapToursApi(this WebApplication app)
     {
         var toursGroup = app.MapGroup(ToursApiEndpoints.ToursBasePath)
-            .WithTags("Tours")
-            .WithOpenApi();
+            .WithTags("Tours");
 
         return toursGroup.MapToursEndpoints();
     }
@@ -68,7 +67,8 @@ internal static class ToursEndpoints
         store.Add(tour);
         await uow.SaveChanges(ct);
 
-        return TypedResults.Created($"/tours/{tour.Id}", tour);
+        var responseDto = new GetTourDto(tour.Name, tour.Description, tour.Price, tour.StartDate, tour.EndDate);
+        return TypedResults.Created($"/tours/{tour.Id}", responseDto);
     }
 
     /// <summary>
@@ -82,6 +82,7 @@ internal static class ToursEndpoints
         CancellationToken ct)
     {
         var tours = await store.GetAll(ct);
-        return TypedResults.Ok(tours);
+        var tourDtos = tours.Select(tour => new GetTourDto(tour.Name, tour.Description, tour.Price, tour.StartDate, tour.EndDate));
+        return TypedResults.Ok(tourDtos);
     }
 }

@@ -10,5 +10,6 @@ namespace TourBooking.ApiService.Contracts;
 /// </summary>
 [JsonSerializable(typeof(GetTourDto))]
 [JsonSerializable(typeof(CreateTourDto))]
+[JsonSerializable(typeof(IEnumerable<GetTourDto>))]
 [PublicAPI]
 public partial class ToursContext : JsonSerializerContext;
