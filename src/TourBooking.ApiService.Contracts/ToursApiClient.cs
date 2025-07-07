@@ -27,7 +27,7 @@ public sealed class ToursApiClient(HttpClient httpClient)
         response.EnsureSuccessStatusCode();
 
         var locationUri = response.Headers.Location
-            ?? throw new InvalidOperationException("Location header is missing from the create tour response.");
+                          ?? throw new InvalidOperationException("Location header is missing from the create tour response.");
 
         var createdTour = await response.Content.ReadFromJsonAsync(ToursApiJsonContext.Default.GetTourDto, cancellationToken).ConfigureAwait(false)
                           ?? throw new JsonException("Failed to deserialize created tour data.");
