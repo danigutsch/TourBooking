@@ -1,7 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <NoWarn>$(NoWarn);CA2007</NoWarn>
+	  <IsAotCompatible>true</IsAotCompatible>
+	  <EnableRequestDelegateGenerator>true</EnableRequestDelegateGenerator>
+	  <NoWarn>$(NoWarn);CA2007</NoWarn>
   </PropertyGroup>
 
   <ItemGroup>
