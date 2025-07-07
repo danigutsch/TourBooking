@@ -19,16 +19,20 @@ public sealed class ToursApiClient(HttpClient httpClient)
     /// <summary>
     /// Creates a new tour.
     /// </summary>
-    public async Task<GetTourDto> CreateTour(CreateTourDto request, CancellationToken cancellationToken)
+    /// <returns>A tuple containing the created tour data and the location URI of the created resource.</returns>
+    public async Task<(GetTourDto CreatedTour, Uri LocationUri)> CreateTour(CreateTourDto request, CancellationToken cancellationToken)
     {
         var response = await httpClient.PostAsJsonAsync(ToursApiEndpoints.CreateTour, request, ToursApiJsonContext.Default.CreateTourDto, cancellationToken).ConfigureAwait(false);
 
         response.EnsureSuccessStatusCode();
 
+        var locationUri = response.Headers.Location
+            ?? throw new InvalidOperationException("Location header is missing from the create tour response.");
+
         var createdTour = await response.Content.ReadFromJsonAsync(ToursApiJsonContext.Default.GetTourDto, cancellationToken).ConfigureAwait(false)
                           ?? throw new JsonException("Failed to deserialize created tour data.");
 
-        return createdTour;
+        return (createdTour, locationUri);
     }
 
     /// <summary>
@@ -41,7 +45,7 @@ public sealed class ToursApiClient(HttpClient httpClient)
         response.EnsureSuccessStatusCode();
 
         var tours = await response.Content.ReadFromJsonAsync(ToursApiJsonContext.Default.GetTourDtoArray, cancellationToken).ConfigureAwait(false)
-            ?? throw new JsonException("Failed to deserialize tours data.");
+                    ?? throw new JsonException("Failed to deserialize tours data.");
 
         return tours;
     }

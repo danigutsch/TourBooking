@@ -33,8 +33,8 @@ internal static class ToursEndpoints
         group.MapPost("/", CreateTour)
             .WithName("CreateTour")
             .WithSummary("Create a new tour")
-            .WithDescription("Creates a new bike tour with the specified details")
-            .Produces<Tour>(StatusCodes.Status201Created)
+            .WithDescription("Creates a new bike tour with the specified details. The Location header will contain the URI of the created tour.")
+            .Produces<GetTourDto>(StatusCodes.Status201Created)
             .ProducesValidationProblem()
             .WithTags("Tours");
 
@@ -42,7 +42,7 @@ internal static class ToursEndpoints
             .WithName("GetAllTours")
             .WithSummary("Get all tours")
             .WithDescription("Retrieves all available bike tours")
-            .Produces<IEnumerable<Tour>>()
+            .Produces<IEnumerable<GetTourDto>>()
             .WithTags("Tours");
 
         return group;
@@ -55,7 +55,7 @@ internal static class ToursEndpoints
     /// <param name="store">The tours store.</param>
     /// <param name="uow">The unit of work.</param>
     /// <param name="ct">The cancellation token.</param>
-    /// <returns>The created tour.</returns>
+    /// <returns>The created tour with a 201 Created status. The Location header contains the URI of the created resource.</returns>
     private static async Task<IResult> CreateTour(
         CreateTourDto dto,
         IToursStore store,
