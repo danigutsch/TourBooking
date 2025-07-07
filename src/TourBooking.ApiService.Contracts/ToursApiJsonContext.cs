@@ -10,6 +10,11 @@ namespace TourBooking.ApiService.Contracts;
 /// </summary>
 [JsonSerializable(typeof(GetTourDto))]
 [JsonSerializable(typeof(CreateTourDto))]
+[JsonSerializable(typeof(GetTourDto[]))]
 [JsonSerializable(typeof(IEnumerable<GetTourDto>))]
+[JsonSourceGenerationOptions(
+    PropertyNamingPolicy = JsonKnownNamingPolicy.CamelCase,
+    WriteIndented = false,
+    GenerationMode = JsonSourceGenerationMode.Default)]
 [PublicAPI]
-public partial class ToursContext : JsonSerializerContext;
+public partial class ToursApiJsonContext : JsonSerializerContext;

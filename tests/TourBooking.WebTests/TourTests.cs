@@ -1,5 +1,3 @@
-using System.Net.Http.Json;
-using TourBooking.ApiService.Contracts;
 using TourBooking.Tests;
 using TourBooking.Tests.Shared;
 
@@ -18,10 +16,10 @@ public sealed class TourTests
         using var cts = new CancellationTokenSource(TimeSpan.FromSeconds(30));
 
         // Act
-        var response = await Aspire.ApiHttpClient.GetAsync(ToursApiEndpoints.GetTours, TestContext.Current?.CancellationToken ?? cts.Token);
+        var response = await Aspire.ApiClient.GetAllTours(TestContext.Current?.CancellationToken ?? cts.Token);
 
         // Assert
-        await Assert.That(response.StatusCode).IsEqualTo(HttpStatusCode.OK);
+        await Assert.That(response).IsNotNull();
     }
 
     [Test]
@@ -32,9 +30,14 @@ public sealed class TourTests
 
         // Act
         var request = TourDtoFactory.Create();
-        var response = await Aspire.ApiHttpClient.PostAsJsonAsync(ToursApiEndpoints.CreateTour, request, TestContext.Current?.CancellationToken ?? cts.Token);
+        var createdTour = await Aspire.ApiClient.CreateTour(request, TestContext.Current?.CancellationToken ?? cts.Token);
 
         // Assert
-        await Assert.That(response.StatusCode).IsEqualTo(HttpStatusCode.Created);
+        await Assert.That(createdTour).IsNotNull();
+        await Assert.That(createdTour.Name).IsEqualTo(request.Name);
+        await Assert.That(createdTour.Description).IsEqualTo(request.Description);
+        await Assert.That(createdTour.Price).IsEqualTo(request.Price);
+        await Assert.That(createdTour.StartDate).IsEqualTo(request.StartDate);
+        await Assert.That(createdTour.EndDate).IsEqualTo(request.EndDate);
     }
 }

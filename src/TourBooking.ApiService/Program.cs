@@ -5,6 +5,8 @@ using TourBooking.Tours.Persistence;
 
 var builder = WebApplication.CreateSlimBuilder(args);
 
+builder.WebHost.UseKestrelHttpsConfiguration();
+
 builder.AddToursPersistenceServices();
 
 builder.AddServiceDefaults();
@@ -13,7 +15,7 @@ builder.Services.AddProblemDetails();
 
 builder.Services.ConfigureHttpJsonOptions(options =>
 {
-    options.SerializerOptions.TypeInfoResolverChain.Insert(0, ToursContext.Default);
+    options.SerializerOptions.TypeInfoResolverChain.Insert(0, ToursApiJsonContext.Default);
 });
 
 builder.Services.AddOpenApi();
