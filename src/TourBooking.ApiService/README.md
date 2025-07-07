@@ -1,63 +1,141 @@
 # TourBooking.ApiService
 
-A minimal API service for the Bike Tours Booking Platform, built with ASP.NET Core minimal APIs and organized using route groups for optimal performance and maintainability.
+A **minimal API service** demonstrating modern ASP.NET Core patterns and best practices. This service manages tour functionality for tour company employees, providing efficient APIs for tour creation and retrieval.
+
+> **Domain Focus**: Internal tour management for company employees and systems.
+
+---
 
 ## Minimal APIs Overview
 
-This service demonstrates modern minimal API patterns:
+**Minimal APIs** provide a streamlined approach to building HTTP APIs with reduced ceremony and improved performance. Key characteristics:
 
-- **Route Groups**: Organizes endpoints with `MapGroup()` for common prefixes and shared configuration
-- **Inline Handlers**: Lambda expressions for simple, direct endpoint logic
-- **Dependency Injection**: Services injected directly into endpoint handlers
-- **TypedResults**: Strongly-typed responses for better tooling and performance
-- **Named Endpoints**: Named routes for link generation and testing
+- **Reduced Overhead**: Faster startup and lower memory usage
+- **AOT Compatible**: Native compilation support for optimal performance
+- **TypedResults**: Compile-time type safety with automatic OpenAPI metadata
+- **Route Groups**: Organized endpoint mapping with shared configuration
 
-## Tours Domain API
+### When to Use Minimal APIs
 
-### Current Endpoints
+✅ **Best for**: Microservices, cloud-native apps, high-performance scenarios, new projects  
+❌ **Consider Controllers for**: Complex model binding, extensive validation requirements, large existing controller codebases
 
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| `POST` | `/tours` | Create a new bike tour |
-| `GET` | `/tours` | Retrieve all available tours |
+---
 
-### Domain Features
+## API Documentation
 
-- **Tour Management**: Create and retrieve bike tour offerings
-- **Business Rules**: Tour validation (dates, pricing, capacity)
-- **Domain Events**: Automatic event publishing for tour lifecycle changes
-- **Clean Architecture**: Separation between API, application, and domain layers
-- **Unit of Work**: Transactional consistency across operations
+### Interactive Documentation
+- **Development**: Swagger UI available when running in development mode
+- **OpenAPI Schema**: Available at `/openapi/v1.json` in development
 
-### Tour Properties
+### XML Documentation
+Comprehensive API documentation is embedded as XML comments in the source code and automatically included in OpenAPI generation.
 
-- **Name**: Tour title and identifier
-- **Description**: Detailed tour information
-- **Price**: Tour cost and pricing structure
-- **Start/End Dates**: Tour schedule and duration
-- **Capacity Management**: Booking limits and availability (planned)
+---
 
-## Technology Stack
+## Architecture Patterns
 
-- **ASP.NET Core Minimal APIs**: Lightweight HTTP API framework
-- **Domain-Driven Design**: Rich domain models with encapsulated business logic
-- **OpenAPI/Swagger**: Automatic API documentation
-- **Problem Details**: Standardized error responses (RFC 7807)
-- **Entity Framework Core**: Data persistence with PostgreSQL
+This service demonstrates several minimal API best practices:
+
+### Route Groups
+```csharp
+var toursGroup = app.MapGroup("/tours").WithTags("Tours");
+return toursGroup.MapToursEndpoints();
+```
+
+### TypedResults
+```csharp
+private static async Task<Created<GetTourDto>> CreateTour(...)
+{
+    return TypedResults.Created($"/tours/{tour.Id}", responseDto);
+}
+```
+
+### Benefits
+- **Type Safety**: Compile-time checking and IntelliSense support
+- **Auto Documentation**: OpenAPI metadata generated automatically
+- **Performance**: AOT-compatible with optimized serialization
+- **Testability**: Specific return types for reliable testing
+
+---
+
+## Performance & AOT
+
+Fully **AOT compatible** with optimizations:
+
+```xml
+<PropertyGroup>
+    <IsAotCompatible>true</IsAotCompatible>
+    <EnableRequestDelegateGenerator>true</EnableRequestDelegateGenerator>
+</PropertyGroup>
+```
+
+**Key Optimizations:**
+- `WebApplication.CreateSlimBuilder()` for minimal dependencies
+- Custom `JsonSerializerContext` for efficient serialization
+- Static endpoint handlers for compile-time optimization
+
+---
+
+## Testing
+
+Comprehensive testing coverage:
+
+- **Integration Tests**: `TourBooking.WebTests` - Full HTTP pipeline with containerized dependencies
+- **End-to-End Tests**: `TourBooking.Tests.EndToEnd` - Complete workflows with Playwright
+- **Unit Tests**: `TourBooking.Tests.Domain` - Domain logic validation
+
+---
 
 ## Quick Start
 
-```bash
-# Run via AppHost (recommended)
-dotnet run --project src/TourBooking.AppHost
+### Running the Service
 
-# Access API documentation
-https://localhost:7001/swagger
+**Recommended**: Via .NET Aspire
+```bash
+dotnet run --project src/TourBooking.AppHost
 ```
+
+**Standalone**:
+```bash
+dotnet run --project src/TourBooking.ApiService
+```
+
+### Development Workflow
+1. Start services via AppHost
+2. Access interactive documentation (available in development mode)
+3. Use hot reload for rapid development
+4. Run tests to verify functionality
+
+---
 
 ## Related Projects
 
-- **TourBooking.ApiService.Contracts**: DTOs, endpoints, and typed client
-- **TourBooking.Tours.Domain**: Core business logic and entities
+### Core Dependencies
+- **TourBooking.ApiService.Contracts**: API contracts and typed client
+- **TourBooking.Tours.Domain**: Business logic and entities
 - **TourBooking.Tours.Application**: Use cases and interfaces
-- **TourBooking.Tours.Persistence**: Data access and repositories
+- **TourBooking.Tours.Persistence**: Data access layer
+
+### Infrastructure
+- **TourBooking.AppHost**: .NET Aspire orchestration
+- **TourBooking.ServiceDefaults**: Common configuration and telemetry
+
+### Testing
+- **TourBooking.WebTests**: Integration tests for this service
+- **TourBooking.Tests.EndToEnd**: Cross-service workflow validation
+
+---
+
+## Contributing
+
+### Guidelines
+- Follow minimal API patterns (route groups, TypedResults, extension methods)
+- Maintain AOT compatibility
+- Write comprehensive tests (unit, integration, contract)
+- Document endpoints with XML comments for OpenAPI generation
+- Keep business logic in domain layer
+
+---
+
+*Demonstrates modern .NET minimal API patterns with enterprise-grade quality and performance.*
