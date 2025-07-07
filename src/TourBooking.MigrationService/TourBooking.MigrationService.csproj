@@ -1,6 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk.Worker">
 
 	<PropertyGroup>
+		<IsAotCompatible>true</IsAotCompatible>
 		<NoWarn>$(NoWarn);CA2007;CS1591</NoWarn>
 	</PropertyGroup>
 

@@ -30,7 +30,7 @@ internal sealed class Migrator(
 
         logger.MigratorRunning();
 
-        var scriptsPath = configuration.GetValue<string>(ToursMigrationsPath)
+        var scriptsPath = configuration[ToursMigrationsPath]
                           ?? throw new InvalidOperationException("Tours database migration scripts path is not configured.");
 
         scriptsPath = scriptsPath.Replace('/', Path.DirectorySeparatorChar)
