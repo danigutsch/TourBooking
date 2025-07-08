@@ -82,38 +82,35 @@ The **Bike Tours Booking Platform API** provides a comprehensive framework for m
 
 ### 🏗️ **Infrastructure**
 
+> **Cloud Support**: This application is designed for cloud deployment with support for major cloud providers including **Azure** and **AWS**. All infrastructure components can be deployed using cloud-native services and managed offerings.
+
 #### Cloud & Hosting
 - [x] .NET Aspire cloud-native setup
 - [ ] Basic authentication
 - [ ] Full-text search capabilities
-- [ ] Azure App Service / AWS Elastic Beanstalk
+- [ ] Cloud platform deployment
 
 #### Persistence
 **SQL Databases**
 - PostgreSQL
   - [x] Local
-  - [ ] Azure Database for PostgreSQL
-  - [ ] Amazon RDS for PostgreSQL
+  - [ ] Cloud deployment
 - SQLite
   - [ ] Local
-  - [ ] Azure SQL Edge
-  - [ ] AWS Aurora Serverless
+  - [ ] Cloud deployment
+- SQL Server
+  - [ ] Cloud deployment
 - [ ] Database maintenance
 - Data migration tools
   - [x] Local (EF Core Migrations)
-  - [ ] Flyway
-  - [ ] Liquibase
-  - [ ] Azure Data Factory
-  - [ ] AWS DMS
-- SQL Server
-  - [ ] Azure SQL Database
-  - [ ] Amazon RDS for SQL Server
+  - [x] SQL script migrations ([TourBooking.MigrationService](src/TourBooking.MigrationService/README.md))
+  - [ ] Enterprise migration tools (Flyway, Liquibase)
+  - [ ] Cloud migration services
 
 **NoSQL & Document Storage**
 - Document DB
   - [ ] Local (e.g., MongoDB)
-  - [ ] Azure Cosmos DB
-  - [ ] Amazon DynamoDB
+  - [ ] Cloud deployment
 - [ ] Document storage patterns
 
 #### Caching Systems
@@ -123,11 +120,9 @@ The **Bike Tours Booking Platform API** provides a comprehensive framework for m
 - [ ] Response caching
 
 **Distributed Caching**
-- Redis
-  - [ ] Local
-  - [ ] Azure Cache for Redis
-  - [ ] Amazon ElastiCache
+- [ ] Redis
 - [ ] Garnet caching integration
+- [ ] Database caching
 
 **Hybrid & Advanced**
 - [ ] Hybrid caching system
@@ -135,14 +130,14 @@ The **Bike Tours Booking Platform API** provides a comprehensive framework for m
 
 #### APIs & Endpoints
 **REST APIs**
-- [x] Controller-based APIs
-- [ ] Minimal APIs
-- [ ] OpenAPI/Swagger documentation
+- [x] Minimal APIs ([TourBooking.ApiService](src/TourBooking.ApiService/README.md))
+- [ ] Controller-based APIs
+- [ ] OpenAPI documentation
 - [ ] API versioning
 
 **Alternative Protocols**
-- [ ] gRPC services (Azure API Management, AWS App Mesh)
-- [ ] GraphQL endpoint (Azure API Management, AWS AppSync)
+- [ ] gRPC services
+- [ ] GraphQL endpoint
 
 ### ⚡ **Performance & Optimization**
 
@@ -267,15 +262,15 @@ The **Bike Tours Booking Platform API** provides a comprehensive framework for m
 - [ ] Self-built authentication
 - [ ] Keycloak integration
 - [ ] Duende Identity Server
-- [ ] Azure AD / AWS Cognito integration
+- [ ] Cloud identity integration
 
 #### Security Controls
 - [ ] Rate limiting
 - [ ] Request idempotency
-- [ ] Secrets management (Azure Key Vault, AWS Secrets Manager)
+- [ ] Secrets management
 - [ ] API key management
 - [ ] Audit logging
-- [ ] Data encryption (Azure Managed HSM, AWS KMS)
+- [ ] Data encryption (cloud HSM support)
 - [ ] GDPR compliance
 - [ ] Role-based file access
 - [ ] Security headers
