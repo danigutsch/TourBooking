@@ -18,7 +18,6 @@ public static class AppHostExtensions
 {
     public static IResourceBuilder<OpenTelemetryCollectorResource> AddObservability(this IDistributedApplicationBuilder builder)
     {
-
         var prometheus = builder.AddPrometheus();
 
         var grafana = builder.AddGrafana(prometheus);
