@@ -147,9 +147,8 @@ The **Bike Tours Booking Platform API** provides a comprehensive framework for m
 ### ⚡ **Performance & Optimization**
 
 #### Compilation & Runtime
-- [ ] AOT compilation
+- [x] Native AOT compilation ⚠️ **Partial Compatibility** - See [AOT Status](#aot-native-ahead-of-time-compilation-status)
 - [ ] JIT optimization
-- [ ] Native AOT support
 
 #### Response & Output
 - [ ] Response compression
@@ -346,6 +345,14 @@ The **Bike Tours Booking Platform API** provides a comprehensive framework for m
 - [ ] Route optimization
 - [ ] Equipment management
 - [ ] Tour guide scheduling
+
+---
+
+## AOT (Native Ahead-of-Time) Compilation Status
+
+#### Incompatible Projects
+- **TourBooking.Web**: Blazor Server not supported ([docs](https://learn.microsoft.com/en-us/aspnet/core/fundamentals/native-aot))
+- **TourBooking.Tours.Persistence**: Entity Framework Core requires precompiled queries ([docs](https://learn.microsoft.com/en-us/ef/core/performance/nativeaot-and-precompiled-queries))
 
 ---
 
