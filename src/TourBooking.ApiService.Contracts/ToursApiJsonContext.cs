@@ -15,6 +15,9 @@ namespace TourBooking.ApiService.Contracts;
 [JsonSourceGenerationOptions(
     PropertyNamingPolicy = JsonKnownNamingPolicy.CamelCase,
     WriteIndented = false,
-    GenerationMode = JsonSourceGenerationMode.Default)]
+    GenerationMode = JsonSourceGenerationMode.Default,
+    PropertyNameCaseInsensitive = false,
+    DefaultIgnoreCondition = JsonIgnoreCondition.Never,
+    UnmappedMemberHandling = JsonUnmappedMemberHandling.Disallow)]
 [PublicAPI]
 public partial class ToursApiJsonContext : JsonSerializerContext;
