@@ -1,9 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using JetBrains.Annotations;
+using Microsoft.EntityFrameworkCore;
 using TourBooking.Tours.Application;
 using TourBooking.Tours.Domain;
 
 namespace TourBooking.Tours.Persistence;
 
+[MustDisposeResource]
 internal sealed class ToursDbContext(DbContextOptions<ToursDbContext> options) : DbContext(options), IUnitOfWork
 {
     protected override void OnModelCreating(ModelBuilder modelBuilder)
