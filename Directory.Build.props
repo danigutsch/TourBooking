@@ -2,16 +2,19 @@
 
 	<PropertyGroup>
 		<TargetFramework>net10.0</TargetFramework>
-		<TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-		<CodeAnalysisTreatWarningsAsErrors>true</CodeAnalysisTreatWarningsAsErrors>
-		<GenerateDocumentationFile>true</GenerateDocumentationFile>
-		<NoDefaultExcludes>true</NoDefaultExcludes>
+		<LangVersion>preview</LangVersion>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
+		<NoDefaultExcludes>true</NoDefaultExcludes>
+		<InvariantGlobalization>true</InvariantGlobalization>
+		<GenerateDocumentationFile>true</GenerateDocumentationFile>
+
+		<TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+		<CodeAnalysisTreatWarningsAsErrors>true</CodeAnalysisTreatWarningsAsErrors>
 		<EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
 		<AnalysisLevel>latest</AnalysisLevel>
 		<AnalysisMode>All</AnalysisMode>
-		<LangVersion>preview</LangVersion>
+
 	</PropertyGroup>
 
 	<ItemGroup>
