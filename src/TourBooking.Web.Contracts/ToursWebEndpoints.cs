@@ -15,7 +15,7 @@ public static class ToursWebEndpoints
 
     /// <summary>
     /// Represents the relative URI for the OpenAPI specification document.
-    /// /// </summary>
+    /// </summary>
     public static readonly Uri OpenApi = new(OpenApiPath, UriKind.Relative);
 
     /// <summary>
