@@ -34,4 +34,4 @@ jobs:
         run: dotnet build --configuration Release --no-restore
 
       - name: Run unit tests
-        run: dotnet test --configuration Release --no-build --verbosity normal -- --treenode-filter "/*/*/*/*[Category=Unit]"
+        run: dotnet test .\tests\TourBooking.Tests.Domain\TourBooking.Tests.Domain.csproj --configuration Release --no-build --verbosity normal
