@@ -9,6 +9,16 @@ namespace TourBooking.Web.Contracts;
 public static class ToursWebEndpoints
 {
     /// <summary>
+    /// Represents the path to the OpenAPI specification document.
+    /// </summary>
+    public const string OpenApiPath = "/openapi/v1.json";
+
+    /// <summary>
+    /// Represents the relative URI for the OpenAPI specification document.
+    /// /// </summary>
+    public static readonly Uri OpenApi = new(OpenApiPath, UriKind.Relative);
+
+    /// <summary>
     /// The base path for the Tours website.
     /// </summary>
     public const string ToursBasePath = "/tours";
