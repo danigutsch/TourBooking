@@ -6,13 +6,13 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\TourBooking.Tours.Application\TourBooking.Tours.Application.csproj" />
+		<ProjectReference Include="..\TourBooking.Tours.Application\TourBooking.Tours.Application.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Compile Include="..\ResourceNames.cs">
-	    <Link>ResourceNames.cs</Link>
-	  </Compile>
+		<Compile Include="..\ResourceNames.cs">
+			<Link>ResourceNames.cs</Link>
+		</Compile>
 	</ItemGroup>
 
 </Project>
