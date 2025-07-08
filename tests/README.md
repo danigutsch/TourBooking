@@ -18,14 +18,30 @@ The testing suite implements a **layered testing approach** that provides compre
 
 ### Test Categories
 
-Tests are organized using standardized categories defined in `TestCategories.cs`:
+Tests are organized using **dual categorization** defined in `TestCategories.cs`:
 
+**Test Levels** (execution characteristics):
 ```csharp
-public static class TestCategories
+public const string Unit = "Unit";
+public const string Integration = "Integration"; 
+public const string EndToEnd = "EndToEnd";
+```
+
+**Bounded Contexts** (domain alignment):
+```csharp
+public const string Tours = "Tours";
+public const string Bookings = "Bookings";
+public const string Customers = "Customers";
+public const string Payments = "Payments";
+```
+
+**Usage Pattern**:
+```csharp
+[Category(Unit)]
+[Category(Tours)]
+public class TourTests
 {
-    public const string Unit = "Unit";
-    public const string Integration = "Integration"; 
-    public const string EndToEnd = "EndToEnd";
+    // Tests for Tours domain logic
 }
 ```
 
@@ -139,7 +155,7 @@ public sealed class TourTests : PageTest
 
 ## Running Tests
 
-### By Category
+### By Test Level
 
 Use TUnit's category filtering to run specific test types:
 
@@ -152,6 +168,36 @@ dotnet test -- --treenode-filter "/*/*/*/*[Category=Integration]"
 
 # Run end-to-end tests only
 dotnet test -- --treenode-filter "/*/*/*/*[Category=EndToEnd]"
+```
+
+### By Bounded Context
+
+Filter tests by domain context:
+
+```bash
+# Run all Tours context tests
+dotnet test -- --treenode-filter "/*/*/*/*[Category=Tours]"
+
+# Run all Bookings context tests
+dotnet test -- --treenode-filter "/*/*/*/*[Category=Bookings]"
+
+# Run all Customers context tests
+dotnet test -- --treenode-filter "/*/*/*/*[Category=Customers]"
+
+# Run all Payments context tests
+dotnet test -- --treenode-filter "/*/*/*/*[Category=Payments]"
+```
+
+### Combined Filtering
+
+Combine categories for precise test selection:
+
+```bash
+# Run only Tours unit tests
+dotnet test -- --treenode-filter "/*/*/*/*[Category=Unit and Category=Tours]"
+
+# Run Tours integration and end-to-end tests
+dotnet test -- --treenode-filter "/*/*/*/*[(Category=Integration or Category=EndToEnd) and Category=Tours]"
 ```
 
 ### All Tests
@@ -278,8 +324,25 @@ tests/
 
 - **AAA Pattern**: Arrange, Act, Assert structure for clarity
 - **Descriptive Names**: Test method names describe the scenario and expected outcome
-- **Category Attribution**: All tests properly categorized for filtering
+- **Dual Categorization**: Apply both test level and bounded context categories
 - **Resource Management**: Proper disposal and cleanup in test fixtures
+
+**Category Attribution Example**:
+```csharp
+[Category(Unit)]
+[Category(Tours)]
+public class TourValidationTests
+{
+    // Domain-specific unit tests
+}
+
+[Category(Integration)]
+[Category(Tours)]
+public class TourApiTests  
+{
+    // API integration tests for Tours context
+}
+```
 
 ### Performance Considerations
 
@@ -301,9 +364,20 @@ tests/
 ### Adding New Tests
 
 1. **Choose Appropriate Level**: Unit, integration, or end-to-end based on scope
-2. **Follow Naming Conventions**: Descriptive method names with scenario context
-3. **Apply Correct Category**: Use `TestCategories` constants for filtering
-4. **Include Coverage**: Ensure new functionality is tested comprehensively
+2. **Identify Bounded Context**: Tours, Bookings, Customers, or Payments domain
+3. **Follow Naming Conventions**: Descriptive method names with scenario context
+4. **Apply Dual Categories**: Use both test level and bounded context categories
+5. **Include Coverage**: Ensure new functionality is tested comprehensively
+
+**Example Test Attribution**:
+```csharp
+[Category(Unit)]
+[Category(Tours)]
+public async Task Tour_Name_Cannot_Be_Empty()
+{
+    // Test implementation
+}
+```
 
 ### Test Guidelines
 
