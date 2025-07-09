@@ -9,6 +9,10 @@ A **cloud-native bike tours booking and management** system built with the **lat
 
 ---
 
+> ℹ️ For a detailed overview of root-level configuration, version management, and solution-wide settings, see [docs/FILE_OVERVIEW.md](docs/FILE_OVERVIEW.md).
+
+---
+
 ## Table of Contents
 1. [Overview](#overview)  
 2. [Core Features](#core-features)  
