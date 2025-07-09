@@ -34,4 +34,4 @@ jobs:
         run: dotnet build --configuration Release --no-restore
 
       - name: Run unit tests
-        run: .\tests\TourBooking.Tests.Domain\TourBooking.Tests.Domain.exe
+        run: cd tests/TourBooking.Tests.Domain && dotnet run --configuration Release
