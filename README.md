@@ -456,22 +456,18 @@ The project implements a comprehensive three-tier testing approach with integrat
 ```bash
 # Run all tests
 dotnet test --configuration Release
-```
 
 # Run by category
-```bash
 dotnet test -- --treenode-filter "/*/*/*/*[Category=Unit]" --configuration Release
 dotnet test -- --treenode-filter "/*/*/*/*[Category=Integration]" --configuration Release
 dotnet test -- --treenode-filter "/*/*/*/*[Category=EndToEnd]" --configuration Release
-```
 
 # Run with coverage
-```bash
 pwsh ./scripts/run-coverage.ps1 -Configuration Release
 ```
 
 **Test Structure**:
-- **Unit Tests**: Domain logic testing with comprehensive business rule validation
+- **Unit Tests**: Fast, isolated testing with no external dependencies
 - **Integration Tests**: API and service integration testing with containerized dependencies
 - **End-to-End Tests**: Full application workflow testing using Playwright for UI automation
 - **Shared Test Utilities**: Common testing infrastructure and helpers

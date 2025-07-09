@@ -43,7 +43,7 @@ pwsh ./tests/TourBooking.Tests.EndToEnd/bin/*/playwright.ps1 install --with-deps
 
 The testing suite implements a **layered testing approach** that provides comprehensive validation at different levels of the application:
 
-- **Unit Tests**: Fast, isolated domain logic validation
+- **Unit Tests**: Fast, isolated testing with no external dependencies
 - **Integration Tests**: API and service integration with containerized dependencies  
 - **End-to-End Tests**: Complete user workflows with browser automation
 
@@ -82,11 +82,11 @@ public class TourTests
 
 ### Unit Tests (`TourBooking.Tests.Domain`)
 
-**Purpose**: Validates domain logic, business rules, and entity behavior in isolation.
+**Purpose**: Validates application logic, business rules, and entity behavior in isolation.
 
 **Key Features**:
 - **Fast Execution**: No external dependencies or I/O operations
-- **Domain Focus**: Tests business rules, value objects, and aggregate behavior
+- **Isolated Testing**: Tests individual components and their behavior
 - **Comprehensive Coverage**: Validates edge cases and business invariants
 - **Parameterized Testing**: Data-driven tests for multiple input scenarios
 
@@ -391,7 +391,7 @@ public static CreateTourDto CreateValidTourDto()
 [Category(Tours)]
 public class TourValidationTests
 {
-    // Domain-specific unit tests
+    // Application-specific unit tests
 }
 
 [Category(Integration)]
