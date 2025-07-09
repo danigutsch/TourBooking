@@ -1,22 +1,22 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-	<PropertyGroup>
-		<NoWarn>$(NoWarn);CA1716</NoWarn>
-	</PropertyGroup>
+    <PropertyGroup>
+        <IsAspireSharedProject>true</IsAspireSharedProject>
+        <NoWarn>$(NoWarn);CA1716</NoWarn>
+    </PropertyGroup>
 
-	<ItemGroup>
-	  <Compile Include="..\..\src\ResourceNames.cs" Link="ResourceNames.cs" />
-	</ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="Aspire.Hosting.Testing"/>
+        <PackageReference Include="CommunityToolkit.Diagnostics"/>
+        <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing"/>
+        <PackageReference Include="TUnit"/>
+    </ItemGroup>
 
-	<ItemGroup>
-	  <PackageReference Include="CommunityToolkit.Diagnostics" />
-	  <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <ProjectReference Include="..\..\src\TourBooking.ApiService.Contracts\TourBooking.ApiService.Contracts.csproj" />
-	  <ProjectReference Include="..\..\src\TourBooking.ApiService\TourBooking.ApiService.csproj" Aliases="api" />
-	  <ProjectReference Include="..\..\src\TourBooking.Web\TourBooking.Web.csproj" Aliases="web" />
-	</ItemGroup>
+    <ItemGroup>
+        <ProjectReference Include="..\..\src\TourBooking.ApiService.Contracts\TourBooking.ApiService.Contracts.csproj"/>
+        <ProjectReference Include="..\..\src\TourBooking.ApiService\TourBooking.ApiService.csproj" Aliases="api"/>
+        <ProjectReference Include="..\..\src\TourBooking.AppHost\TourBooking.AppHost.csproj"/>
+        <ProjectReference Include="..\..\src\TourBooking.Web\TourBooking.Web.csproj" Aliases="web"/>
+    </ItemGroup>
 
 </Project>

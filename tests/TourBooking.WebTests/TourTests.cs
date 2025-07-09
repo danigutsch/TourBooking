@@ -2,28 +2,20 @@ using Microsoft.EntityFrameworkCore;
 using TourBooking.Tests;
 using TourBooking.Tests.Shared;
 using TourBooking.Tours.Domain;
-using TourBooking.Tours.Persistence;
 
 namespace TourBooking.WebTests;
 
 [Category(TestCategories.Integration)]
-public sealed class TourTests : IDisposable
+public sealed class TourTests : TourTestBase
 {
-    [ClassDataSource<AspireManager>(Shared = SharedType.PerTestSession)]
-    public required AspireManager Aspire { get; init; }
-
-    private readonly CancellationTokenSource _cts = new(TimeSpan.FromSeconds(5));
-    
     [Test]
     public async Task Gets_Tour_By_Id()
     {
         // Arrange
-        using var scope = Aspire.ApiFixture.Services.CreateScope();
-        var toursContext = scope.ServiceProvider.GetRequiredService<ToursDbContext>();
-        var tour = await toursContext.Set<Tour>().FirstAsync(_cts.Token);
+        var tour = await Set<Tour>().FirstAsync(Token);
 
         // Act
-        var response = await Aspire.ApiClient.GetTourById(tour.Id, TestContext.Current?.CancellationToken ?? _cts.Token);
+        var response = await Aspire.ApiClient.GetTourById(tour.Id, Token);
 
         // Assert
         await Assert.That(response).IsNotNull();
@@ -40,7 +32,7 @@ public sealed class TourTests : IDisposable
         // Arrange
 
         // Act
-        var response = await Aspire.ApiClient.GetAllTours(TestContext.Current?.CancellationToken ?? _cts.Token);
+        var response = await ApiClient.GetAllTours(Token);
 
         // Assert
         await Assert.That(response).IsNotNull();
@@ -53,7 +45,7 @@ public sealed class TourTests : IDisposable
 
         // Act
         var request = TourDtoFactory.Create();
-        var (createdTour, url) = await Aspire.ApiClient.CreateTour(request, TestContext.Current?.CancellationToken ?? _cts.Token);
+        var (createdTour, url) = await ApiClient.CreateTour(request, Token);
 
         // Assert
         await Assert.That(createdTour).IsNotNull();
@@ -64,10 +56,5 @@ public sealed class TourTests : IDisposable
         await Assert.That(createdTour.EndDate).IsEqualTo(request.EndDate);
 
         await Assert.That(url).IsNotDefault();
-    }
-
-    public void Dispose()
-    {
-        _cts.Dispose();
     }
 }

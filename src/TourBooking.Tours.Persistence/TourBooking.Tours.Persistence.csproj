@@ -16,7 +16,7 @@
 	</ItemGroup>
 	
 	<ItemGroup>
-		<InternalsVisibleTo Include="TourBooking.WebTests" />
+		<InternalsVisibleTo Include="TourBooking.Tests.Shared"/>
 	</ItemGroup>
 
 </Project>

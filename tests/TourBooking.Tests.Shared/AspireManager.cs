@@ -1,11 +1,14 @@
 ﻿using Aspire.Hosting;
+using Aspire.Hosting.ApplicationModel;
+using Aspire.Hosting.Testing;
 using JetBrains.Annotations;
+using Microsoft.Testing.Platform.Services;
+using Projects;
 using TourBooking.ApiService.Contracts;
 using TourBooking.Constants;
-using TourBooking.Tests.Shared;
 using TUnit.Core.Interfaces;
 
-namespace TourBooking.WebTests;
+namespace TourBooking.Tests.Shared;
 
 [UsedImplicitly]
 [MustDisposeResource]
@@ -22,12 +25,19 @@ public sealed class AspireManager : IAsyncInitializer, IAsyncDisposable
     public string RedisConnectionString { get; private set; } = null!;
     public string ToursDbConnectionString { get; private set; } = null!;
 
+    public async ValueTask DisposeAsync()
+    {
+        await App.DisposeAsync();
+        await ApiFixture.DisposeAsync()
+            .ConfigureAwait(false);
+    }
+
     public async Task InitializeAsync()
     {
         using var cts = new CancellationTokenSource(DefaultTimeout);
         var cancellationToken = cts.Token;
 
-        var appHost = await DistributedApplicationTestingBuilder.CreateAsync<Projects.TourBooking_AppHost>(cancellationToken);
+        var appHost = await DistributedApplicationTestingBuilder.CreateAsync<TourBooking_AppHost>(cancellationToken);
 
         App = await appHost.BuildAsync(cancellationToken);
         var resourceNotificationService = App.Services.GetRequiredService<ResourceNotificationService>();
@@ -37,7 +47,7 @@ public sealed class AspireManager : IAsyncInitializer, IAsyncDisposable
             ResourceNames.WebFrontend,
             KnownResourceStates.Running,
             cancellationToken
-            ).WaitAsync(cancellationToken);
+        ).WaitAsync(cancellationToken);
 
         RedisConnectionString = await App.GetConnectionStringAsync(ResourceNames.Redis, cancellationToken)
                                 ?? throw new InvalidOperationException("No connection string set for Redis");
@@ -45,15 +55,9 @@ public sealed class AspireManager : IAsyncInitializer, IAsyncDisposable
                                   ?? throw new InvalidOperationException("No connection string set for Tours Database");
 
         Environment.SetEnvironmentVariable($"ConnectionStrings__{ResourceNames.Redis}", RedisConnectionString);
-        Environment.SetEnvironmentVariable($"ConnectionStrings__{ResourceNames.ToursDatabase}", ToursDbConnectionString);
+        Environment.SetEnvironmentVariable($"ConnectionStrings__{ResourceNames.ToursDatabase}",
+            ToursDbConnectionString);
 
         ApiFixture = new ApiFixture();
-    }
-
-    public async ValueTask DisposeAsync()
-    {
-        await App.DisposeAsync();
-        await ApiFixture.DisposeAsync()
-            .ConfigureAwait(false);
     }
 }

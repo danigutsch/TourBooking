@@ -1017,10 +1017,13 @@
       "tourbooking.tests.shared": {
         "type": "Project",
         "dependencies": {
+          "Aspire.Hosting.Testing": "[9.3.1, )",
           "CommunityToolkit.Diagnostics": "[8.4.0, )",
           "Microsoft.AspNetCore.Mvc.Testing": "[10.0.0-preview.5.25277.114, )",
+          "TUnit": "[0.25.21, )",
           "TourBooking.ApiService": "[1.0.0, )",
           "TourBooking.ApiService.Contracts": "[1.0.0, )",
+          "TourBooking.AppHost": "[1.0.0, )",
           "TourBooking.Web": "[1.0.0, )"
         }
       },
