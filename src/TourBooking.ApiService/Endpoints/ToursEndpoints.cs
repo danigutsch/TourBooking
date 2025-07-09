@@ -34,15 +34,19 @@ internal static class ToursEndpoints
         group.MapPost("/", CreateTour)
             .WithName("CreateTour")
             .WithSummary("Create a new tour")
-            .WithDescription("Creates a new bike tour with the specified details. The Location header will contain the URI of the created tour.")
-            .ProducesValidationProblem()
-            .WithTags("Tours");
+            .WithDescription("Creates a new bike tour with the specified details. The Location header will contain the URI of the created tour.");
 
         group.MapGet("/", GetAllTours)
             .WithName("GetAllTours")
             .WithSummary("Get all tours")
-            .WithDescription("Retrieves all available bike tours")
-            .WithTags("Tours");
+            .WithDescription("Retrieves all available bike tours");
+
+        group.MapGet("/{id:guid}", GetTourById)
+            .WithName("GetTourById")
+            .WithSummary("Get a tour by ID")
+            .WithDescription("Retrieves a bike tour by its unique identifier")
+            .Produces<GetTourDto>()
+            .Produces(404);
 
         return group;
     }
@@ -55,7 +59,7 @@ internal static class ToursEndpoints
     /// <param name="uow">The unit of work.</param>
     /// <param name="ct">The cancellation token.</param>
     /// <returns>The created tour with a 201 Created status. The Location header contains the URI of the created resource.</returns>
-    private static async Task<Created<GetTourDto>> CreateTour(
+    private static async Task<Results<Created<GetTourDto>, ValidationProblem>> CreateTour(
         CreateTourDto dto,
         IToursStore store,
         IUnitOfWork uow,
@@ -83,5 +87,22 @@ internal static class ToursEndpoints
         var tours = await store.GetAll(ct);
         var tourDtos = tours.Select(tour => new GetTourDto(tour.Name, tour.Description, tour.Price, tour.StartDate, tour.EndDate));
         return TypedResults.Ok(tourDtos);
+    }
+
+    /// <summary>
+    /// Gets a tour by its unique identifier.
+    /// </summary>
+    /// <param name="id">The tour ID.</param>
+    /// <param name="store">The tours store.</param>
+    /// <param name="ct">The cancellation token.</param>
+    /// <returns>The tour if found, otherwise 404 Not Found.</returns>
+    private static async Task<Results<Ok<GetTourDto>, NotFound, ValidationProblem>> GetTourById(
+        Guid id,
+        IToursStore store,
+        CancellationToken ct)
+    {
+        var tour = await store.GetById(id, ct);
+        var responseDto = new GetTourDto(tour.Name, tour.Description, tour.Price, tour.StartDate, tour.EndDate);
+        return TypedResults.Ok(responseDto);
     }
 }

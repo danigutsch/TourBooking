@@ -32,9 +32,19 @@ public static class ToursApiEndpoints
     /// The path to create a new tour.
     /// </summary>
     public const string CreateTourPath = "/tours";
-
+    
     /// <summary>
     /// Represents the relative URI for creating a tour.
     /// </summary>
     public static readonly Uri CreateTour = new(CreateTourPath, UriKind.Relative);
+    
+    /// <summary>
+    /// The path to retrieve a tour by its unique identifier.
+    /// </summary>
+    public const string GetTourByIdPath = "/tours/{id:guid}";
+    
+    /// <summary>
+    /// Represents the relative URI for retrieving a tour by its unique identifier.
+    /// </summary>
+    public static Uri GetTourByIdUri(Guid tourId) => new($"{ToursBasePath}/{tourId}", UriKind.Relative);
 }

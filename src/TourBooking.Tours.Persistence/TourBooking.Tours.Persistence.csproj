@@ -14,5 +14,9 @@
 			<Link>ResourceNames.cs</Link>
 		</Compile>
 	</ItemGroup>
+	
+	<ItemGroup>
+		<InternalsVisibleTo Include="TourBooking.WebTests" />
+	</ItemGroup>
 
 </Project>

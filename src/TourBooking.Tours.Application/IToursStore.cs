@@ -16,7 +16,14 @@ public interface IToursStore
     /// <summary>
     /// Retrieves all tours.
     /// </summary>
-    /// <param name="ct"></param>
+    /// <param name="ct">A cancellation token that can be used to cancel the operation.</param>
     /// <returns></returns>
     Task<IReadOnlyList<Tour>> GetAll(CancellationToken ct);
+
+    /// <summary>
+    /// Retrieves a tour by its unique identifier.
+    /// </summary>
+    /// <param name="id">The unique identifier of the tour.</param>
+    /// <param name="ct">A cancellation token that can be used to cancel the operation.</param>
+    Task<Tour> GetById(Guid id, CancellationToken ct);
 }
