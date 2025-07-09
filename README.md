@@ -1,5 +1,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Platform: Linux/Windows/macOS](https://img.shields.io/badge/platform-linux--windows--macos-blue)](https://dotnet.microsoft.com/en-us/platform/support/policy/dotnet-core)
+![Line Coverage](CoverageReport/badge_linecoverage.svg)
+![Branch Coverage](CoverageReport/badge_branchcoverage.svg)
 
 # Bike Tours Booking Platform
 
