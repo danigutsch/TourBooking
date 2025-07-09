@@ -393,14 +393,23 @@ The **Bike Tours Booking Platform API** provides a comprehensive framework for m
    > Use the wildcard (*) to match your build configuration and .NET version (e.g., Debug/net9.0 or Release/net9.0). For details, see the [Playwright .NET docs](https://playwright.dev/dotnet/docs/intro).
 
 5. **Run the application**:
+   
+   **Option A: Using Aspire CLI (recommended)**:
    ```bash
-   dotnet run --project src/Aspire/TourBooking.AppHost
+   aspire run
+   ```
+   > Note: With Aspire 9.3+, you can run `aspire run` from any directory within the solution, and it will automatically discover the AppHost project.
+   
+   **Option B: Using .NET CLI**:
+   ```bash
+   dotnet run --project src/TourBooking.AppHost/TourBooking.AppHost.csproj
    ```
 
 6. **Access the application**:
-   - API: `https://localhost:7001`
-   - Swagger UI: `https://localhost:7001/swagger`
-   - Aspire Dashboard: `https://localhost:15888`
+   - **CLI users**: The Aspire Dashboard URL will be displayed in the terminal output. Click the link (if your terminal supports hyperlinks) or copy and paste it into your browser
+   - **Visual Studio/Rider users**: The dashboard will open automatically in your browser
+   - API and Swagger UI endpoints are displayed in the dashboard
+   - All port information is available in the Aspire Dashboard
 
 7. **Run all tests**:
    ```bash
@@ -507,18 +516,10 @@ To create coverage badges for your repository:
    - `badge_branchcoverage.svg` - Branch coverage badge
    - `badge_combined.svg` - Combined coverage badge
 
-3. **Add to README**:
-   ```markdown
-   ![Line Coverage](./CoverageReport/badge_linecoverage.svg)
-   ![Branch Coverage](./CoverageReport/badge_branchcoverage.svg)
-   ```
-
+3. **Add to README**:![Line Coverage](./CoverageReport/badge_linecoverage.svg)
+![Branch Coverage](./CoverageReport/badge_branchcoverage.svg)
 4. **Shields.io Integration**:
-   Use the generated coverage percentage with [Shields.io](https://shields.io/):
-   ```markdown
-   ![Coverage](https://img.shields.io/badge/coverage-XX%25-brightgreen)
-   ```
-   Replace `XX` with your actual coverage percentage from the report.
+   Use the generated coverage percentage with [Shields.io](https://shields.io/):![Coverage](https://img.shields.io/badge/coverage-XX%25-brightgreen)   Replace `XX` with your actual coverage percentage from the report.
 
 #### Planned Advanced Testing
 - **Performance Testing**: Benchmark critical paths (tour search, booking creation, payment processing)
