@@ -1,8 +1,39 @@
 # TourBooking Testing Suite
 
-A **comprehensive three-tier testing strategy** implementing modern .NET testing patterns with full code coverage analysis. This testing suite demonstrates enterprise-grade testing practices for cloud-native applications using the latest testing frameworks and tools.
+A **comprehensive three-tier testing strategy** implementing modern .NET testing patterns with **TUnit** and **Microsoft Testing Platform**. Features full code coverage analysis, containerized integration testing, and browser automation for enterprise-grade cloud-native applications.
 
 > **Testing Philosophy**: Test-driven development with comprehensive coverage across unit, integration, and end-to-end scenarios.
+
+---
+
+## Quick Start
+
+### Running Tests
+
+```bash
+# Run all tests
+dotnet test --configuration Release
+
+# Run by category
+dotnet test -- --treenode-filter "/*/*/*/*[Category=Unit]" --configuration Release
+dotnet test -- --treenode-filter "/*/*/*/*[Category=Integration]" --configuration Release  
+dotnet test -- --treenode-filter "/*/*/*/*[Category=EndToEnd]" --configuration Release
+
+# Run with coverage
+pwsh ./scripts/run-coverage.ps1 -Configuration Release
+```
+
+### Prerequisites for E2E Tests
+
+```bash
+# Build solution first
+dotnet build
+
+# Install Playwright browsers
+pwsh ./tests/TourBooking.Tests.EndToEnd/bin/*/playwright.ps1 install --with-deps
+```
+
+> **Requirements**: Docker/Podman for integration tests, Aspire workload for distributed application testing.
 
 ---
 
@@ -151,6 +182,33 @@ public sealed class TourTests : PageTest
 - **Multiple Formats**: XML (Cobertura) and HTML report generation
 - **CI/CD Integration**: Coverage data for build pipelines
 
+#### Coverage Commands
+
+```bash
+# Run all tests with coverage
+pwsh ./scripts/run-coverage.ps1 -Configuration Release
+
+# Include end-to-end tests in coverage
+pwsh ./scripts/run-coverage.ps1 -Configuration Release -IncludeE2E
+
+# Open coverage report in browser
+pwsh ./scripts/run-coverage.ps1 -Configuration Release -OpenReport
+```
+
+#### Coverage Results
+- **Coverage Reports**: Comprehensive HTML and XML coverage reports generated using ReportGenerator
+- **Report Location**: `CoverageReport/index.html`
+- **Filtered Assemblies**: Only includes `TourBooking.*` assemblies in coverage analysis, excluding migrations and external dependencies
+- **Coverage Formats**: Supports Cobertura XML and HTML reports
+
+#### Creating Coverage Badges
+1. **Generate Coverage Report**: `pwsh ./scripts/run-coverage.ps1 -Configuration Release`
+2. **Extract Coverage Data**: The script generates badges in `CoverageReport/` directory:
+   - `badge_linecoverage.svg` - Line coverage badge
+   - `badge_branchcoverage.svg` - Branch coverage badge
+   - `badge_combined.svg` - Combined coverage badge
+3. **Shields.io Integration**: Use the generated coverage percentage with [Shields.io](https://shields.io/)
+
 ---
 
 ## Running Tests
@@ -162,10 +220,14 @@ Use TUnit's category filtering to run specific test types:
 ```bash
 # Run unit tests only
 dotnet test -- --treenode-filter "/*/*/*/*[Category=Unit]"
+```
 
+```bash
 # Run integration tests only  
 dotnet test -- --treenode-filter "/*/*/*/*[Category=Integration]"
+```
 
+```bash
 # Run end-to-end tests only
 dotnet test -- --treenode-filter "/*/*/*/*[Category=EndToEnd]"
 ```
@@ -177,13 +239,19 @@ Filter tests by domain context:
 ```bash
 # Run all Tours context tests
 dotnet test -- --treenode-filter "/*/*/*/*[Category=Tours]"
+```
 
+```bash
 # Run all Bookings context tests
 dotnet test -- --treenode-filter "/*/*/*/*[Category=Bookings]"
+```
 
+```bash
 # Run all Customers context tests
 dotnet test -- --treenode-filter "/*/*/*/*[Category=Customers]"
+```
 
+```bash
 # Run all Payments context tests
 dotnet test -- --treenode-filter "/*/*/*/*[Category=Payments]"
 ```
@@ -195,7 +263,9 @@ Combine categories for precise test selection:
 ```bash
 # Run only Tours unit tests
 dotnet test -- --treenode-filter "/*/*/*/*[Category=Unit and Category=Tours]"
+```
 
+```bash
 # Run Tours integration and end-to-end tests
 dotnet test -- --treenode-filter "/*/*/*/*[(Category=Integration or Category=EndToEnd) and Category=Tours]"
 ```
@@ -297,18 +367,6 @@ public static CreateTourDto CreateValidTourDto()
 
 ## Configuration
 
-### Project Structure
-
-```
-tests/
-├── Directory.Build.props          # Shared MSBuild properties
-├── TestCategories.cs              # Test category definitions
-├── TourBooking.Tests.Domain/      # Unit tests
-├── TourBooking.WebTests/          # Integration tests  
-├── TourBooking.Tests.EndToEnd/    # E2E browser tests
-└── TourBooking.Tests.Shared/      # Common test utilities
-```
-
 ### Build Configuration
 
 **Microsoft Testing Platform** with optimized settings:
@@ -361,8 +419,6 @@ public class TourApiTests
 
 ## Contributing to Tests
 
-### Adding New Tests
-
 1. **Choose Appropriate Level**: Unit, integration, or end-to-end based on scope
 2. **Identify Bounded Context**: Tours, Bookings, Customers, or Payments domain
 3. **Follow Naming Conventions**: Descriptive method names with scenario context
@@ -388,4 +444,11 @@ public async Task Tour_Name_Cannot_Be_Empty()
 
 ---
 
-*Demonstrates comprehensive testing strategies with modern .NET testing frameworks and enterprise-grade practices.*
+## Planned Advanced Testing
+
+- **Performance Testing**: Benchmark critical paths (tour search, booking creation, payment processing)
+- **Load Testing**: Stress testing for concurrent bookings and high-traffic scenarios
+- **Snapshot Testing**: Ensure API contract consistency and UI component stability over time
+- **Mutation Testing**: Awaiting [Stryker.NET Microsoft Testing Platform support](https://github.com/stryker-mutator/stryker-net/issues/3094)
+- **Gherkin Behavior Tests**: Business-readable test scenarios
+

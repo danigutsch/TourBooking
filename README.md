@@ -411,13 +411,10 @@ The **Bike Tours Booking Platform API** provides a comprehensive framework for m
    - API and Swagger UI endpoints are displayed in the dashboard
    - All port information is available in the Aspire Dashboard
 
-7. **Run all tests**:
+7. **Run tests** (see [tests/README.md](tests/README.md) for detailed commands):
    ```bash
    dotnet test --configuration Release
    ```
-   - To run only unit tests: `dotnet test -- --treenode-filter "/*/*/*/*[Category=Unit]" --configuration Release`
-   - To run integration/API tests: `dotnet test tests/TourBooking.WebTests --configuration Release`
-   - To run end-to-end UI tests: `dotnet test tests/TourBooking.Tests.EndToEnd --configuration Release`
 
 > Aspire-based tests require Docker or a compatible container runtime running.
 > Playwright browsers must be installed before running E2E tests.
@@ -453,78 +450,31 @@ This pattern promotes:
 
 ### Testing Strategy
 
-The project implements a comprehensive three-tier testing approach with integrated code coverage analysis:
+The project implements a comprehensive three-tier testing approach with integrated code coverage analysis. For detailed testing information, commands, and best practices, see **[tests/README.md](tests/README.md)**.
 
-#### Test Projects Structure
+**Quick Test Commands**:
+```bash
+# Run all tests
+dotnet test --configuration Release
+```
+
+# Run by category
+```bash
+dotnet test -- --treenode-filter "/*/*/*/*[Category=Unit]" --configuration Release
+dotnet test -- --treenode-filter "/*/*/*/*[Category=Integration]" --configuration Release
+dotnet test -- --treenode-filter "/*/*/*/*[Category=EndToEnd]" --configuration Release
+```
+
+# Run with coverage
+```bash
+pwsh ./scripts/run-coverage.ps1 -Configuration Release
+```
+
+**Test Structure**:
 - **Unit Tests**: Domain logic testing with comprehensive business rule validation
 - **Integration Tests**: API and service integration testing with containerized dependencies
 - **End-to-End Tests**: Full application workflow testing using Playwright for UI automation
 - **Shared Test Utilities**: Common testing infrastructure and helpers
-
-#### Code Coverage Configuration
-- **Comprehensive Analysis**: Automated coverage analysis across all test types
-- **External Assembly Filtering**: Automatically excludes external dependencies and generated code
-- **Focused Coverage**: Analysis limited to `TourBooking.*` assemblies, excluding migrations and infrastructure noise
-- **Multiple Formats**: Generates both XML (Cobertura) and HTML reports for CI/CD and local development
-
-#### Running Tests with Coverage
-```bash
-# Run all tests with code coverage
-pwsh ./scripts/run-coverage.ps1 -Configuration Release
-
-# Include end-to-end tests in coverage
-pwsh ./scripts/run-coverage.ps1 -Configuration Release -IncludeE2E
-
-# Open coverage report in browser
-pwsh ./scripts/run-coverage.ps1 -Configuration Release -OpenReport
-```
-
-#### Running Tests by Category
-
-The project uses TUnit for testing, which requires specific syntax for filtering:
-
-```bash
-# Run unit tests only
-dotnet test -- --treenode-filter "/*/*/*/*[Category=Unit]"
-
-# Run integration tests only  
-dotnet test -- --treenode-filter "/*/*/*/*[Category=Integration]"
-
-# Run end-to-end tests only
-dotnet test -- --treenode-filter "/*/*/*/*[Category=EndToEnd]"
-```
-
-> **Note**: TUnit uses `-- --treenode-filter` syntax for category filtering with `dotnet test`, unlike traditional xUnit/NUnit filtering.
-
-#### Coverage Results
-- **Coverage Reports**: Comprehensive HTML and XML coverage reports generated using ReportGenerator
-- **Report Location**: `CoverageReport/index.html`
-- **Filtered Assemblies**: Only includes `TourBooking.*` assemblies in coverage analysis, excluding migrations and external dependencies
-- **Coverage Formats**: Supports Cobertura XML and HTML reports
-
-#### Creating Coverage Badges
-To create coverage badges for your repository:
-
-1. **Generate Coverage Report**:
-   ```bash
-   pwsh ./scripts/run-coverage.ps1 -Configuration Release
-   ```
-
-2. **Extract Coverage Data**:
-   The script generates badges in `CoverageReport/` directory:
-   - `badge_linecoverage.svg` - Line coverage badge
-   - `badge_branchcoverage.svg` - Branch coverage badge
-   - `badge_combined.svg` - Combined coverage badge
-
-3. **Add to README**:![Line Coverage](./CoverageReport/badge_linecoverage.svg)
-![Branch Coverage](./CoverageReport/badge_branchcoverage.svg)
-4. **Shields.io Integration**:
-   Use the generated coverage percentage with [Shields.io](https://shields.io/):![Coverage](https://img.shields.io/badge/coverage-XX%25-brightgreen)   Replace `XX` with your actual coverage percentage from the report.
-
-#### Planned Advanced Testing
-- **Performance Testing**: Benchmark critical paths (tour search, booking creation, payment processing)
-- **Load Testing**: Stress testing for concurrent bookings and high-traffic scenarios
-- **Snapshot Testing**: Ensure API contract consistency and UI component stability over time
 
 ---
 
