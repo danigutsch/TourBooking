@@ -1,29 +1,29 @@
 using Microsoft.EntityFrameworkCore;
 using TourBooking.Tests;
 using TourBooking.Tests.Shared;
-using TourBooking.Tours.Application;
 using TourBooking.Tours.Domain;
 using TourBooking.Tours.Persistence;
 
 namespace TourBooking.WebTests;
 
 [Category(TestCategories.Integration)]
-public sealed class TourTests
+public sealed class TourTests : IDisposable
 {
     [ClassDataSource<AspireManager>(Shared = SharedType.PerTestSession)]
     public required AspireManager Aspire { get; init; }
+
+    private readonly CancellationTokenSource _cts = new(TimeSpan.FromSeconds(5));
     
     [Test]
     public async Task Gets_Tour_By_Id()
     {
         // Arrange
-        using var cts = new CancellationTokenSource(TimeSpan.FromSeconds(30));
         using var scope = Aspire.ApiFixture.Services.CreateScope();
         var toursContext = scope.ServiceProvider.GetRequiredService<ToursDbContext>();
-        var tour = await toursContext.Set<Tour>().FirstAsync(cts.Token);
+        var tour = await toursContext.Set<Tour>().FirstAsync(_cts.Token);
 
         // Act
-        var response = await Aspire.ApiClient.GetTourById(tour.Id, TestContext.Current?.CancellationToken ?? cts.Token);
+        var response = await Aspire.ApiClient.GetTourById(tour.Id, TestContext.Current?.CancellationToken ?? _cts.Token);
 
         // Assert
         await Assert.That(response).IsNotNull();
@@ -38,11 +38,9 @@ public sealed class TourTests
     public async Task Gets_All_Tours()
     {
         // Arrange
-        using var cts = new CancellationTokenSource(TimeSpan.FromSeconds(30));
-        
 
         // Act
-        var response = await Aspire.ApiClient.GetAllTours(TestContext.Current?.CancellationToken ?? cts.Token);
+        var response = await Aspire.ApiClient.GetAllTours(TestContext.Current?.CancellationToken ?? _cts.Token);
 
         // Assert
         await Assert.That(response).IsNotNull();
@@ -52,11 +50,10 @@ public sealed class TourTests
     public async Task Creates_Tour()
     {
         // Arrange
-        using var cts = new CancellationTokenSource(TimeSpan.FromSeconds(30));
 
         // Act
         var request = TourDtoFactory.Create();
-        var (createdTour, url) = await Aspire.ApiClient.CreateTour(request, TestContext.Current?.CancellationToken ?? cts.Token);
+        var (createdTour, url) = await Aspire.ApiClient.CreateTour(request, TestContext.Current?.CancellationToken ?? _cts.Token);
 
         // Assert
         await Assert.That(createdTour).IsNotNull();
@@ -67,5 +64,10 @@ public sealed class TourTests
         await Assert.That(createdTour.EndDate).IsEqualTo(request.EndDate);
 
         await Assert.That(url).IsNotDefault();
+    }
+
+    public void Dispose()
+    {
+        _cts.Dispose();
     }
 }
