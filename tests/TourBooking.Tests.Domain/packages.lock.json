@@ -879,11 +879,6 @@
         "resolved": "0.25.21",
         "contentHash": "eaccIw/l6jP/6es8HAiAoffXynL2xIe6riB1IK8WTmdbIGggvY7LeSsuwbLuKV/baEEl9pWnTyg9W4TjpNuk6w=="
       },
-      "TUnit.Core": {
-        "type": "Transitive",
-        "resolved": "0.25.21",
-        "contentHash": "vlYyHa2oxvrFtDPu7Jw0yibY5KU7fDcSMcGj3yuWumIkh3oh/o9AT11kfzuef/kUSdzRbyQzAsu+V/4GbB3UQA=="
-      },
       "TUnit.Engine": {
         "type": "Transitive",
         "resolved": "0.25.21",
@@ -957,7 +952,7 @@
           "Aspire.Hosting.Testing": "[9.3.1, )",
           "CommunityToolkit.Diagnostics": "[8.4.0, )",
           "Microsoft.AspNetCore.Mvc.Testing": "[10.0.0-preview.5.25277.114, )",
-          "TUnit": "[0.25.21, )",
+          "TUnit.Core": "[0.25.21, )",
           "TourBooking.ApiService": "[1.0.0, )",
           "TourBooking.ApiService.Contracts": "[1.0.0, )",
           "TourBooking.AppHost": "[1.0.0, )",
@@ -1361,6 +1356,12 @@
           "Nerdbank.Streams": "2.12.87",
           "Newtonsoft.Json": "13.0.3"
         }
+      },
+      "TUnit.Core": {
+        "type": "CentralTransitive",
+        "requested": "[0.25.21, )",
+        "resolved": "0.25.21",
+        "contentHash": "vlYyHa2oxvrFtDPu7Jw0yibY5KU7fDcSMcGj3yuWumIkh3oh/o9AT11kfzuef/kUSdzRbyQzAsu+V/4GbB3UQA=="
       }
     }
   }

@@ -33,6 +33,7 @@
     <PackageVersion Include="OpenTelemetry.Instrumentation.StackExchangeRedis" Version="1.12.0-beta.1" />
     <PackageVersion Include="StreamJsonRpc" Version="2.22.11" />
     <PackageVersion Include="TUnit" Version="0.25.21" />
+    <PackageVersion Include="TUnit.Core" Version="0.25.21"/>
     <PackageVersion Include="TUnit.Playwright" Version="0.25.21" />
     <PackageVersion Include="SonarAnalyzer.CSharp" Version="10.12.0.118525" />
   </ItemGroup>

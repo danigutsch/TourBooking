@@ -2,7 +2,7 @@
 using Aspire.Hosting.ApplicationModel;
 using Aspire.Hosting.Testing;
 using JetBrains.Annotations;
-using Microsoft.Testing.Platform.Services;
+using Microsoft.Extensions.DependencyInjection;
 using Projects;
 using TourBooking.ApiService.Contracts;
 using TourBooking.Constants;
